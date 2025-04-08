@@ -1,0 +1,70 @@
+---
+title: "No P-Values"
+author: Norm Matloff
+toc: true
+---
+
+**Why Statistical Hypothesis Testing Is a Bad Idea**
+
+> *Abstract:* From the beginning of statistics, in the early 20th century, 
+> Null Hypothesis Significance Testing (NHST) was an ill-conceived idea.
+> Unfortunately, its usage has become entrenched, producing misleading
+> analysis and wasted opportunities.
+
+# NHST Is (Too) Comfortable
+
+* We all grew up with it.
+
+* Clean, simple, orderly -- an OCDer's dream! :-)
+
+* Highly developed mathematical foundation.
+
+# The Core Problem
+
+* We wish to determine whether $H_0$ is true or false.
+
+* But $H_0$ **is never true**.
+
+   * $H_0:$ new drug effectiveness = old drug effectiveness
+
+     Can't be true true after many decimal places.
+
+   * $H_0:$ $\beta_i = 0$ in linear model
+
+     The linear model itself is false -- useful maybe -- but just
+     an approximation.
+
+   * $H_0:$ population distribution of human weight $W$ is normal/Gaussian
+
+     Measured $W$ is discrete, not continuous.
+
+     No one has a negative weight, or weights 10,000 kg.
+
+   * $H_0:$ Efficient Market Hypothesis
+
+     * Example in pro-NHST essay by
+       [Imbens](https://www.aeaweb.org/articles?id=10.1257/jep.35.3.157).
+     
+     * The EMH is intended only as a rough description, so of course it
+       is false in the exact sense.
+
+* Effect of measurement error, especially bias.
+
+   * E.g. physics, 
+
+     $H_0:$ gravity waves do not exist
+
+   * Yes, the existence is either true or false, but our imperfect
+     measurements make $H_0$ false.
+
+   * Research on gravity waves relies on umpteen other unproven
+     theories.
+
+# Both an Epistemological and Practical Problem
+
+* OK, $H_0$ is never true. But why is that a problem?
+
+* Philosophical: Unscientific -- and just plain silly -- to test for 
+  a trait that we know *a priori* is false.
+
+* Practical: Can be extremely misleading.
