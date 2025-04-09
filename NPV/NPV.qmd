@@ -4,7 +4,7 @@ author: Norm Matloff
 toc: true
 ---
 
-[Author bio](heather.cs.ucdavis.edu/matloff.html) 
+[Author bio](heather.cs.ucdavis.edu/matloff.html)     
 
 **Why Statistical Hypothesis Testing Is a Bad Idea**
 
