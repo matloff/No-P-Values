@@ -1,5 +1,5 @@
 project:
   title: "NPV"
-
-
+  type: website
+  output-dir: docs
 
