@@ -149,7 +149,7 @@ whether the person passed the bar examination.
 * But actually, the impact of family income is not significant in
   practical terms.  Here's why:
 
-* Family income in this dataset is measured by quintiles.  So,
+* Family income in this dataset is measured in quintiles.  So,
   [Mathematically, testing for a 0 effect is equivalent to checking
   whether the confidence interval contains 0.  But this is missing the
   point of the CI, as we will discuss shortly.]{.column-margin} this
@@ -191,7 +191,7 @@ whether the person passed the bar examination.
   in the dataset, complexity of the model and so on, but the same
   principle holds.
 
-# Making a Decision
+# Making a Decision, I
 
 * One of the biggest myths about critics of NHST is that they fail to
   realize that the analyst must make a decision. Of course one must make
@@ -206,7 +206,9 @@ whether the person passed the bar examination.
 * As noted at the outset of this document, making decisions in this
   manner is much less psychologically satisfying than doing an NHST.
   Rather than being automatically in an NHST, the analyst must supply
-  his/her own power. But it is the scientifically valid approach, rather
+  his/her own power, devising a criterion for making a decision. 
+
+* But it is the scientifically valid approach, rather
   than relying on "superstition" with NHST.
 
 # Not-So-Easy Parts
@@ -251,4 +253,33 @@ whether the person passed the bar examination.
   baseline.  
 
 * So, while the test has strongly indicated a with-interaction model, we
-  may well prefer the simpler, no-interaction version.
+  may well prefer the simpler, no-interaction version. 
+
+# Making a Decision, II
+
+* Again, the above decision on whether to include interaction terms is
+  not as psychologically satisfying as the NHST approach. We had to
+  supply our own power, devising a way to help us make a decision. 
+
+* Indeed, this one requires even more "power" on our part, because we
+  need to take into account our goal. If we want to do prediction, we
+  probably should omit the interaction terms, but if our goal is
+  understanding the dynamics of the LSAT, we may want to keep those
+  terms.
+
+* But this is the rational, scientific approach, rather than relying on
+  a test of a hypothesis that we know *a priori* is false, which is
+  absurdly unscientific.
+
+# Regarding Confidence Intervals
+
+* Never base judgment on whether "the CI contains 0." That is simply
+  backdoor NHST.
+
+* Instead, use the CI as intended:
+
+  * Its center tells us our point estimate of the population quantity
+    of interest.
+
+  * Its radius gives us an idea of how accurate the point estimate is.
+
