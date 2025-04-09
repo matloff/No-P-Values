@@ -26,7 +26,7 @@ toc: true
 
 * We wish to determine whether $H_0$ is true or false.
 
-* But $H_0$ **is never true**.
+* But in practice, $H_0$ **is never true**.
 
    * $H_0:$ new drug effectiveness = old drug effectiveness
 
@@ -60,6 +60,8 @@ toc: true
      Sampling bias can easily push an effect across that threshold, one
      direction of the other.
 
+   * Same issue with transcription errors.
+
    * Bias in physical measurements. No physical measurement is 
      infinitely precise.
 
@@ -78,7 +80,7 @@ toc: true
 * Philosophical: Unscientific -- and just plain silly -- to test for 
   a trait that we know *a priori* is false.
 
-* The American Statistical Association rightly takes pride in statistics
+* The American Statistical Association (ASA) rightly takes pride in statistics
   as a *science*, [saying](www.amstat.org/about-asa) it "the
   development, application, and dissemination of statistical science,
   and that its members "[promote] sound statistical practice to inform 
@@ -296,6 +298,8 @@ T
 
 * CIs should play a key role in non-NHST analyses.
 
+* Of course this includes multiple-comparisons CIs.
+
 # Formal Non-NHST Tools 
 
 * Defenders of NHST emphasize that NHST formally addresses uncertainty.
@@ -304,9 +308,167 @@ T
   our assessment of adding interaction terms in the
   LSAT model above.
 
-* Following are some examples of how this can be done.
+* Following are a few examples.
 
-   * To 
+## Hierarchical models
+
+* In the interaction terms example, informally compared the change in 
+  $\widehat{E}(Y|X=t)$ that occurred when we added interaction terms.
+  How can we formalize this into a CI?
+
+* A CI for the proportional change can be obtained via the 
+  Delta Method, or by the bootstrap.
+
+* The *log-linear model* can be used to explore relationships among
+  categorical variables. For instance, this might be used in the LSAT
+  data to analyze relationships between race, gender, family income and
+  so on.
+
+  Again there is a hierarchy of interaction terms, as in our linear
+  model example, so again either the Delta Method or the bootstrap can
+  be used. The necessary standard errors for DM can be obtained via
+  [the "Poisson trick"](https://github.com/matloff/LogLinFit).
+
+  ::: {.column-margin}
+  [For the Delta Method,  see *All of Statistics*, by Larry 
+  Wasserman. Various R implementations exist, including those not
+  requiring user-specified derivatives.]{.column-margin} 
+  :::
+
+  ::: {.column-margin}
+  [For log-linear models,  see *An Introduction to Categorical Data Analysis*, 
+  by Alan Agresti. Many R implementations.]{.column-margin} 
+
+## Goodness-of-fit procedures
+
+* As noted earlier, goodness-of-fit tests can be especially problematic.
+  What can be done instead?
+
+* First, ask if assessment of the model is needed in the first place.
+  Many statistical methods, e.g. the linear model, are robust to
+  normality assumptions, and thus assessing normality is superfluous.
+
+* Explicitly recognize that one's model is an approximation, by
+  estimating some distance from the population version of one's model 
+  to the true population probabilities, density or whatever.
+
+  * As the sample size grows, a fitted linear regression
+    model will converge to the linear function that best approximates
+    the true population regression function.
+  
+  * A genetic model may be technically false but still serve as a good
+    approximation. As the sample size grows, the fitted probabilities will
+    converge to the set of model probabilities closest to the true
+    population values.
+
+  * In a Markov chain analysis, we might model the holding times as
+    exponentially distributed as an approximation. The resulting
+    estimated exponential distributions will converge to the closest
+    such distributions to the true population distributions.
+
+* How can this idea be implemented?
+
+* The familiar Kolmogorov-Smirnov procedure is a simple example,
+  allowing use to form a CI for the distance between a model population
+  CDF and the true population CDF.
+
+* There is an extensive literature on, and R implementations of,
+  *minimum distance estimators*. However, their computation of standard
+  errors may assume that the given model holds, an assumption that is
+  unacceptable in our context here. Instead, use the methods but compute
+  standard errors using the bootstrap.
+
+# Where Is the ASA on This Issue?
+
+The American Statistical Association clearly should play a leading role
+in rectifying this grave error in statistical science. And in fact, in
+one sense, it has done so.
+
+In 2016, the ASA released [a position
+paper](https://www.burtthompson.net/uploads/9/6/8/4/9684389/wasserstein-2016__asa_p-value_statement.pdf) on the issue, 
+along with a [cover letter.](https://www.amstat.org/asa/files/pdfs/p-valuestatement.pdf). The latter says in part (emphasis added),
+
+> "'The p-value was never intended to be a substitute for scientific
+> reasoning,' said Ron Wasserstein, the ASA’s executive director.
+> 'Well-reasoned statistical arguments contain much more than the value of
+> a single number and whether that number exceeds an arbitrary threshold.
+> *The ASA statement is intended to steer research into a ‘post p<0.05
+> era*'...'The contents of the ASA statement and the reasoning behind it
+> are not new—statisticians and other scientists have been writing on the
+> topic for decades,' [then-ASA President] Utts said. 'But this is the
+> first time that the community of statisticians, as represented by the
+> ASA Board of Directors, has issued a statement to address these
+> issues.'"
+
+Wasserstein (who today is still the ASA executive director), along with
+*American Statistician* editor Nicole Lazar, authored the article.
+
+There is considerable overlap there with my points in the present
+document.  But the ASA editorial (referred to below as "the 2016
+statement") stopped short of advocating complete abandonment
+of the p-value concept. 
+
+Later, the *American Statistician* ran a full issue on the topic, with a
+sharper tone in the [cover
+editorial](https://www.tandfonline.com/doi/pdf/10.1080/00031305.2019.1583913)
+(which I'll call "the 2019 statement"). The authors, Wasserstein, Lazar
+and Allen Schirm,used language such as "eliminating the use of p-values
+as a truth arbiter."
+
+Readers of the present document should keep in mind, as I have noted,
+that my criticisms of NHST are much deeper than those of most critics,
+which don't go much futher than warning analysts of the difference
+between statistical and practical significance. In that light, 
+this passsge in the 2019 statement is especially noteworthy:
+
+> Reviewers of this editorial asked, as some readers of it will, is a
+> p-value threshold ever okay to use? We asked some of the authors of
+> articles in the special issue that question as well...[some] authors
+> suggested that such dichotomized use of p-values was acceptable in
+> modelfitting and variable selection strategies, again as automated
+> tools, this time for sorting through large numbers of potential models
+> or variables. Still others pointed out that p-values with very low
+> thresholds are used in fields such as physics, genomics, and imaging as
+> a filter for massive numbers of tests.  '[B]inary decision making is
+> indispensable in medicine and related fields'...
+
+This brings up several issues that I refute in the present document..
+
+According to Wasserstein (personal communication, April 8, 2025), after
+the release of the 2019 statement,
+
+> ...there were certainly some concerned voices. One of them reached out to
+> Karen Kafadar, who was president at the time. The task force composition
+> notably lacked diversity of viewpoints on this issue..."
+
+The 2019 statement led to [a vehement counter-statement](https://hdsr.mitpress.mit.edu/pub/50vl2b07/release/2) ("the 2021
+statement"), authored by some of the most prominent people in the field.
+As Wasserman points out, the list of signatores "notably lacked
+diversity of viewpoints on this issue."
+
+I consider that list to include some of the most talented scholars in
+the field. How could such creative -- and thus open-minded -- people be
+so closed-minded on this issue? I believe this stems from the strong
+emotionally vested feelings on NHST in mathematical statisticians. For
+them, NHST is not just something tbey "grew up with," but a notion that
+has been absolutely core to their careers. Their work and their
+professional stature have stemmed from research that is typically
+NHST-centered. They thus had a powerful incentive to counter the 2019
+statement.  Though their bias was undoubtely not conscious, it was
+nevertheless very profound. 
+
+I hope that these highly talented researchers will instead turn to
+developing non- NHST tools.
+
+Finally, it should be noted that neither the 2019 nor 2021 statements 
+are official ASA policy; the 2016 statement is the only such position.
+As Wasserstein wrote in his April 2025 message to me,
+
+> "The 2016 ASA Statement on P-Values and Statistical Significance remains
+> the only official statement issued by the ASA on this topic. The
+> president's task force statement represents the views of its authors,
+> not an official ASA position."
+
 
 # Conclusions
 
@@ -320,7 +482,8 @@ deserving of demise.
 Statistics textbooks and curricula should finally be purged of the
 absurdity of testing hypotheses that we know *a priori* to be false.
 Mathematical statisticians should develop new formal non-NHST tools. And
-most of all, the ASA should play a leading role in all this.
+most of all, the ASA should play a leading role in all this, expanding
+on its 2016 statement and becoming more activist on the issue.
 
 # Acknowledgements
 
