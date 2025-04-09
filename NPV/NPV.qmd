@@ -4,12 +4,15 @@ author: Norm Matloff
 toc: true
 ---
 
+[Author bio](heather.cs.ucdavis.edu/matloff.html)
+
 **Why Statistical Hypothesis Testing Is a Bad Idea**
 
 > *Abstract:* From the beginning of statistics, in the early 20th century, 
 > Null Hypothesis Significance Testing (NHST) was an ill-conceived idea.
 > Unfortunately, its usage has become entrenched, producing misleading
-> analysis and wasted opportunities.
+> analysis and wasted opportunities. What are the problems with NHST,
+> and what should one do instead?
 
 # NHST Is (Too) Comfortable
 
@@ -239,8 +242,11 @@ whether the person passed the bar examination.
   complex model?
 
 * Let's check the actual impact of including the
-  interaction terms, by doing predictions of both models on an example X
-  value:
+  interaction terms on the value of $\widehat{E}(Y|X=t)$, 
+  the estimated value of the true regression function
+  at some point $t$ chosen to be "typical."
+
+* We will find $\widehat{E}(Y|X=t)$ under both models and compare:
   
   ```{r}
   typx <- lsa[1,-5]  # set up an example case
@@ -248,9 +254,8 @@ whether the person passed the bar examination.
   predict(w1,typx)  # with-interaction model
   ```
 
-* Adding the interaction term changed the predictions--and the estimated
-  value of the regession function--by only about 0.02 out of a 40.23
-  baseline.  
+* Adding the interaction term changed the estimated value of the
+  regession function--by only about 0.02 out of a 40.23 baseline.  
 
 * So, while the test has strongly indicated a with-interaction model, we
   may well prefer the simpler, no-interaction version. 
@@ -259,14 +264,14 @@ whether the person passed the bar examination.
 
 * Again, the above decision on whether to include interaction terms is
   not as psychologically satisfying as the NHST approach. We had to
-  supply our own power, devising a way to help us make a decision. 
+  supply our own power, devising an *ad hoc* way to help us make a decision. 
 
 * Indeed, this one requires even more "power" on our part, because we
   need to take into account our goal. If we want to do prediction, we
   probably should omit the interaction terms, but if our goal is
   understanding the dynamics of the LSAT, we may want to keep those
   terms.
-
+T
 * But this is the rational, scientific approach, rather than relying on
   a test of a hypothesis that we know *a priori* is false, which is
   absurdly unscientific.
@@ -278,8 +283,52 @@ whether the person passed the bar examination.
 
 * Instead, use the CI as intended:
 
-  * Its center tells us our point estimate of the population quantity
-    of interest.
+  a. Its center tells us our point estimate of the population quantity
+     of interest.
 
-  * Its radius gives us an idea of how accurate the point estimate is.
+  b. Its radius gives us an idea of how accurate the point estimate is.
+
+* Item (b) here is actually familiar to the general, nonstatistical
+  public, in the from of the *margin of error* in opinion polls. 
+
+* If you were a candidate running for office, wouldn't you want to know
+  (b), not just (a)?
+
+* CIs should play a key role in non-NHST analyses.
+
+# Formal Non-NHST Tools 
+
+* Defenders of NHST emphasize that NHST formally addresses uncertainty.
+
+* So for instance it would be desirable to formalize 
+  our assessment of adding interaction terms in the
+  LSAT model above.
+
+* Following are some examples of how this can be done.
+
+   * To 
+
+# Conclusions
+
+In the classic novel *Don Quixote*, the deranged but well-meaning hero
+attacks windmills, which he believes to be evil giants.  American
+humorist Mark Twain [viewed the work](en.wikipedia.org/wiki/Don_Quixote)
+as having "swept the world's admiration for the mediaeval
+chivalry-silliness out of existence." The NHST silliness is no less
+deserving of demise.
+
+Statistics textbooks and curricula should finally be purged of the
+absurdity of testing hypotheses that we know *a priori* to be false.
+Mathematical statisticians should develop new formal non-NHST tools. And
+most of all, the ASA should play a leading role in all this.
+
+# Acknowledgements
+
+I was first introduced to this vital issue long ago in graduate
+[Prof. Dunn is often credited as the first to use the Bonferroni
+Inequality for multiple comparisons]{.column-margin}
+school by the late Professor Olive Jean Dunn of the UCLA Biostatistics
+Department. I was doing my dissertation in the Mathematics Department.
+but took classes in Biostat. Jean brought up the topic casually one day
+in lecture, changing my views forever.
 
