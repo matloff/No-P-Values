@@ -5,7 +5,7 @@ author: Norm Matloff
 toc: true
 ---
 
-[Author bio](heather.cs.ucdavis.edu/matloff.html)     
+[Author bio](http://heather.cs.ucdavis.edu/matloff.html)     
 
 > *Abstract:* From the beginning of statistics, in the early 20th century, 
 > Null Hypothesis Significance Testing (NHST) was an ill-conceived idea.
@@ -77,7 +77,7 @@ toc: true
         [the methods details](https://arxiv.org/pdf/1602.03840).
 
       * (The situation is also complicated by the fact that they use a
-        Bayesian analysis, courting further criticism.
+        Bayesian analysis, courting further criticism.)
 
 # Both an Epistemological and Practical Problem
 
@@ -227,7 +227,7 @@ whether the person passed the bar examination.
   significance -- **in the context of measuring a treatment effect**.
   In the above case, effect was of family income. 
 
-* But many analysts do not realize that this smae notion may not be
+* But many analysts do not realize that this same notion may be
   extended to non-treatment contexts.
 
 * E.g. "I just want to use NHST to check whether my model fits the data."
@@ -365,7 +365,7 @@ whether the person passed the bar examination.
   * In a Markov chain analysis, we might model the holding times as
     exponentially distributed as an approximation. The resulting
     estimated exponential distributions will converge to the closest
-    such distributions to the true population distributions.
+    exponential distributions to the true population distributions.
 
 * In all these situations, estimating a distance can help us determine
   if our (imperfect) model is good enough.
@@ -422,7 +422,7 @@ as a truth arbiter."
 
 Readers of the present document should keep in mind, as I have noted,
 that **my criticisms of NHST are much deeper than those of most critics,
-which don't go much futher than warning analysts of the difference
+which don't go much further than warning analysts of the difference
 between statistical and practical significance.** In that light, 
 this passsge in the 2019 statement is especially noteworthy:
 
@@ -437,8 +437,8 @@ this passsge in the 2019 statement is especially noteworthy:
 > a filter for massive numbers of tests.  '[B]inary decision making is
 > indispensable in medicine and related fields'...
 
-The above passage brings up several issues that I refute in the present
-document.
+**The above passage brings up several issues that I refute in the present
+document.**
 
 According to Wasserstein (personal communication, April 8, 2025), after
 the release of the 2019 statement,
@@ -448,15 +448,16 @@ the release of the 2019 statement,
 > a task force to study the matter] The task force composition
 > notably lacked diversity of viewpoints on this issue..."
 
-The 2019 statement led to [a vehement counter-statement](https://hdsr.mitpress.mit.edu/pub/50vl2b07/release/2) ("the 2021
-statement"), authored by some of the most prominent people in the field.
-As Wasserman points out, the list of signatores "notably lacked
-diversity of viewpoints on this issue."
+The 2019 statement led to [a vehement
+counter-statement](https://hdsr.mitpress.mit.edu/pub/50vl2b07/release/2)
+by the task force ("the 2021 statement"), authored by some of the most
+prominent people in the field.  As Wasserman points out, the list of
+signatores "notably lacked diversity of viewpoints on this issue."
 
 I consider that list to include some of the most talented scholars in
 the field. How could such creative -- and thus open-minded -- people be
 so closed-minded on this issue? I believe this stems from the strong
-emotionally vested feelings on NHST in mathematical statisticians. For
+emotionally vested feelings on NHST among mathematical statisticians. For
 them, NHST is not just something tbey "grew up with," but a notion that
 has been absolutely core to their careers. Their work and their
 professional stature have stemmed from research that is typically
