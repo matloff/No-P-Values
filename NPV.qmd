@@ -5,7 +5,7 @@ author: Norm Matloff
 toc: true
 ---
 
-[Author bio](http://heather.cs.ucdavis.edu/matloff.html)     
+[Author bio](https://heather.cs.ucdavis.edu/matloff.html) 
 
 > *Abstract:* From the beginning of statistics, in the early 20th century, 
 > Null Hypothesis Significance Testing (NHST) was an ill-conceived idea.
