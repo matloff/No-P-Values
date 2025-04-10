@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Norm Matloff">
+
+<title>No P-Values – NPV</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-79108a0fc1995748cbd19a5b0e3e3e7c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body>
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#nhst-is-too-comfortable" id="toc-nhst-is-too-comfortable" class="nav-link active" data-scroll-target="#nhst-is-too-comfortable">NHST Is (Too) Comfortable</a></li>
+  <li><a href="#the-core-problem" id="toc-the-core-problem" class="nav-link" data-scroll-target="#the-core-problem">The Core Problem</a></li>
+  <li><a href="#effect-of-measurement-error-especially-bias" id="toc-effect-of-measurement-error-especially-bias" class="nav-link" data-scroll-target="#effect-of-measurement-error-especially-bias">Effect of Measurement Error, Especially Bias</a></li>
+  <li><a href="#both-an-epistemological-and-practical-problem" id="toc-both-an-epistemological-and-practical-problem" class="nav-link" data-scroll-target="#both-an-epistemological-and-practical-problem">Both an Epistemological and Practical Problem</a></li>
+  <li><a href="#the-easy-part-statistical-vs.-practical-significance" id="toc-the-easy-part-statistical-vs.-practical-significance" class="nav-link" data-scroll-target="#the-easy-part-statistical-vs.-practical-significance">The Easy Part: Statistical vs.&nbsp;Practical Significance</a></li>
+  <li><a href="#running-example-lsat-data" id="toc-running-example-lsat-data" class="nav-link" data-scroll-target="#running-example-lsat-data">Running Example: LSAT Data</a>
+  <ul class="collapse">
+  <li><a href="#wealth-bias-in-the-lsat" id="toc-wealth-bias-in-the-lsat" class="nav-link" data-scroll-target="#wealth-bias-in-the-lsat">Wealth bias in the LSAT?</a></li>
+  </ul></li>
+  <li><a href="#making-a-decision-i" id="toc-making-a-decision-i" class="nav-link" data-scroll-target="#making-a-decision-i">Making a Decision, I</a></li>
+  <li><a href="#not-so-easy-parts" id="toc-not-so-easy-parts" class="nav-link" data-scroll-target="#not-so-easy-parts">Not-So-Easy Parts</a>
+  <ul class="collapse">
+  <li><a href="#example-interaction-effects-in-lsat-data" id="toc-example-interaction-effects-in-lsat-data" class="nav-link" data-scroll-target="#example-interaction-effects-in-lsat-data">Example: interaction effects in LSAT data</a></li>
+  </ul></li>
+  <li><a href="#making-a-decision-ii" id="toc-making-a-decision-ii" class="nav-link" data-scroll-target="#making-a-decision-ii">Making a Decision, II</a></li>
+  <li><a href="#regarding-confidence-intervals" id="toc-regarding-confidence-intervals" class="nav-link" data-scroll-target="#regarding-confidence-intervals">Regarding Confidence Intervals</a></li>
+  <li><a href="#formal-non-nhst-tools" id="toc-formal-non-nhst-tools" class="nav-link" data-scroll-target="#formal-non-nhst-tools">Formal Non-NHST Tools</a>
+  <ul class="collapse">
+  <li><a href="#hierarchical-models" id="toc-hierarchical-models" class="nav-link" data-scroll-target="#hierarchical-models">Hierarchical models</a></li>
+  <li><a href="#goodness-of-fit-procedures" id="toc-goodness-of-fit-procedures" class="nav-link" data-scroll-target="#goodness-of-fit-procedures">Goodness-of-fit procedures</a></li>
+  </ul></li>
+  <li><a href="#where-is-the-asa-on-this-issue" id="toc-where-is-the-asa-on-this-issue" class="nav-link" data-scroll-target="#where-is-the-asa-on-this-issue">Where Is the ASA on This Issue?</a></li>
+  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions</a></li>
+  <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements">Acknowledgements</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">No P-Values</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Norm Matloff </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><a href="heather.cs.ucdavis.edu/matloff.html">Author bio</a></p>
+<p><strong>Why Statistical Hypothesis Testing Is a Bad Idea</strong></p>
+<blockquote class="blockquote">
+<p><em>Abstract:</em> From the beginning of statistics, in the early 20th century, Null Hypothesis Significance Testing (NHST) was an ill-conceived idea. Unfortunately, its usage has become entrenched, producing misleading analysis and wasted opportunities. What are the problems with NHST, and what should one do instead?</p>
+</blockquote>
+<section id="nhst-is-too-comfortable" class="level1">
+<h1>NHST Is (Too) Comfortable</h1>
+<ul>
+<li><p>We all grew up with it.</p></li>
+<li><p>Clean, simple, orderly – an OCDer’s dream! :-)</p></li>
+<li><p>Highly developed mathematical foundation.</p></li>
+</ul>
+</section>
+<section id="the-core-problem" class="level1">
+<h1>The Core Problem</h1>
+<ul>
+<li><p>We wish to determine whether <span class="math inline">\(H_0\)</span> is true or false.</p></li>
+<li><p>But in practice, <span class="math inline">\(H_0\)</span> <strong>is never true</strong>.</p>
+<ul>
+<li><p><span class="math inline">\(H_0:\)</span> new drug effectiveness = old drug effectiveness</p>
+<p>Can’t be true true after many decimal places.</p></li>
+<li><p><span class="math inline">\(H_0:\)</span> <span class="math inline">\(\beta_i = 0\)</span> in linear model</p>
+<p>The linear model itself is false – useful maybe – but just an approximation.</p></li>
+<li><p><span class="math inline">\(H_0:\)</span> population distribution of human weight <span class="math inline">\(W\)</span> is normal/Gaussian</p>
+<p>Measured <span class="math inline">\(W\)</span> is discrete, not continuous.</p>
+<p>No one has a negative weight, or weights 10,000 kg.</p></li>
+<li><p><span class="math inline">\(H_0:\)</span> Efficient Market Hypothesis</p>
+<ul>
+<li><p>Example in pro-NHST essay by <a href="https://www.aeaweb.org/articles?id=10.1257/jep.35.3.157">Imbens</a>.</p></li>
+<li><p>The EMH is intended only as a rough description, so of course it is false in the exact sense.</p></li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="effect-of-measurement-error-especially-bias" class="level1">
+<h1>Effect of Measurement Error, Especially Bias</h1>
+<ul>
+<li><p>Biased sampling designs.</p></li>
+<li><p>“I just want know which medical treatment is better.” <span class="math inline">\(H_0: \mu_1 \leq \mu2\)</span> vs.&nbsp;<span class="math inline">\(H_{\textrm{alt}}: \mu1 &gt; \mu2\)</span>. Sampling bias can easily push an effect across that threshold, one direction of the other.</p></li>
+<li><p>Same issue with transcription errors.</p></li>
+<li><p>Bias in physical measurements. No physical measurement is infinitely precise.</p></li>
+<li><p>E.g. physics, <span class="math inline">\(H_0:\)</span> gravity waves do not exist.</p>
+<ul>
+<li><p>Yes, the existence is either true or false, but our imperfect measurements make <span class="math inline">\(H_0\)</span> false.</p></li>
+<li><p>Research on gravity waves relies on umpteen other unproven theories.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="both-an-epistemological-and-practical-problem" class="level1">
+<h1>Both an Epistemological and Practical Problem</h1>
+<ul>
+<li><p>OK, <span class="math inline">\(H_0\)</span> is never true. But why is that a problem?</p></li>
+<li><p>Philosophical: Unscientific – and just plain silly – to test for a trait that we know <em>a priori</em> is false.</p></li>
+<li><p>The American Statistical Association (ASA) rightly takes pride in statistics as a <em>science</em>, <a href="www.amstat.org/about-asa">saying</a> it “the development, application, and dissemination of statistical science, and that its members”[promote] sound statistical practice to inform public policy and improve human welfare.”</p>
+<p>But testing a hypothesis that one knows <em>a priori</em> is false certainly isn’t science, nor is it “sound practice.”</p></li>
+<li><p>Practical: NHST can be extremely misleading, a grave concern in light of the pivotal role statistics plays in crucial human events, such as in medical cases or legal proceedings.</p></li>
+</ul>
+</section>
+<section id="the-easy-part-statistical-vs.-practical-significance" class="level1">
+<h1>The Easy Part: Statistical vs.&nbsp;Practical Significance</h1>
+<ul>
+<li><p>This is the “easy” part, in the sense that most readers here will have learned about this issue in the statistics coursework. In other words, it would seem that they don’t need convincing.</p></li>
+<li><p>Yet they do need to be convinced. While they may distinguish between statistical vs.&nbsp;practical significance when analyzing treatment effects, many do not understand the importance of this distinction in other statistical contexts.</p></li>
+<li><p>So, let’s look in detail at this “easy” part before delving into deeper issues later in this document.</p></li>
+</ul>
+</section>
+<section id="running-example-lsat-data" class="level1 page-columns page-full">
+<h1>Running Example: LSAT Data</h1>
+<ul>
+<li><p>See <a href="https://www.kaggle.com/datasets/danofer/law-school-admissions-bar-passage">the Kaggle entry</a>.</p></li>
+<li><p>Here is an overview of the variables:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">'data/lsa.RData'</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(lsa)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(lsa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "age"      "decile1"  "decile3"  "fam_inc"  "lsat"     "ugpa"    
+ [7] "gender"   "race1"    "cluster"  "fulltime" "bar"     </code></pre>
+</div>
+</div></li>
+<li><p>The two  decile scores are class standing in the first and third years of law school, and ‘cluster’ refers to the reputed quality of the law school.</p></li>
+<li><p>Two variables of particular interest might be the student’s score on the Law School Admission Test (LSAT) and a logical variable indicating whether the person passed the bar examination.</p></li>
+</ul>
+<div class="no-row-height column-margin column-container"><span class="">The ‘age’ variable is apparently birth year, with e.g.&nbsp;67 meaning 1967.</span></div><section id="wealth-bias-in-the-lsat" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="wealth-bias-in-the-lsat">Wealth bias in the LSAT?</h2>
+<ul>
+<li><p>There is concern that the LSAT and other similar tests may be heavily influenced by family income, thus unfair, especially to underrepresented minorities.</p></li>
+<li><p>Let’s consider the estimated coefficients in a linear model for the LSAT:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="fu">lm</span>(lsat <span class="sc">~</span> .,lsa)  <span class="co"># predict lsat from all other variables</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(w)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = lsat ~ ., data = lsa)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-19.290  -2.829   0.120   2.888  16.556 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 31.985789   0.448435  71.328  &lt; 2e-16 ***
+age          0.020825   0.005842   3.565 0.000365 ***
+decile1      0.127548   0.020947   6.089 1.15e-09 ***
+decile3      0.214950   0.020919  10.275  &lt; 2e-16 ***
+fam_inc      0.300858   0.035953   8.368  &lt; 2e-16 ***
+ugpa        -0.278173   0.080431  -3.459 0.000544 ***
+gendermale   0.513774   0.060037   8.558  &lt; 2e-16 ***
+race1black  -4.748263   0.198088 -23.970  &lt; 2e-16 ***
+race1hisp   -2.001460   0.203504  -9.835  &lt; 2e-16 ***
+race1other  -0.868031   0.262529  -3.306 0.000947 ***
+race1white   1.247088   0.154627   8.065 7.71e-16 ***
+cluster2    -5.106684   0.119798 -42.627  &lt; 2e-16 ***
+cluster3    -2.436137   0.074744 -32.593  &lt; 2e-16 ***
+cluster4     1.210946   0.088478  13.686  &lt; 2e-16 ***
+cluster5     3.794275   0.124477  30.482  &lt; 2e-16 ***
+cluster6    -5.532161   0.210751 -26.250  &lt; 2e-16 ***
+fulltime2   -1.388821   0.116213 -11.951  &lt; 2e-16 ***
+barTRUE      1.749733   0.102819  17.018  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 4.197 on 20782 degrees of freedom
+Multiple R-squared:  0.3934,  Adjusted R-squared:  0.3929 
+F-statistic: 792.9 on 17 and 20782 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div></li>
+<li><p>There are definitely some salient racial aspects here, but, staying with the income issue, look at the coefficient for family income, 0.3009.</p></li>
+<li><p>The p-value is essentially 0, which in an academic research journal would classically be heralded with much fanfare, termed “very highly significant,” with a 3-star insignia.</p></li>
+<li><p>But actually, the impact of family income is not significant in practical terms. Here’s why:</p></li>
+<li><p>Family income in this dataset is measured in quintiles. So,  this estimated coefficient says that, for example, if we compare people who grew up in the bottom 20% of income with those who were raised in the next 20%, the mean LSAT score rises by only about 1/3 of 1 point on a 5-point scale. The 95% confidence interval (CI), (0.2304,0.3714), again indicates that the effect size here is very small.</p></li>
+<li><p>So family income is not an important factor after all, and the significance test was highly misleading. The result was statistically significant but not practically significant. How did this discrepancy arise?</p></li>
+<li><p>The above analysis tests the hypothesis</p>
+<p><span class="math display">\[
+H_0: \beta_{\textrm{faminc}} = 0
+\]</span></p>
+<p>using the test statistic using the standard error</p>
+<p><span class="math display">\[
+T = \frac{\widehat{\beta}_{\textrm{faminc}}}
+{\textrm{s.e.}(\widehat{\beta}_{\textrm{faminc}})}
+\]</span></p></li>
+<li><p>As the sample size increases the denominator of <span class="math inline">\(T\)</span> goes to 0. The numerator goes to the population parameter <span class="math inline">\(\beta_{\textrm{faminc}}\)</span> – <strong>which is nonzero since all <span class="math inline">\(H_0\)</span>s are false</strong>.</p></li>
+<li><p><span class="math inline">\(T\)</span> goes to <span class="math inline">\(\pm \infty\)</span>, and thus the p-value goes to 0. In other words:</p>
+<blockquote class="blockquote">
+<p>Given a large enough dataset, <em>any</em> <span class="math inline">\(H_0\)</span> will have a small p-value and will be rejected. <strong>The term “significant” means nothing.</strong></p>
+</blockquote></li>
+<li><p>The level of “large enough” depends on other factors, e.g.&nbsp;variability in the dataset, complexity of the model and so on, but the same principle holds.</p></li>
+</ul>
+<div class="no-row-height column-margin column-container"><span class="">Mathematically, testing for a 0 effect is equivalent to checking whether the confidence interval contains 0. But this is missing the point of the CI, as we will discuss shortly.</span></div></section>
+</section>
+<section id="making-a-decision-i" class="level1">
+<h1>Making a Decision, I</h1>
+<ul>
+<li><p>One of the biggest myths about critics of NHST is that they fail to realize that the analyst must make a decision. Of course one must make a decision – but based on relevant information, not on an NHST.</p></li>
+<li><p>For instance:</p>
+<blockquote class="blockquote">
+<p>In the above analysis, the proper decision is to conclude that family income has rather little effect on LSAT scores, especially compared to several other factors.</p>
+</blockquote></li>
+<li><p>As noted at the outset of this document, making decisions in this manner is much less psychologically satisfying than doing an NHST. Rather than being automatically in an NHST, the analyst must supply his/her own power, devising a criterion for making a decision.</p></li>
+<li><p>But it is the scientifically valid approach, rather than relying on “superstition” with NHST.</p></li>
+</ul>
+</section>
+<section id="not-so-easy-parts" class="level1">
+<h1>Not-So-Easy Parts</h1>
+<ul>
+<li><p>As noted, today’s statistically-trained analysts know to watch for the phenomenon of statistical significance without practical significance – <strong>in the context of measuring a treatment effect</strong>, in the above case, effect of family income.</p></li>
+<li><p>But for many of them, this notion may not be extended to non-treatment contexts.</p></li>
+<li><p>E.g. “I just want to use NHST to check whether my model fits the data.”</p></li>
+</ul>
+<section id="example-interaction-effects-in-lsat-data" class="level2">
+<h2 class="anchored" data-anchor-id="example-interaction-effects-in-lsat-data">Example: interaction effects in LSAT data</h2>
+<ul>
+<li><p>Say we are considering adding an interaction term between race and undergraduate GPA to our above model. Let’s fit this more elaborate model, then compare.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>w1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(lsat <span class="sc">~</span> .<span class="sc">+</span>race1<span class="sc">:</span>ugpa,lsa)  <span class="co"># add interaction</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(w1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = lsat ~ . + race1:ugpa, data = lsa)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-19.1783  -2.8065   0.1219   2.8879  16.0633 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)     26.574993   1.219611  21.790  &lt; 2e-16 ***
+age              0.020612   0.005837   3.531 0.000415 ***
+decile1          0.127585   0.020926   6.097 1.10e-09 ***
+decile3          0.213918   0.020902  10.234  &lt; 2e-16 ***
+fam_inc          0.295042   0.035939   8.210 2.35e-16 ***
+ugpa             1.417659   0.363389   3.901 9.60e-05 ***
+gendermale       0.513686   0.059986   8.563  &lt; 2e-16 ***
+race1black       4.121631   1.439354   2.864 0.004194 ** 
+race1hisp        1.378504   1.570833   0.878 0.380191    
+race1other       2.212299   1.976702   1.119 0.263073    
+race1white       6.838251   1.201559   5.691 1.28e-08 ***
+cluster2        -5.105703   0.119879 -42.590  &lt; 2e-16 ***
+cluster3        -2.427800   0.074862 -32.430  &lt; 2e-16 ***
+cluster4         1.208794   0.088453  13.666  &lt; 2e-16 ***
+cluster5         3.777611   0.124422  30.361  &lt; 2e-16 ***
+cluster6        -5.565130   0.210945 -26.382  &lt; 2e-16 ***
+fulltime2       -1.406151   0.116132 -12.108  &lt; 2e-16 ***
+barTRUE          1.743800   0.102855  16.954  &lt; 2e-16 ***
+ugpa:race1black -2.876555   0.460281  -6.250 4.20e-10 ***
+ugpa:race1hisp  -1.022786   0.494210  -2.070 0.038508 *  
+ugpa:race1other -0.941852   0.617940  -1.524 0.127479    
+ugpa:race1white -1.737553   0.370283  -4.693 2.72e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 4.193 on 20778 degrees of freedom
+Multiple R-squared:  0.3948,  Adjusted R-squared:  0.3942 
+F-statistic: 645.4 on 21 and 20778 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div></li>
+<li><p>The Black and white interaction terms with undergraduate GPA are “very highly significant.” But that does mean we should use the more complex model?</p></li>
+<li><p>Let’s check the actual impact of including the interaction terms on the value of <span class="math inline">\(\widehat{E}(Y|X=t)\)</span>, the estimated value of the true regression function at some point <span class="math inline">\(t\)</span> chosen to be “typical.”</p></li>
+<li><p>We will find <span class="math inline">\(\widehat{E}(Y|X=t)\)</span> under both models and compare:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>typx <span class="ot">&lt;-</span> lsa[<span class="dv">1</span>,<span class="sc">-</span><span class="dv">5</span>]  <span class="co"># set up an example case</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(w,typx)  <span class="co"># no-interaction model</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      2 
+40.2294 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(w1,typx)  <span class="co"># with-interaction model</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      2 
+40.2056 </code></pre>
+</div>
+</div></li>
+<li><p>Adding the interaction term changed the estimated value of the regession function–by only about 0.02 out of a 40.23 baseline.</p></li>
+<li><p>So, while the test has strongly indicated a with-interaction model, we may well prefer the simpler, no-interaction version.</p></li>
+</ul>
+</section>
+</section>
+<section id="making-a-decision-ii" class="level1">
+<h1>Making a Decision, II</h1>
+<ul>
+<li><p>Again, the above decision on whether to include interaction terms is not as psychologically satisfying as the NHST approach. We had to supply our own power, devising an <em>ad hoc</em> way to help us make a decision.</p></li>
+<li><p>Indeed, this one requires even more “power” on our part, because we need to take into account our goal. If we want to do prediction, we probably should omit the interaction terms, but if our goal is understanding the dynamics of the LSAT, we may want to keep those terms. T</p></li>
+<li><p>But this is the rational, scientific approach, rather than relying on a test of a hypothesis that we know <em>a priori</em> is false, which is absurdly unscientific.</p></li>
+</ul>
+</section>
+<section id="regarding-confidence-intervals" class="level1">
+<h1>Regarding Confidence Intervals</h1>
+<ul>
+<li><p>Never base judgment on whether “the CI contains 0.” That is simply backdoor NHST.</p></li>
+<li><p>Instead, use the CI as intended:</p>
+<ol type="a">
+<li><p>Its center tells us our point estimate of the population quantity of interest.</p></li>
+<li><p>Its radius gives us an idea of how accurate the point estimate is.</p></li>
+</ol></li>
+<li><p>Item (b) here is actually familiar to the general, nonstatistical public, in the from of the <em>margin of error</em> in opinion polls.</p></li>
+<li><p>If you were a candidate running for office, wouldn’t you want to know (b), not just (a)?</p></li>
+<li><p>CIs should play a key role in non-NHST analyses.</p></li>
+<li><p>Of course this includes multiple-comparisons CIs.</p></li>
+</ul>
+</section>
+<section id="formal-non-nhst-tools" class="level1 page-columns page-full">
+<h1>Formal Non-NHST Tools</h1>
+<ul>
+<li><p>Defenders of NHST emphasize that NHST formally addresses uncertainty.</p></li>
+<li><p>So for instance it would be desirable to formalize our assessment of adding interaction terms in the LSAT model above.</p></li>
+<li><p>Following are a few examples.</p></li>
+</ul>
+<section id="hierarchical-models" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="hierarchical-models">Hierarchical models</h2>
+<ul>
+<li><p>In the interaction terms example, informally compared the change in <span class="math inline">\(\widehat{E}(Y|X=t)\)</span> that occurred when we added interaction terms. How can we formalize this into a CI?</p></li>
+<li><p>A CI for the proportional change can be obtained via the Delta Method, or by the bootstrap.</p></li>
+<li><p>The <em>log-linear model</em> can be used to explore relationships among categorical variables. For instance, this might be used in the LSAT data to analyze relationships between race, gender, family income and so on.</p>
+<p>Again there is a hierarchy of interaction terms, as in our linear model example, so again either the Delta Method or the bootstrap can be used. The necessary standard errors for DM can be obtained via <a href="https://github.com/matloff/LogLinFit">the “Poisson trick”</a>.</p>
+
+</li>
+</ul>
+<div class="no-row-height column-margin column-container"><div class="">
+<p><span class="">For the Delta Method, see <em>All of Statistics</em>, by Larry Wasserman. Various R implementations exist, including those not requiring user-specified derivatives.</span></p>
+</div><div class="">
+<p><span class="">For log-linear models, see <em>An Introduction to Categorical Data Analysis</em>, by Alan Agresti. Many R implementations.</span></p>
+</div></div></section>
+<section id="goodness-of-fit-procedures" class="level2">
+<h2 class="anchored" data-anchor-id="goodness-of-fit-procedures">Goodness-of-fit procedures</h2>
+<ul>
+<li><p>As noted earlier, goodness-of-fit tests can be especially problematic. What can be done instead?</p></li>
+<li><p>First, ask if assessment of the model is needed in the first place. Many statistical methods, e.g.&nbsp;the linear model, are robust to normality assumptions, and thus assessing normality is superfluous.</p></li>
+<li><p>Explicitly recognize that one’s model is an approximation, by estimating some distance from the population version of one’s model to the true population probabilities, density or whatever.</p>
+<ul>
+<li><p>As the sample size grows, a fitted linear regression model will converge to the linear function that best approximates the true population regression function.</p></li>
+<li><p>A genetic model may be technically false but still serve as a good approximation. As the sample size grows, the fitted probabilities will converge to the set of model probabilities closest to the true population values.</p></li>
+<li><p>In a Markov chain analysis, we might model the holding times as exponentially distributed as an approximation. The resulting estimated exponential distributions will converge to the closest such distributions to the true population distributions.</p></li>
+</ul></li>
+<li><p>How can this idea be implemented?</p></li>
+<li><p>The familiar Kolmogorov-Smirnov procedure is a simple example, allowing use to form a CI for the distance between a model population CDF and the true population CDF.</p></li>
+<li><p>There is an extensive literature on, and R implementations of, <em>minimum distance estimators</em>. However, their computation of standard errors may assume that the given model holds, an assumption that is unacceptable in our context here. Instead, use the methods but compute standard errors using the bootstrap.</p></li>
+</ul>
+</section>
+</section>
+<section id="where-is-the-asa-on-this-issue" class="level1">
+<h1>Where Is the ASA on This Issue?</h1>
+<p>The American Statistical Association clearly should play a leading role in rectifying this grave error in statistical science. And in fact, in one sense, it has done so.</p>
+<p>In 2016, the ASA released <a href="https://www.burtthompson.net/uploads/9/6/8/4/9684389/wasserstein-2016__asa_p-value_statement.pdf">a position paper</a> on the issue, along with a <a href="https://www.amstat.org/asa/files/pdfs/p-valuestatement.pdf">cover letter.</a>. The latter says in part (emphasis added),</p>
+<blockquote class="blockquote">
+<p>“‘The p-value was never intended to be a substitute for scientific reasoning,’ said Ron Wasserstein, the ASA’s executive director. ‘Well-reasoned statistical arguments contain much more than the value of a single number and whether that number exceeds an arbitrary threshold. <em>The ASA statement is intended to steer research into a ‘post p&lt;0.05 era</em>’…‘The contents of the ASA statement and the reasoning behind it are not new—statisticians and other scientists have been writing on the topic for decades,’ [then-ASA President] Utts said. ‘But this is the first time that the community of statisticians, as represented by the ASA Board of Directors, has issued a statement to address these issues.’”</p>
+</blockquote>
+<p>Wasserstein (who today is still the ASA executive director), along with <em>American Statistician</em> editor Nicole Lazar, authored the article.</p>
+<p>There is considerable overlap there with my points in the present document. But the ASA editorial (referred to below as “the 2016 statement”) stopped short of advocating complete abandonment of the p-value concept.</p>
+<p>Later, the <em>American Statistician</em> ran a full issue on the topic, with a sharper tone in the <a href="https://www.tandfonline.com/doi/pdf/10.1080/00031305.2019.1583913">cover editorial</a> (which I’ll call “the 2019 statement”). The authors, Wasserstein, Lazar and Allen Schirm,used language such as “eliminating the use of p-values as a truth arbiter.”</p>
+<p>Readers of the present document should keep in mind, as I have noted, that my criticisms of NHST are much deeper than those of most critics, which don’t go much futher than warning analysts of the difference between statistical and practical significance. In that light, this passsge in the 2019 statement is especially noteworthy:</p>
+<blockquote class="blockquote">
+<p>Reviewers of this editorial asked, as some readers of it will, is a p-value threshold ever okay to use? We asked some of the authors of articles in the special issue that question as well…[some] authors suggested that such dichotomized use of p-values was acceptable in modelfitting and variable selection strategies, again as automated tools, this time for sorting through large numbers of potential models or variables. Still others pointed out that p-values with very low thresholds are used in fields such as physics, genomics, and imaging as a filter for massive numbers of tests. ‘[B]inary decision making is indispensable in medicine and related fields’…</p>
+</blockquote>
+<p>This brings up several issues that I refute in the present document..</p>
+<p>According to Wasserstein (personal communication, April 8, 2025), after the release of the 2019 statement,</p>
+<blockquote class="blockquote">
+<p>…there were certainly some concerned voices. One of them reached out to Karen Kafadar, who was president at the time. The task force composition notably lacked diversity of viewpoints on this issue…”</p>
+</blockquote>
+<p>The 2019 statement led to <a href="https://hdsr.mitpress.mit.edu/pub/50vl2b07/release/2">a vehement counter-statement</a> (“the 2021 statement”), authored by some of the most prominent people in the field. As Wasserman points out, the list of signatores “notably lacked diversity of viewpoints on this issue.”</p>
+<p>I consider that list to include some of the most talented scholars in the field. How could such creative – and thus open-minded – people be so closed-minded on this issue? I believe this stems from the strong emotionally vested feelings on NHST in mathematical statisticians. For them, NHST is not just something tbey “grew up with,” but a notion that has been absolutely core to their careers. Their work and their professional stature have stemmed from research that is typically NHST-centered. They thus had a powerful incentive to counter the 2019 statement. Though their bias was undoubtely not conscious, it was nevertheless very profound.</p>
+<p>I hope that these highly talented researchers will instead turn to developing non- NHST tools.</p>
+<p>Finally, it should be noted that neither the 2019 nor 2021 statements are official ASA policy; the 2016 statement is the only such position. As Wasserstein wrote in his April 2025 message to me,</p>
+<blockquote class="blockquote">
+<p>“The 2016 ASA Statement on P-Values and Statistical Significance remains the only official statement issued by the ASA on this topic. The president’s task force statement represents the views of its authors, not an official ASA position.”</p>
+</blockquote>
+</section>
+<section id="conclusions" class="level1">
+<h1>Conclusions</h1>
+<p>In the classic novel <em>Don Quixote</em>, the deranged but well-meaning hero attacks windmills, which he believes to be evil giants. American humorist Mark Twain <a href="en.wikipedia.org/wiki/Don_Quixote">viewed the work</a> as having “swept the world’s admiration for the mediaeval chivalry-silliness out of existence.” The NHST silliness is no less deserving of demise.</p>
+<p>Statistics textbooks and curricula should finally be purged of the absurdity of testing hypotheses that we know <em>a priori</em> to be false. Mathematical statisticians should develop new formal non-NHST tools. And most of all, the ASA should play a leading role in all this, expanding on its 2016 statement and becoming more activist on the issue.</p>
+</section>
+<section id="acknowledgements" class="level1 page-columns page-full">
+<h1>Acknowledgements</h1>
+<div class="page-columns page-full"><p>I was first introduced to this vital issue long ago in graduate  school by the late Professor Olive Jean Dunn of the UCLA Biostatistics Department. I was doing my dissertation in the Mathematics Department. but took classes in Biostat. Jean brought up the topic casually one day in lecture, changing my views forever.</p><div class="no-row-height column-margin column-container"><span class="">Prof.&nbsp;Dunn is often credited as the first to use the Bonferroni Inequality for multiple comparisons</span></div></div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
