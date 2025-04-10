@@ -178,6 +178,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">No P-Values</h1>
+<p class="subtitle lead">Why Statistical Hypothesis Testing Is a Bad Idea</p>
 </div>
 
 
@@ -201,16 +202,15 @@ window.Quarto = {
 
 
 <p><a href="heather.cs.ucdavis.edu/matloff.html">Author bio</a></p>
-<p><strong>Why Statistical Hypothesis Testing Is a Bad Idea</strong></p>
 <blockquote class="blockquote">
-<p><em>Abstract:</em> From the beginning of statistics, in the early 20th century, Null Hypothesis Significance Testing (NHST) was an ill-conceived idea. Unfortunately, its usage has become entrenched, producing misleading analysis and wasted opportunities. What are the problems with NHST, and what should one do instead?</p>
+<p><em>Abstract:</em> From the beginning of statistics, in the early 20th century, Null Hypothesis Significance Testing (NHST) was an ill-conceived idea. Unfortunately, its usage has become entrenched, producing misleading analysis and wasted opportunities. What are the problems with NHST, and what should one do instead? <strong>Here we probe more deeply than have previous treatments.</strong></p>
 </blockquote>
 <section id="nhst-is-too-comfortable" class="level1">
 <h1>NHST Is (Too) Comfortable</h1>
 <ul>
 <li><p>We all grew up with it.</p></li>
 <li><p>Clean, simple, orderly – an OCDer’s dream! :-)</p></li>
-<li><p>Highly developed mathematical foundation.</p></li>
+<li><p>Highly developed mathematical foundation – a feeling of “safety in math.”</p></li>
 </ul>
 </section>
 <section id="the-core-problem" class="level1">
@@ -222,13 +222,13 @@ window.Quarto = {
 <li><p><span class="math inline">\(H_0:\)</span> new drug effectiveness = old drug effectiveness</p>
 <p>Can’t be true true after many decimal places.</p></li>
 <li><p><span class="math inline">\(H_0:\)</span> <span class="math inline">\(\beta_i = 0\)</span> in linear model</p>
-<p>The linear model itself is false – useful maybe – but just an approximation.</p></li>
+<p>The linear model itself is false – useful maybe but false – but just an approximation.</p></li>
 <li><p><span class="math inline">\(H_0:\)</span> population distribution of human weight <span class="math inline">\(W\)</span> is normal/Gaussian</p>
 <p>Measured <span class="math inline">\(W\)</span> is discrete, not continuous.</p>
-<p>No one has a negative weight, or weights 10,000 kg.</p></li>
+<p>No one has a negative weight, or weight 10,000 kg.</p></li>
 <li><p><span class="math inline">\(H_0:\)</span> Efficient Market Hypothesis</p>
 <ul>
-<li><p>Example in pro-NHST essay by <a href="https://www.aeaweb.org/articles?id=10.1257/jep.35.3.157">Imbens</a>.</p></li>
+<li><p>Example in <a href="https://www.aeaweb.org/articles?id=10.1257/jep.35.3.157">pro-NHST essay</a> by Imbens.</p></li>
 <li><p>The EMH is intended only as a rough description, so of course it is false in the exact sense.</p></li>
 </ul></li>
 </ul></li>
@@ -238,13 +238,15 @@ window.Quarto = {
 <h1>Effect of Measurement Error, Especially Bias</h1>
 <ul>
 <li><p>Biased sampling designs.</p></li>
-<li><p>“I just want know which medical treatment is better.” <span class="math inline">\(H_0: \mu_1 \leq \mu2\)</span> vs.&nbsp;<span class="math inline">\(H_{\textrm{alt}}: \mu1 &gt; \mu2\)</span>. Sampling bias can easily push an effect across that threshold, one direction of the other.</p></li>
-<li><p>Same issue with transcription errors.</p></li>
-<li><p>Bias in physical measurements. No physical measurement is infinitely precise.</p></li>
+<li><p>Transcription errors.</p></li>
+<li><p>“I just want know which medical treatment is better.” <span class="math inline">\(H_0: \mu_1
+\leq \mu2\)</span> vs.&nbsp;<span class="math inline">\(H_{\textrm{alt}}: \mu1 &gt; \mu2\)</span>. Sampling bias or data errors can easily push an effect across that threshold, one direction of the other.</p></li>
+<li><p>Bias in physical measurements. No physical measurement is infinitely precise, nor absolutely exactly centered.</p></li>
 <li><p>E.g. physics, <span class="math inline">\(H_0:\)</span> gravity waves do not exist.</p>
 <ul>
 <li><p>Yes, the existence is either true or false, but our imperfect measurements make <span class="math inline">\(H_0\)</span> false.</p></li>
-<li><p>Research on gravity waves relies on umpteen other unproven theories.</p></li>
+<li><p>Research on gravity waves relies on a complex array of detection machinery and on other unproven theories. See <a href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.116.061102#fulltext">the main paper</a> and <a href="https://arxiv.org/pdf/1602.03840">the methods details</a>.</p></li>
+<li><p>(The situation is also complicated by the fact that they use a Bayesian analysis, courting further criticism.</p></li>
 </ul></li>
 </ul>
 </section>
@@ -253,16 +255,16 @@ window.Quarto = {
 <ul>
 <li><p>OK, <span class="math inline">\(H_0\)</span> is never true. But why is that a problem?</p></li>
 <li><p>Philosophical: Unscientific – and just plain silly – to test for a trait that we know <em>a priori</em> is false.</p></li>
-<li><p>The American Statistical Association (ASA) rightly takes pride in statistics as a <em>science</em>, <a href="www.amstat.org/about-asa">saying</a> it “the development, application, and dissemination of statistical science, and that its members”[promote] sound statistical practice to inform public policy and improve human welfare.”</p>
-<p>But testing a hypothesis that one knows <em>a priori</em> is false certainly isn’t science, nor is it “sound practice.”</p></li>
+<li><p>The American Statistical Association (ASA) rightly takes pride in statistics as a <em>science</em>, <a href="www.amstat.org/about-asa">saying</a> they promotes”the development, application, and dissemination of statistical science,” and that its members “[promote] sound statistical practice to inform public policy and improve human welfare.”</p>
+<p>But testing a hypothesis that one knows is false certainly isn’t science, nor is it “sound practice.”</p></li>
 <li><p>Practical: NHST can be extremely misleading, a grave concern in light of the pivotal role statistics plays in crucial human events, such as in medical cases or legal proceedings.</p></li>
 </ul>
 </section>
 <section id="the-easy-part-statistical-vs.-practical-significance" class="level1">
 <h1>The Easy Part: Statistical vs.&nbsp;Practical Significance</h1>
 <ul>
-<li><p>This is the “easy” part, in the sense that most readers here will have learned about this issue in the statistics coursework. In other words, it would seem that they don’t need convincing.</p></li>
-<li><p>Yet they do need to be convinced. While they may distinguish between statistical vs.&nbsp;practical significance when analyzing treatment effects, many do not understand the importance of this distinction in other statistical contexts.</p></li>
+<li><p>This is the “easy” part, in the sense that most readers here will have learned about this issue in their statistics coursework. In other words, it would seem that they don’t need convincing.</p></li>
+<li><p>Yet they do need to be convinced. While they may distinguish between statistical vs.&nbsp;practical significance when analyzing treatment effects, many do not understand the importance of this distinction in general statistical contexts.</p></li>
 <li><p>So, let’s look in detail at this “easy” part before delving into deeper issues later in this document.</p></li>
 </ul>
 </section>
@@ -280,13 +282,13 @@ window.Quarto = {
  [7] "gender"   "race1"    "cluster"  "fulltime" "bar"     </code></pre>
 </div>
 </div></li>
-<li><p>The two  decile scores are class standing in the first and third years of law school, and ‘cluster’ refers to the reputed quality of the law school.</p></li>
-<li><p>Two variables of particular interest might be the student’s score on the Law School Admission Test (LSAT) and a logical variable indicating whether the person passed the bar examination.</p></li>
+<li><p>The two decile scores are class standing in the first and third years of law school, and ‘cluster’ refers to the reputed quality of the law school. </p></li>
+<li><p>Two variables of particular interest might be the student’s score on the Law School Admission Test (LSAT) and a logical variable indicating whether the person passed the bar examination. </p></li>
 </ul>
-<div class="no-row-height column-margin column-container"><span class="">The ‘age’ variable is apparently birth year, with e.g.&nbsp;67 meaning 1967.</span></div><section id="wealth-bias-in-the-lsat" class="level2 page-columns page-full">
+<div class="no-row-height column-margin column-container"><span class=""></span><span class="">The ‘age’ variable is apparently birth year, with e.g.&nbsp;67 meaning 1967.</span></div><section id="wealth-bias-in-the-lsat" class="level2">
 <h2 class="anchored" data-anchor-id="wealth-bias-in-the-lsat">Wealth bias in the LSAT?</h2>
 <ul>
-<li><p>There is concern that the LSAT and other similar tests may be heavily influenced by family income, thus unfair, especially to underrepresented minorities.</p></li>
+<li><p>There is concern that the LSAT and other similar tests may be heavily influenced by family income, thus unfair.</p></li>
 <li><p>Let’s consider the estimated coefficients in a linear model for the LSAT:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="fu">lm</span>(lsat <span class="sc">~</span> .,lsa)  <span class="co"># predict lsat from all other variables</span></span>
@@ -329,15 +331,15 @@ F-statistic: 792.9 on 17 and 20782 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div></li>
 <li><p>There are definitely some salient racial aspects here, but, staying with the income issue, look at the coefficient for family income, 0.3009.</p></li>
-<li><p>The p-value is essentially 0, which in an academic research journal would classically be heralded with much fanfare, termed “very highly significant,” with a 3-star insignia.</p></li>
+<li><p>The p-value is essentially 0, which in an academic research journal would be heralded with much fanfare, termed “very highly significant,” with a 3-star insignia.</p></li>
 <li><p>But actually, the impact of family income is not significant in practical terms. Here’s why:</p></li>
-<li><p>Family income in this dataset is measured in quintiles. So,  this estimated coefficient says that, for example, if we compare people who grew up in the bottom 20% of income with those who were raised in the next 20%, the mean LSAT score rises by only about 1/3 of 1 point on a 5-point scale. The 95% confidence interval (CI), (0.2304,0.3714), again indicates that the effect size here is very small.</p></li>
+<li><p>Family income in this dataset is measured in quintiles. So, this estimated coefficient says that, for example, if we compare people who grew up in the bottom 20% of income with those who were raised in the next 20%, the mean LSAT score rises by only about 1/3 of 1 point – on a test where scores are typically in the 20s, 30s and 40s. The 95% confidence interval (CI), (0.2304,0.3714), again indicates that the effect size here is very small.</p></li>
 <li><p>So family income is not an important factor after all, and the significance test was highly misleading. The result was statistically significant but not practically significant. How did this discrepancy arise?</p></li>
 <li><p>The above analysis tests the hypothesis</p>
 <p><span class="math display">\[
 H_0: \beta_{\textrm{faminc}} = 0
 \]</span></p>
-<p>using the test statistic using the standard error</p>
+<p>using the test statistic based on the standard error,</p>
 <p><span class="math display">\[
 T = \frac{\widehat{\beta}_{\textrm{faminc}}}
 {\textrm{s.e.}(\widehat{\beta}_{\textrm{faminc}})}
@@ -349,25 +351,25 @@ T = \frac{\widehat{\beta}_{\textrm{faminc}}}
 </blockquote></li>
 <li><p>The level of “large enough” depends on other factors, e.g.&nbsp;variability in the dataset, complexity of the model and so on, but the same principle holds.</p></li>
 </ul>
-<div class="no-row-height column-margin column-container"><span class="">Mathematically, testing for a 0 effect is equivalent to checking whether the confidence interval contains 0. But this is missing the point of the CI, as we will discuss shortly.</span></div></section>
+</section>
 </section>
 <section id="making-a-decision-i" class="level1">
 <h1>Making a Decision, I</h1>
 <ul>
-<li><p>One of the biggest myths about critics of NHST is that they fail to realize that the analyst must make a decision. Of course one must make a decision – but based on relevant information, not on an NHST.</p></li>
+<li><p>One of the biggest myths about us critics of NHST is that we fail to recognize that the analyst must make a decision. Of course one must make a decision – but based on relevant information, not on an NHST.</p></li>
 <li><p>For instance:</p>
 <blockquote class="blockquote">
-<p>In the above analysis, the proper decision is to conclude that family income has rather little effect on LSAT scores, especially compared to several other factors.</p>
+<p>In the above analysis, the proper decision is to conclude that family income has negligible effect on LSAT scores.</p>
 </blockquote></li>
-<li><p>As noted at the outset of this document, making decisions in this manner is much less psychologically satisfying than doing an NHST. Rather than being automatically in an NHST, the analyst must supply his/her own power, devising a criterion for making a decision.</p></li>
+<li><p>As noted at the outset of this document, making decisions in this manner is much less psychologically satisfying than doing an NHST. Rather than the decision being determined automatically in an NHST, the analyst must supply his/her own power, devising an <em>ad hoc</em> criterion for making a decision.</p></li>
 <li><p>But it is the scientifically valid approach, rather than relying on “superstition” with NHST.</p></li>
 </ul>
 </section>
 <section id="not-so-easy-parts" class="level1">
 <h1>Not-So-Easy Parts</h1>
 <ul>
-<li><p>As noted, today’s statistically-trained analysts know to watch for the phenomenon of statistical significance without practical significance – <strong>in the context of measuring a treatment effect</strong>, in the above case, effect of family income.</p></li>
-<li><p>But for many of them, this notion may not be extended to non-treatment contexts.</p></li>
+<li><p>As noted, today’s statistically-trained analysts know to watch for the phenomenon of statistical significance without practical significance – <strong>in the context of measuring a treatment effect</strong>. In the above case, effect was of family income.</p></li>
+<li><p>But many analysts do not realize that this smae notion may not be extended to non-treatment contexts.</p></li>
 <li><p>E.g. “I just want to use NHST to check whether my model fits the data.”</p></li>
 </ul>
 <section id="example-interaction-effects-in-lsat-data" class="level2">
@@ -375,7 +377,7 @@ T = \frac{\widehat{\beta}_{\textrm{faminc}}}
 <ul>
 <li><p>Say we are considering adding an interaction term between race and undergraduate GPA to our above model. Let’s fit this more elaborate model, then compare.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>w1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(lsat <span class="sc">~</span> .<span class="sc">+</span>race1<span class="sc">:</span>ugpa,lsa)  <span class="co"># add interaction</span></span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>w1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(lsat <span class="sc">~</span> .<span class="sc">+</span>race1<span class="sc">:</span>ugpa,lsa)  <span class="co"># add interactions</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(w1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -434,7 +436,7 @@ F-statistic: 645.4 on 21 and 20778 DF,  p-value: &lt; 2.2e-16</code></pre>
 40.2056 </code></pre>
 </div>
 </div></li>
-<li><p>Adding the interaction term changed the estimated value of the regession function–by only about 0.02 out of a 40.23 baseline.</p></li>
+<li><p>Adding the interaction term changed the estimated value of the regession function by only about 0.02 out of a 40.23 baseline.</p></li>
 <li><p>So, while the test has strongly indicated a with-interaction model, we may well prefer the simpler, no-interaction version.</p></li>
 </ul>
 </section>
@@ -443,7 +445,6 @@ F-statistic: 645.4 on 21 and 20778 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h1>Making a Decision, II</h1>
 <ul>
 <li><p>Again, the above decision on whether to include interaction terms is not as psychologically satisfying as the NHST approach. We had to supply our own power, devising an <em>ad hoc</em> way to help us make a decision.</p></li>
-<li><p>Indeed, this one requires even more “power” on our part, because we need to take into account our goal. If we want to do prediction, we probably should omit the interaction terms, but if our goal is understanding the dynamics of the LSAT, we may want to keep those terms. T</p></li>
 <li><p>But this is the rational, scientific approach, rather than relying on a test of a hypothesis that we know <em>a priori</em> is false, which is absurdly unscientific.</p></li>
 </ul>
 </section>
@@ -451,13 +452,13 @@ F-statistic: 645.4 on 21 and 20778 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h1>Regarding Confidence Intervals</h1>
 <ul>
 <li><p>Never base judgment on whether “the CI contains 0.” That is simply backdoor NHST.</p></li>
-<li><p>Instead, use the CI as intended:</p>
+<li><p>Instead, use the CI as intended. Pay close attention to the two vital pieces of information contained in the CI:</p>
 <ol type="a">
 <li><p>Its center tells us our point estimate of the population quantity of interest.</p></li>
 <li><p>Its radius gives us an idea of how accurate the point estimate is.</p></li>
 </ol></li>
 <li><p>Item (b) here is actually familiar to the general, nonstatistical public, in the from of the <em>margin of error</em> in opinion polls.</p></li>
-<li><p>If you were a candidate running for office, wouldn’t you want to know (b), not just (a)?</p></li>
+<li><p>If you were a candidate running for office, wouldn’t you want to know (b), not just (a)? You should view statistical analysis in the same way.</p></li>
 <li><p>CIs should play a key role in non-NHST analyses.</p></li>
 <li><p>Of course this includes multiple-comparisons CIs.</p></li>
 </ul>
@@ -472,7 +473,7 @@ F-statistic: 645.4 on 21 and 20778 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="hierarchical-models" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="hierarchical-models">Hierarchical models</h2>
 <ul>
-<li><p>In the interaction terms example, informally compared the change in <span class="math inline">\(\widehat{E}(Y|X=t)\)</span> that occurred when we added interaction terms. How can we formalize this into a CI?</p></li>
+<li><p>In the interaction terms example, we informally compared the change in <span class="math inline">\(\widehat{E}(Y|X=t)\)</span> that occurred when we added interaction terms. How can we formalize this into a CI?</p></li>
 <li><p>A CI for the proportional change can be obtained via the Delta Method, or by the bootstrap.</p></li>
 <li><p>The <em>log-linear model</em> can be used to explore relationships among categorical variables. For instance, this might be used in the LSAT data to analyze relationships between race, gender, family income and so on.</p>
 <p>Again there is a hierarchy of interaction terms, as in our linear model example, so again either the Delta Method or the bootstrap can be used. The necessary standard errors for DM can be obtained via <a href="https://github.com/matloff/LogLinFit">the “Poisson trick”</a>.</p>
@@ -480,24 +481,25 @@ F-statistic: 645.4 on 21 and 20778 DF,  p-value: &lt; 2.2e-16</code></pre>
 </li>
 </ul>
 <div class="no-row-height column-margin column-container"><div class="">
-<p><span class="">For the Delta Method, see <em>All of Statistics</em>, by Larry Wasserman. Various R implementations exist, including those not requiring user-specified derivatives.</span></p>
+<p>For the Delta Method, see <em>All of Statistics</em>, by Larry Wasserman. Various R implementations exist, including those not requiring user-specified derivatives.</p>
 </div><div class="">
 <p><span class="">For log-linear models, see <em>An Introduction to Categorical Data Analysis</em>, by Alan Agresti. Many R implementations.</span></p>
 </div></div></section>
 <section id="goodness-of-fit-procedures" class="level2">
 <h2 class="anchored" data-anchor-id="goodness-of-fit-procedures">Goodness-of-fit procedures</h2>
 <ul>
-<li><p>As noted earlier, goodness-of-fit tests can be especially problematic. What can be done instead?</p></li>
-<li><p>First, ask if assessment of the model is needed in the first place. Many statistical methods, e.g.&nbsp;the linear model, are robust to normality assumptions, and thus assessing normality is superfluous.</p></li>
-<li><p>Explicitly recognize that one’s model is an approximation, by estimating some distance from the population version of one’s model to the true population probabilities, density or whatever.</p>
+<li><p>As noted earlier, goodness-of-fit tests can be especially problematic in terms of the inappropriate nature of NHST. What can be done instead?</p></li>
+<li><p>First, ask if assessment of the model is needed in the first place. For instance, many statistical methods, such as the linear model, are robust to normality assumptions, and thus assessing normality is superfluous.</p></li>
+<li><p>Explicitly recognize that one’s model is an approximation, by estimating some measure of distance from the population version of one’s model to the true population probabilities, density or whatever.</p>
 <ul>
 <li><p>As the sample size grows, a fitted linear regression model will converge to the linear function that best approximates the true population regression function.</p></li>
 <li><p>A genetic model may be technically false but still serve as a good approximation. As the sample size grows, the fitted probabilities will converge to the set of model probabilities closest to the true population values.</p></li>
 <li><p>In a Markov chain analysis, we might model the holding times as exponentially distributed as an approximation. The resulting estimated exponential distributions will converge to the closest such distributions to the true population distributions.</p></li>
 </ul></li>
+<li><p>In all these situations, estimating a distance can help us determine if our (imperfect) model is good enough.</p></li>
 <li><p>How can this idea be implemented?</p></li>
 <li><p>The familiar Kolmogorov-Smirnov procedure is a simple example, allowing use to form a CI for the distance between a model population CDF and the true population CDF.</p></li>
-<li><p>There is an extensive literature on, and R implementations of, <em>minimum distance estimators</em>. However, their computation of standard errors may assume that the given model holds, an assumption that is unacceptable in our context here. Instead, use the methods but compute standard errors using the bootstrap.</p></li>
+<li><p>There is an extensive literature on, and R implementations of, <em>minimum distance estimators</em>. However, their computation of standard errors may assume that the given model holds, an assumption that is unacceptable in our context here. Instead, use the methods but compute standard errors using the bootstrap. (The theory on these methods needs to be reworked.)</p></li>
 </ul>
 </section>
 </section>
@@ -511,14 +513,14 @@ F-statistic: 645.4 on 21 and 20778 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Wasserstein (who today is still the ASA executive director), along with <em>American Statistician</em> editor Nicole Lazar, authored the article.</p>
 <p>There is considerable overlap there with my points in the present document. But the ASA editorial (referred to below as “the 2016 statement”) stopped short of advocating complete abandonment of the p-value concept.</p>
 <p>Later, the <em>American Statistician</em> ran a full issue on the topic, with a sharper tone in the <a href="https://www.tandfonline.com/doi/pdf/10.1080/00031305.2019.1583913">cover editorial</a> (which I’ll call “the 2019 statement”). The authors, Wasserstein, Lazar and Allen Schirm,used language such as “eliminating the use of p-values as a truth arbiter.”</p>
-<p>Readers of the present document should keep in mind, as I have noted, that my criticisms of NHST are much deeper than those of most critics, which don’t go much futher than warning analysts of the difference between statistical and practical significance. In that light, this passsge in the 2019 statement is especially noteworthy:</p>
+<p>Readers of the present document should keep in mind, as I have noted, that <strong>my criticisms of NHST are much deeper than those of most critics, which don’t go much futher than warning analysts of the difference between statistical and practical significance.</strong> In that light, this passsge in the 2019 statement is especially noteworthy:</p>
 <blockquote class="blockquote">
 <p>Reviewers of this editorial asked, as some readers of it will, is a p-value threshold ever okay to use? We asked some of the authors of articles in the special issue that question as well…[some] authors suggested that such dichotomized use of p-values was acceptable in modelfitting and variable selection strategies, again as automated tools, this time for sorting through large numbers of potential models or variables. Still others pointed out that p-values with very low thresholds are used in fields such as physics, genomics, and imaging as a filter for massive numbers of tests. ‘[B]inary decision making is indispensable in medicine and related fields’…</p>
 </blockquote>
-<p>This brings up several issues that I refute in the present document..</p>
+<p>The above passage brings up several issues that I refute in the present document.</p>
 <p>According to Wasserstein (personal communication, April 8, 2025), after the release of the 2019 statement,</p>
 <blockquote class="blockquote">
-<p>…there were certainly some concerned voices. One of them reached out to Karen Kafadar, who was president at the time. The task force composition notably lacked diversity of viewpoints on this issue…”</p>
+<p>…there were certainly some concerned voices. One of them reached out to Karen Kafadar, who was [ASA] president at the time…[She appointed a task force to study the matter] The task force composition notably lacked diversity of viewpoints on this issue…”</p>
 </blockquote>
 <p>The 2019 statement led to <a href="https://hdsr.mitpress.mit.edu/pub/50vl2b07/release/2">a vehement counter-statement</a> (“the 2021 statement”), authored by some of the most prominent people in the field. As Wasserman points out, the list of signatores “notably lacked diversity of viewpoints on this issue.”</p>
 <p>I consider that list to include some of the most talented scholars in the field. How could such creative – and thus open-minded – people be so closed-minded on this issue? I believe this stems from the strong emotionally vested feelings on NHST in mathematical statisticians. For them, NHST is not just something tbey “grew up with,” but a notion that has been absolutely core to their careers. Their work and their professional stature have stemmed from research that is typically NHST-centered. They thus had a powerful incentive to counter the 2019 statement. Though their bias was undoubtely not conscious, it was nevertheless very profound.</p>
