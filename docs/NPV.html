@@ -363,6 +363,7 @@ T = \frac{\widehat{\beta}_{\textrm{faminc}}}
 </blockquote></li>
 <li><p>As noted at the outset of this document, making decisions in this manner is much less psychologically satisfying than doing an NHST. Rather than the decision being determined automatically in an NHST, the analyst must supply his/her own power, devising an <em>ad hoc</em> criterion for making a decision.</p></li>
 <li><p>But it is the scientifically valid approach, rather than relying on “superstition” with NHST.</p></li>
+<li><p>It is very telling that in a special 2019 issue of the <em>American Statistician</em> devoted to NHST problems, some authors proposed elaborate replacements for NHST. The psychological urge for an automatic decision-making procedure is clearly very strong. But I would argue that it is counterproductive, not really addressing the problem at hand.</p></li>
 </ul>
 </section>
 <section id="not-so-easy-parts" class="level1">
@@ -474,7 +475,8 @@ F-statistic: 645.4 on 21 and 20778 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h2 class="anchored" data-anchor-id="hierarchical-models">Hierarchical models</h2>
 <ul>
 <li><p>In the interaction terms example, we informally compared the change in <span class="math inline">\(\widehat{E}(Y|X=t)\)</span> that occurred when we added interaction terms. How can we formalize this into a CI?</p></li>
-<li><p>A CI for the proportional change can be obtained via the Delta Method, or by the bootstrap.</p></li>
+<li><p>A CI for the contribution of an interaction term to an overall estimate of <span class="math inline">\(E(Y|X=t)\)</span> is straightforward. The interaction term for GPA and being Black is given in the output, and we can add and subtract 1.96 times the standard error to obtain a CI for a 1-point increase in GPA for Black students, for example.</p></li>
+<li><p>A CI for the <em>proportional</em> contribution to <span class="math inline">\(E(Y|X=t)\)</span> can be obtained via the Delta Method, or by the bootstrap.</p></li>
 <li><p>The <em>log-linear model</em> can be used to explore relationships among categorical variables. For instance, this might be used in the LSAT data to analyze relationships between race, gender, family income and so on.</p>
 <p>Again there is a hierarchy of interaction terms, as in our linear model example, so again either the Delta Method or the bootstrap can be used. The necessary standard errors for DM can be obtained via <a href="https://github.com/matloff/LogLinFit">the “Poisson trick”</a>.</p>
 
