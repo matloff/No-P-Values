@@ -5,7 +5,7 @@ author: Norm Matloff
 toc: true
 ---
 
-[Author bio](https://heather.cs.ucdavis.edu/matloff.html) 
+[Author bio](https://heather.cs.ucdavis.edu/matloff.html)
 
 > *Abstract:* From the beginning of statistics, in the early 20th century, 
 > Null Hypothesis Significance Testing (NHST) was an ill-conceived idea.
@@ -27,7 +27,15 @@ toc: true
 
 * We wish to determine whether $H_0$ is true or false.
 
-* But in practice, $H_0$ **is never true**.
+* But:
+
+::: {.callout-caution title='Core Problem with NHST'}
+
+In practice, $H_0$ **is never true**.
+
+:::
+
+* Examples:
 
    * $H_0:$ new drug effectiveness = old drug effectiveness
 
@@ -204,7 +212,7 @@ whether the person passed the bar examination.
 
 * One of the biggest myths about us critics of NHST is that we fail to
   recognize that the analyst must make a decision. Of course one must make
-  a decision -- but based on relevant information, not on an NHST.
+  a decision -- but a decision based on relevant information, not on an NHST.
 
 * For instance: 
 
@@ -220,17 +228,28 @@ whether the person passed the bar examination.
 * But it is the scientifically valid approach, rather
   than relying on "superstition" with NHST.
 
+* It is very telling that in a special 2019 issue of the *American
+  Statistician* devoted to NHST problems, some authors proposed
+  elaborate replacements for NHST. The psychological urge for an
+  automatic decision-making procedure is clearly very strong. But I
+  would argue that it is counterproductive, not really addressing the
+  problem at hand.
+
 # Not-So-Easy Parts
 
 * As noted, today's statistically-trained analysts know to watch for
   the phenomenon of statistical significance without practical
   significance -- **in the context of measuring a treatment effect**.
-  In the above case, effect was of family income. 
+  In the above case, the "treatment effect" was of family income. 
 
 * But many analysts do not realize that this same notion may be
   extended to non-treatment contexts.
 
-* E.g. "I just want to use NHST to check whether my model fits the data."
+* E.g. an analyst who says, "I just want to use NHST to check whether my
+  model fits the data" is not only missing the principle of "all $H_0$s
+  are false," but is also missing an opportunity to perform much more
+  meaningful investigation as to whether the model is useful in the
+  given setting.
 
 ## Example: interaction effects in LSAT data
 
@@ -316,8 +335,14 @@ whether the person passed the bar examination.
   $\widehat{E}(Y|X=t)$ that occurred when we added interaction terms.
   How can we formalize this into a CI?
 
-* A CI for the proportional change can be obtained via the 
-  Delta Method, or by the bootstrap.
+* A CI for the contribution of an interaction term to an overall 
+  estimate of $E(Y|X=t)$ is straightforward. The interaction term for GPA
+  and being Black is given in the output, and we can add and subtract
+  1.96 times the standard error to obtain a CI for a 1-point increase in
+  GPA for Black students, for example.
+
+* A CI for the *proportional* contribution to $E(Y|X=t)$ can be obtained via
+  the Delta Method, or by the bootstrap.
 
 * The *log-linear model* can be used to explore relationships among
   categorical variables. For instance, this might be used in the LSAT
@@ -410,13 +435,13 @@ Wasserstein (who today is still the ASA executive director), along with
 
 There is considerable overlap there with my points in the present
 document.  But the ASA editorial (referred to below as "the 2016
-statement") stopped short of advocating complete abandonment
+ASA Statement") stopped short of advocating complete abandonment
 of the p-value concept. 
 
 Later, the *American Statistician* ran a full issue on the topic, with a
 sharper tone in the [cover
 editorial](https://www.tandfonline.com/doi/pdf/10.1080/00031305.2019.1583913)
-(which I'll call "the 2019 statement"). The authors, Wasserstein, Lazar
+(which I'll call "the 2019 editorial"). The authors, Wasserstein, Lazar
 and Allen Schirm,used language such as "eliminating the use of p-values
 as a truth arbiter."
 
@@ -424,7 +449,7 @@ Readers of the present document should keep in mind, as I have noted,
 that **my criticisms of NHST are much deeper than those of most critics,
 which don't go much further than warning analysts of the difference
 between statistical and practical significance.** In that light, 
-this passsge in the 2019 statement is especially noteworthy:
+this passsge in the 2019 editorial is especially noteworthy:
 
 > Reviewers of this editorial asked, as some readers of it will, is a
 > p-value threshold ever okay to use? We asked some of the authors of
@@ -441,17 +466,17 @@ this passsge in the 2019 statement is especially noteworthy:
 document.**
 
 According to Wasserstein (personal communication, April 8, 2025), after
-the release of the 2019 statement,
+the release of the 2019 editorial,
 
 > ...there were certainly some concerned voices. One of them reached out
 > to Karen Kafadar, who was [ASA] president at the time...[She appointed
 > a task force to study the matter] The task force composition
 > notably lacked diversity of viewpoints on this issue..."
 
-The 2019 statement led to [a vehement
+The 2019 editorial led to [a vehement
 counter-statement](https://hdsr.mitpress.mit.edu/pub/50vl2b07/release/2)
-by the task force ("the 2021 statement"), authored by some of the most
-prominent people in the field.  As Wasserman points out, the list of
+by the task force ("the 2021 task force report"), authored by some of the most
+prominent people in the field.  As Wasserstein points out, the list of
 signatores "notably lacked diversity of viewpoints on this issue."
 
 I consider that list to include some of the most talented scholars in
@@ -462,14 +487,14 @@ them, NHST is not just something tbey "grew up with," but a notion that
 has been absolutely core to their careers. Their work and their
 professional stature have stemmed from research that is typically
 NHST-centered. They thus had a powerful incentive to counter the 2019
-statement.  Though their bias was undoubtely not conscious, it was
+editorial  Though their bias was undoubtely not conscious, it was
 nevertheless very profound. 
 
 I hope that these highly talented researchers will instead turn to
 developing non- NHST tools.
 
 Finally, it should be noted that neither the 2019 nor 2021 statements 
-are official ASA policy; the 2016 statement is the only such position.
+are official ASA policy; the 2016 ASA Statement is the only such position.
 As Wasserstein wrote in his April 2025 message to me,
 
 > "The 2016 ASA Statement on P-Values and Statistical Significance remains
@@ -491,7 +516,7 @@ Statistics textbooks and curricula should finally be purged of the
 absurdity of testing hypotheses that we know *a priori* to be false.
 Mathematical statisticians should develop new formal non-NHST tools. And
 most of all, the ASA should play a leading role in all this, expanding
-on its 2016 statement and becoming more activist on the issue.
+on its 2016 ASA Statement and becoming more activist on the issue.
 
 # Acknowledgements
 
