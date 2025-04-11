@@ -217,7 +217,23 @@ window.Quarto = {
 <h1>The Core Problem</h1>
 <ul>
 <li><p>We wish to determine whether <span class="math inline">\(H_0\)</span> is true or false.</p></li>
-<li><p>But in practice, <span class="math inline">\(H_0\)</span> <strong>is never true</strong>.</p>
+<li><p>But:</p></li>
+</ul>
+<div class="callout callout-style-default callout-caution callout-titled" title="Core Problem with NHST">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Core Problem with NHST
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In practice, <span class="math inline">\(H_0\)</span> <strong>is never true</strong>.</p>
+</div>
+</div>
+<ul>
+<li><p>Examples:</p>
 <ul>
 <li><p><span class="math inline">\(H_0:\)</span> new drug effectiveness = old drug effectiveness</p>
 <p>Can’t be true true after many decimal places.</p></li>
@@ -356,7 +372,7 @@ T = \frac{\widehat{\beta}_{\textrm{faminc}}}
 <section id="making-a-decision-i" class="level1">
 <h1>Making a Decision, I</h1>
 <ul>
-<li><p>One of the biggest myths about us critics of NHST is that we fail to recognize that the analyst must make a decision. Of course one must make a decision – but based on relevant information, not on an NHST.</p></li>
+<li><p>One of the biggest myths about us critics of NHST is that we fail to recognize that the analyst must make a decision. Of course one must make a decision – but a decision based on relevant information, not on an NHST.</p></li>
 <li><p>For instance:</p>
 <blockquote class="blockquote">
 <p>In the above analysis, the proper decision is to conclude that family income has negligible effect on LSAT scores.</p>
@@ -369,9 +385,9 @@ T = \frac{\widehat{\beta}_{\textrm{faminc}}}
 <section id="not-so-easy-parts" class="level1">
 <h1>Not-So-Easy Parts</h1>
 <ul>
-<li><p>As noted, today’s statistically-trained analysts know to watch for the phenomenon of statistical significance without practical significance – <strong>in the context of measuring a treatment effect</strong>. In the above case, effect was of family income.</p></li>
+<li><p>As noted, today’s statistically-trained analysts know to watch for the phenomenon of statistical significance without practical significance – <strong>in the context of measuring a treatment effect</strong>. In the above case, the “treatment effect” was of family income.</p></li>
 <li><p>But many analysts do not realize that this same notion may be extended to non-treatment contexts.</p></li>
-<li><p>E.g. “I just want to use NHST to check whether my model fits the data.”</p></li>
+<li><p>E.g. an analyst who says, “I just want to use NHST to check whether my model fits the data” is not only missing the principle of “all <span class="math inline">\(H_0\)</span>s are false,” but is also missing an opportunity to perform much more meaningful investigation as to whether the model is useful in the given setting.</p></li>
 </ul>
 <section id="example-interaction-effects-in-lsat-data" class="level2">
 <h2 class="anchored" data-anchor-id="example-interaction-effects-in-lsat-data">Example: interaction effects in LSAT data</h2>
