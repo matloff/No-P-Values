@@ -5,7 +5,7 @@ author: Norm Matloff
 toc: true
 ---
 
-[Author bio](https://heather.cs.ucdavis.edu/matloff.html)
+[Author bio](https://heather.cs.ucdavis.edu/matloff.html)  
 
 > *Abstract:* From the beginning of statistics, in the early 20th century, 
 > Null Hypothesis Significance Testing (NHST) was an ill-conceived idea.
@@ -50,7 +50,7 @@ In practice, $H_0$ **is never true**.
 
      Measured $W$ is discrete, not continuous.
 
-     No one has a negative weight, or weight 10,000 kg.
+     No one has a negative weight, or weighs 10,000 kg.
 
    * $H_0:$ Efficient Market Hypothesis
 
