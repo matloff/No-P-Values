@@ -165,8 +165,8 @@ whether the person passed the bar examination.
 
 ::: {.column-margin}
 
-There are numerous causality issues, but they will not be
-addressed here.
+There are important causal issues here, but this aspect is beyond the
+scope of this document. 
 
 :::
 
@@ -321,7 +321,10 @@ Accordingly we need to idenitfy existing formal tools for assessing
   ```
 
 * Adding the interaction term changed the estimated value of the
-  regession function by only about 0.02 out of a 40.23 baseline.  
+  regression function by only about 0.02 out of a 40.23 baseline.  
+
+  (The interaction terms themselves are larger than 0.02, but they
+  absorbed some of the values in the original noninteraction variables.)
 
 * So, if our goal is prediction, we should not include the interaction
   terms.
@@ -383,6 +386,8 @@ Accordingly we need to idenitfy existing formal tools for assessing
   LSAT model above.
 
 Below we discuss two broad classes of NHST tools.
+(See the Appendix for mathematical details of material in 
+this section.)
 
 ## Procedures assessing treatment effects
 
@@ -391,13 +396,35 @@ Below we discuss two broad classes of NHST tools.
   How can we formalize this into a CI?
 
 * A CI for the contribution of an interaction term to an overall 
-  estimate of $E(Y|X=t)$ is straightforward. The interaction term for GPA
-  and being Black is given in the output, and we can add and subtract
-  1.96 times the standard error to obtain a CI for a 1-point increase in
-  GPA for Black students, for example.
+  estimate of $E(Y|X=t)$ is straightforward. 
 
-* A CI for the *proportional* contribution to $E(Y|X=t)$ can be obtained via
-  the Delta Method, or by the bootstrap.
+  $$
+
+  -2.876555 \pm  0.460281 = (-3.336836, -2.416274)
+
+  $$
+
+* However, the more relevant quantity might be the net effect of being
+  Black and having a 1.0 point increase in GPA, i.e. the 
+  computation 4.121631-2.876555 = 1.245076 shown above. Computation is
+  still straightforward, if the analyst's statistical coursework had
+  included dealing with covariance matrices (available here via the
+  **vcov** function). 
+
+* A more sophisticated approach would be to form a CI for the
+  *proportional* contribution to $\widehat{E}(Y|X=t)$ of some estimated
+  regression coefficient, for some analyst-chosen "typical" value of
+  $t$. In the code above, we arbitrarily chose the first row in the
+  dataset at our $t$, but the analyst might choose it, say, as the
+  vector of means of all the predictor variables.
+
+  We then would like to form a CI for the quantity
+
+  $$
+  \frac{\beta_i}{E(Y|X=t)}
+  $$
+
+  This can be obtained via the Delta Method, or by the bootstrap.
 
 * The *log-linear model* can be used to explore relationships among
   categorical variables. For instance, this might be used in the LSAT
@@ -408,16 +435,6 @@ Below we discuss two broad classes of NHST tools.
   model example, so again either the Delta Method or the bootstrap can
   be used. The necessary standard errors for DM can be obtained via
   [the "Poisson trick"](https://github.com/matloff/LogLinFit).
-
-  ::: {.column-margin}
-  For the Delta Method,  see *All of Statistics*, by Larry 
-  Wasserman. Various R implementations exist, including those not
-  requiring user-specified derivatives.
-  :::
-
-  ::: {.column-margin}
-  [For log-linear models,  see *An Introduction to Categorical Data Analysis*, 
-  by Alan Agresti. Many R implementations.]{.column-margin} 
 
 ## Goodness-of-fit of the fundamental model
 
@@ -441,6 +458,8 @@ test model fit.
   estimating some measure of distance from the population version of
   one's model to the true population probabilities, density or whatever.
 
+## Examples 
+
   * As the sample size grows, a fitted linear regression
     model will converge to the linear function that best approximates
     the true population regression function.
@@ -455,21 +474,49 @@ test model fit.
     estimated exponential distributions will converge to the closest
     exponential distributions to the true population distributions.
 
-* In all these situations, estimating a distance can help us determine
-  if our (imperfect) model is good enough.
+* In all these situations, estimating a distance (broadly defined)
+  can help us determine if our (imperfect) model is good enough.
 
-* How can this idea be implemented?
+## How can this idea be implemented?
 
-* The familiar Kolmogorov-Smirnov procedure is a simple example,
-  allowing use to form a CI for the distance between a model population
-  CDF and the true population CDF.
+* Setting:
+
+  * Let $\theta$ denote the population quantity of interest and write
+    $\widehat{\theta}$ for our sample estimate. 
+
+  * Note that we are informally defining $\theta$ to be the limit of
+    $\widehat{\theta}$ as the sample size $n$ does to infinity. 
+
+  * As in the examples above, we do NOT assume the model is correct;
+    $\theta$, rather than describing the true data-generating process,
+    merely describes a process that hopefully is close enough to it for
+    practical use.
 
 * There is an extensive literature on, and R implementations of,
-  *minimum distance estimators*. However, their computation of standard
-  errors may assume that the given model holds, an assumption that is
-  unacceptable in our context here. Instead, use the methods but compute
-  standard errors using the bootstrap. (The theory on these methods
-  needs to be reworked.)
+  *minimum distance estimators*. However, most have limitations
+  from our point of view here. For instance, the procedure should
+  produce standard errors not only for $\theta$, the population quantity
+  of interest, but also for the distance from the asymptotic model fit and 
+  the true population process.
+
+* Fortunately what we need can be easily developed for large classes of
+  estimators. See the Appendix.
+
+## Curricular improvement
+
+Besides the obvious retooling of statistics curricula in terms of
+banishing NHST, statistics programs need to modernize in terms of
+including some material on multivariate random variables. By this I mean
+in particular the concept of covariance and covariance matrices.
+
+Students need to be taught how to find the standard error of a linear
+combination of the components of a vector $\widehat{\theta}$, knowing
+its estimated covariance matrix.  I would surmise that even most
+Master's programs in Statistics do not cover this, and really the
+concept is not beyond the grasp of students methodology courses 
+that do not require linear algebra, say a course in regression for
+non-Statistics majors. If the course uses the R **lm** function, there
+is no reason students can't be taught the associated **vcov** method.
 
 # Where Is the ASA on This Issue?
 
@@ -590,4 +637,7 @@ school by the late Professor Olive Jean Dunn of the UCLA Biostatistics
 Department. I was doing my dissertation in the Mathematics Department.
 but took classes in Biostat. Jean brought up the topic casually one day
 in lecture, changing my views forever.
+
+# Appendix
+
 
