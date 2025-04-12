@@ -12,10 +12,11 @@ toc: true
 
 1. All null hypotheses $H_0$ are false.
 
-2. Here we probe more deeply than typical criticisms of NHST in the
-   literature, starting with this core theme that all $H_0$s are false.
+2. Null Hypothesis Significance Testing (NHST) is thus an absurdity.
 
-3. Null Hypothesis Significance Testing (NHST) is thus an absurdity.
+3. Here we probe more deeply than typical criticisms of NHST in the
+   literature, starting with this core theme that all $H_0$s are false.
+   NHST should be abandoned, not modified.
 
 4. Decisions must be made, but based on relevant analysis, not NHST.
 
@@ -380,6 +381,8 @@ Accordingly we need to idenitfy existing formal tools for assessing
 # Formal Non-NHST Tools 
 
 * Defenders of NHST emphasize that NHST formally addresses uncertainty.
+  NHST does this badly, but it is definitely true that any analysis must
+  address the random nature of the data. Non-NHST tools must do so.
 
 * So for instance it would be desirable to formalize 
   our assessment of adding interaction terms in the
@@ -396,20 +399,18 @@ this section.)
   How can we formalize this into a CI?
 
 * A CI for the contribution of an interaction term to an overall 
-  estimate of $E(Y|X=t)$ is straightforward. 
+  estimate of $E(Y|X=t)$ is straightforward, just the point estimate
+  plus or minux 1.96 times the standard error, 
 
   $$
-
-  -2.876555 \pm  0.460281 = (-3.336836, -2.416274)
-
+  -2.876555 \pm  1.96*0.460281 = (-3.336836, -2.416274)
   $$
 
 * However, the more relevant quantity might be the net effect of being
   Black and having a 1.0 point increase in GPA, i.e. the 
   computation 4.121631-2.876555 = 1.245076 shown above. Computation is
-  still straightforward, if the analyst's statistical coursework had
-  included dealing with covariance matrices (available here via the
-  **vcov** function). 
+  still straightforward, if the analyst knows covariance matrices (see
+  @sec-curric below.)
 
 * A more sophisticated approach would be to form a CI for the
   *proportional* contribution to $\widehat{E}(Y|X=t)$ of some estimated
@@ -502,7 +503,7 @@ test model fit.
 * Fortunately what we need can be easily developed for large classes of
   estimators. See the Appendix.
 
-## Curricular improvement
+## Curricular improvement {#sec-curric}
 
 Besides the obvious retooling of statistics curricula in terms of
 banishing NHST, statistics programs need to modernize in terms of
@@ -510,13 +511,20 @@ including some material on multivariate random variables. By this I mean
 in particular the concept of covariance and covariance matrices.
 
 Students need to be taught how to find the standard error of a linear
-combination of the components of a vector $\widehat{\theta}$, knowing
-its estimated covariance matrix.  I would surmise that even most
-Master's programs in Statistics do not cover this, and really the
-concept is not beyond the grasp of students methodology courses 
-that do not require linear algebra, say a course in regression for
-non-Statistics majors. If the course uses the R **lm** function, there
-is no reason students can't be taught the associated **vcov** method.
+combination $a' \widehat{\theta}$ of the components of a vector
+$\widehat{\theta}$, knowing its estimated covariance matrix
+$\widehat{\Sigma}$. They should be familiar with quadratic 
+forms $a'\widehat{\Sigma}a$, and more generally, $a'\widehat{\Sigma}b$.
+
+I would surmise that even most Master's programs in Statistics do not
+cover this. Yet really the concept is not beyond the grasp of students
+in methodology courses that do not require linear algebra, say a course in
+regression for non-Statistics majors. If the course uses the R **lm**
+function, there is no reason students can't be taught the associated
+**vcov** method.
+
+Many analysts who apply statistics are largely self-taught. Again,
+educational materials in that genre should account for these issues.
 
 # Where Is the ASA on This Issue?
 
@@ -640,4 +648,13 @@ in lecture, changing my views forever.
 
 # Appendix
 
+This Appendix is itended as a start toward developing non-NHST tools for
+analyst decision making.
+
+## Applications of the Delta Method
+
+In the interactions model discussed above, it was mentioned that one
+might wish to form a CI for the ratio between some $\beta_i$, say, and
+the value $E(Y|X=t)$ of the regression function at some analyst-chosen
+point $i$. How can this be done?W\
 
