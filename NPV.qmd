@@ -392,7 +392,7 @@ Below we discuss two broad classes of NHST tools.
 (See the Appendix for mathematical details of material in 
 this section.)
 
-## Procedures assessing treatment effects
+## Procedures assessing treatment effects {#sec-treats}
 
 * In the interaction terms example, we informally compared the change in 
   $\widehat{E}(Y|X=t)$ that occurred when we added interaction terms.
@@ -523,6 +523,23 @@ regression for non-Statistics majors. If the course uses the R **lm**
 function, there is no reason students can't be taught the associated
 **vcov** method.
 
+A related topic is the Delta Method. It's very handy for constructing
+CIs for nonlinear functions of $\widehat{\theta}$, but has two main
+barriers to usage:
+
+* Calculation of covariance matrices.
+
+* Calculation of derivatives.
+
+That first barrier again illustrates the aboe point regarding
+the need for the inclusion of rudimentary properties of covariance
+matrices in Statistics curricula.
+
+The second barrier is overcome by use of software that computes
+numerical derivatives internally, such as R's **msm::deltamethod**.
+
+Some exposure to the bootstrap is also desirable.
+
 Many analysts who apply statistics are largely self-taught. Again,
 educational materials in that genre should account for these issues.
 
@@ -651,17 +668,15 @@ in lecture, changing my views forever.
 This Appendix is itended as a start toward developing non-NHST tools for
 analyst decision making.
 
-## Applications of the Delta Method
+## Simple Applications of the Delta Method
 
-In the interactions model discussed above, it was mentioned that one
+In @sec-treats, it was mentioned that one
 might wish to form a CI for the ratio between some $\beta_i$, say, and
 the value $E(Y|X=t)$ of the regression function at some analyst-chosen
-point $i$. How can this be done?
+point $i$. But in @sec-curric, concern was raised as to the degree of
+statistical sophistication needed. Let's take a look.
 
 ```{r}
-library(qeML)
-data(svcensus)
-svc <- factorsToDummies(svcensus,omitLast=TRUE,dfOut=TRUE)
 lmOut <- lm(wageinc ~ .,svc)
 coef(lmOut)
 xpt <- svc[1,-9]
