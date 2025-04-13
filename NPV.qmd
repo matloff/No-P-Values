@@ -144,7 +144,6 @@ In practice, $H_0$ **is never true**.
 
   ```{r}
   load('data/lsa.RData')
-  data(lsa)
   names(lsa)
   ```
 
@@ -670,22 +669,44 @@ analyst decision making.
 
 ## Simple Applications of the Delta Method
 
-In @sec-treats, it was mentioned that one
-might wish to form a CI for the ratio between some $\beta_i$, say, and
-the value $E(Y|X=t)$ of the regression function at some analyst-chosen
-point $i$. But in @sec-curric, concern was raised as to the degree of
-statistical sophistication needed. Let's take a look.
+In @sec-treats, it was mentioned that one might wish to form a CI for
+the ratio between some $\beta_i$, say, and the value $E(Y|X=t)$ of the
+regression function at some analyst-chosen point $i$. But in
+@sec-curric, concern was raised as to the degree of statistical
+sophistication needed. Let's take a look. 
+
+The data here is from the 2000 US Census, specifically engineers and
+programmers in Santa Clara County, California. We will use the
+first row in our dataset as a "typical" point of comparison. (Again, our
+emphasis here is on the Delta Method, not on the propriety of this
+comparison.)
 
 ```{r}
-lmOut <- lm(wageinc ~ .,svc)
-coef(lmOut)
-xpt <- svc[1,-9]
-xptv <- unlist(xpt)
-regXpt <- predict(lmOut,xpt)
-contrib <- coef(lmOut)['gender.female']
-a <- c(1,rep(0,9),1)
-b <- c(1,xptv)
+load('data/svcensus.RData')
+# for simplicity, limit scope
+svc <- svcensus[,c('age','wageinc','gender')]
+svc$fem <- as.numeric(svc$gender=='female')
+svc$gender <- NULL
+lmOut <- lm(wageinc ~ .,data=svc)
+x1 <- svc[1,-2]  # our reference point
+x1Pred <- predict(lmOut,x1)
+a <- c(0,10,0)  # effect of 10 years of age
+b <- as.numeric(x1)
+b <- c(1,b)  # account for intercept term
+betaHat <- coef(lmOut)
 cvm <- vcov(lmOut)
-t(a) %*% cvm %*% b
+varn <- t(a) %*% cvm %*% a  # est. var. of numerator
+vard <- t(b) %*% cvm %*% b  # est. var. of denominator
+cvnd <- t(a) %*% cvm %*% b  # est. covariance
+num <- t(a) %*% betaHat
+den <- t(b) %*% betaHat
+propor10Age <- num/den
+library(msm)
+cvProp <- matrix(c(varn,cvnd,cvnd,vard),nrow=2)
+se <- deltamethod(~ x1/x2,c(num,den),cvProp)
+c(propor10Age - 1.96*se,propor10Age + 1.96*se)
 ```
+
+The code is somewhat involved, but as noted earlier, well within the
+capabilities of scientific researchers who use R.
 
