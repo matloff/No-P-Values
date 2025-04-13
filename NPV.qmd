@@ -656,5 +656,21 @@ analyst decision making.
 In the interactions model discussed above, it was mentioned that one
 might wish to form a CI for the ratio between some $\beta_i$, say, and
 the value $E(Y|X=t)$ of the regression function at some analyst-chosen
-point $i$. How can this be done?W\
+point $i$. How can this be done?
+
+```{r}
+library(qeML)
+data(svcensus)
+svc <- factorsToDummies(svcensus,omitLast=TRUE,dfOut=TRUE)
+lmOut <- lm(wageinc ~ .,svc)
+coef(lmOut)
+xpt <- svc[1,-9]
+xptv <- unlist(xpt)
+regXpt <- predict(lmOut,xpt)
+contrib <- coef(lmOut)['gender.female']
+a <- c(1,rep(0,9),1)
+b <- c(1,xptv)
+cvm <- vcov(lmOut)
+t(a) %*% cvm %*% b
+```
 
