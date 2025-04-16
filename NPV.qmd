@@ -391,7 +391,7 @@ Below we discuss two broad classes of NHST tools.
 (See the Appendix for mathematical details of material in 
 this section.)
 
-## Procedures assessing treatment effects {#sec-treats}
+# Procedures Assessing Treatment Effects {#sec-treats}
 
 * In the interaction terms example, we informally compared the change in 
   $\widehat{E}(Y|X=t)$ that occurred when we added interaction terms.
@@ -436,68 +436,101 @@ this section.)
   be used. The necessary standard errors for DM can be obtained via
   [the "Poisson trick"](https://github.com/matloff/LogLinFit).
 
+# Accounting for Imperfections in Our Model
+
+*All models are wrong, but some are useful* -- prominant 
+statistician George Box
+
+## Dependence on one's goals
+
+As usual, proper analysis depends on one's goals. 
+
+* If the goal is prediction, a linear model may be quite effective even
+  though there is a substantial discrepancy between it and the true
+  population regression function $E(Y|X=t)$. 
+
+* But if the goal is measurement of treatment effects, we may be
+  acquiring distorted results if the model discrepancy is large.
+
+### We are always estimating *something* {#sec-something}
+
+* Say we are estimating a parameter $\theta$ in some model. 
+  Does the inevitable incorrectness of the model mean our estimate is
+  meaningless? No, not at all.
+
+* Even though our model is (always) wrong, we are still estimating
+  *something*. If we fit a linear regression model $E(Y|X=t) = \beta'X$
+  (using ' for matrix transpose, in this case of a column vector), we
+  are in essence estimating the linear function closest to the true
+  population regression function $\mu(t) = E(Y|X=t)$. $\beta$ is then
+  the vector of coefficients for that linear function. 
+
+* Statistical theory asks what the long-run behavior of an estimator is,
+  as the sample size $n$ grows. When we say that our least-squares
+  estimator $\widehat{\beta}$ estimates that "closest" $\beta$, we mean
+  that $\lim_{n \rightarrow \infty} \widehat{\beta} =\beta$.
+
+* The mathematical details are in the Appendix, but the point is this:
+  If that "closest linear function" is not too far from $\mu(t)$, we can
+  feel comfortable with analyzing the resulting $\widehat{\beta}$ as an
+  approximation.
+
+* The same principle holds for, say, Maximum Likelihood Estimators (MLE).
+  We are estimating the closest model to reality.
+
+* However, our estimation procedure for that closest model should not
+  assume the model is correct, especially in computing standard errors.
+  For instance:
+
+     * Normally, in the linear miodel, we estimate the conditional
+       variance $Var(Y|X=t) = \sigma^2$ using the squared residuals,
+
+       $$
+       \frac{1}{n-p-1} \sum_{i=1}^n (Y_i - \widehat{\beta}' X_i)^2
+       $$
+
+       But that only works if the model is correct. If not, then each
+       residual includes the model bias. That in turn invalidates the
+       standard errors of the estimated coefficients.
+
+     * In the case of MLEs, the standard errors come from the
+       *information matrix*, based on a derivation that assumes the
+       model is correct. Thus standard errors based on the classic
+       formmula are incorrect.
+
+* Thus alternative ways of computing standard errors must be found.
+  At the very least, one has the bootstrap, but analytical methods would
+  be preferred. This discussed in the Appendix.
+
 ## Goodness-of-fit of the fundamental model
 
-::: {.callout-important title='Worst of the Worse of NHST Usage'}
+* But once again, "all models are wrong," so in addition to calculating
+  a point estimate and a standard error for $\theta$, the analyst may
+  optionally wish to assess how close his/her model is to the true
+  population entity. 
 
-The problem, "All $H_0$s are false," is especially acute for NHSTs that
-test model fit.
+* Classically, that would be done via NHST, in some sort of
+  goodness-of-fit test, but of course NHST should not be done.  One
+  should both calculate a point estimate for the distance and also a
+  standard error for the estimated distance.
 
-:::
-
-
-* As noted earlier, goodness-of-fit tests can be especially problematic
-  in terms of the inappropriate nature of NHST.  What can be done instead?
-
-* First, ask if assessment of the model is needed in the first place.
-  For instance, many statistical methods, such as the linear model, are
-  robust to normality assumptions, and thus assessing normality is
-  superfluous.
-
-* Explicitly recognize that one's model is an approximation, by
-  estimating some measure of distance from the population version of
-  one's model to the true population probabilities, density or whatever.
-
-## Examples 
-
-  * As the sample size grows, a fitted linear regression
-    model will converge to the linear function that best approximates
-    the true population regression function.
-  
-  * A genetic model may be technically false but still serve as a good
-    approximation. As the sample size grows, the fitted probabilities will
-    converge to the set of model probabilities closest to the true
-    population values.
-
-  * In a Markov chain analysis, we might model the holding times as
-    exponentially distributed as an approximation. The resulting
-    estimated exponential distributions will converge to the closest
-    exponential distributions to the true population distributions.
-
-* In all these situations, estimating a distance (broadly defined)
-  can help us determine if our (imperfect) model is good enough.
+* (In many cases, this is done informally through a graphical procedure,
+  e.g. plotting residuals. This is fine, but here we address the issue
+  of formal methods.) 
 
 ## How can this idea be implemented?
 
-* Setting:
-
-  * Let $\theta$ denote the population quantity of interest and write
-    $\widehat{\theta}$ for our sample estimate. 
-
-  * Note that we are informally defining $\theta$ to be the limit of
-    $\widehat{\theta}$ as the sample size $n$ does to infinity. 
-
-  * As in the examples above, we do NOT assume the model is correct;
-    $\theta$, rather than describing the true data-generating process,
-    merely describes a process that hopefully is close enough to it for
-    practical use.
-
 * There is an extensive literature on, and R implementations of,
-  *minimum distance estimators*. However, most have limitations
-  from our point of view here. For instance, the procedure should
-  produce standard errors not only for $\theta$, the population quantity
-  of interest, but also for the distance from the asymptotic model fit and 
-  the true population process.
+  *minimum distance estimators*, a concept which would seem to dovetail
+  with the above point that with a false model we are estimating the
+  closest instance of our model to the true population entity.
+
+* However, most have limitations from our point of view here. For
+  instance, the procedure should produce standard errors not only for
+  $\theta$, the population quantity of interest, but also for the
+  distance from the asymptotic model fit and the true population
+  process. Most important, the procedure must not assume correctness of
+  the model.
 
 * Fortunately what we need can be easily developed for large classes of
   estimators. See the Appendix.
@@ -671,9 +704,11 @@ analyst decision making.
 
 In @sec-treats, it was mentioned that one might wish to form a CI for
 the ratio between some $\beta_i$, say, and the value $E(Y|X=t)$ of the
-regression function at some analyst-chosen point $i$. But in
+regression function at some analyst-chosen point $t$. But in
 @sec-curric, concern was raised as to the degree of statistical
 sophistication needed. Let's take a look. 
+
+### Example
 
 The data here is from the 2000 US Census, specifically engineers and
 programmers in Santa Clara County, California. We will use the
@@ -685,28 +720,132 @@ comparison.)
 load('data/svcensus.RData')
 # for simplicity, limit scope
 svc <- svcensus[,c('age','wageinc','gender')]
+# replace gender by dummy variable for female
 svc$fem <- as.numeric(svc$gender=='female')
 svc$gender <- NULL
 lmOut <- lm(wageinc ~ .,data=svc)
 x1 <- svc[1,-2]  # our reference point
-x1Pred <- predict(lmOut,x1)
+x1Pred <- predict(lmOut,x1) # est. reg. ftn. at x1
+# prepare to compute relevant linear combinations of betahat
 a <- c(0,10,0)  # effect of 10 years of age
 b <- as.numeric(x1)
 b <- c(1,b)  # account for intercept term
 betaHat <- coef(lmOut)
+# compute ratio
+num <- t(a) %*% betaHat
+den <- t(b) %*% betaHat
+propor10Age <- num/den
+# compute covariance matrix of ratio
 cvm <- vcov(lmOut)
 varn <- t(a) %*% cvm %*% a  # est. var. of numerator
 vard <- t(b) %*% cvm %*% b  # est. var. of denominator
 cvnd <- t(a) %*% cvm %*% b  # est. covariance
-num <- t(a) %*% betaHat
-den <- t(b) %*% betaHat
-propor10Age <- num/den
+# apply Delta Method
 library(msm)
 cvProp <- matrix(c(varn,cvnd,cvnd,vard),nrow=2)
 se <- deltamethod(~ x1/x2,c(num,den),cvProp)
 c(propor10Age - 1.96*se,propor10Age + 1.96*se)
 ```
 
+We estimate that the proportional impact of 10 additional years of age
+is between 7.8 and 9.8%.
+
 The code is somewhat involved, but as noted earlier, well within the
 capabilities of scientific researchers who use R.
+
+## Taking model inaccuracy into account
+
+Continuing @sec-something, we seek estimators with the following
+characteristics:
+
+* We have a model $\cal{M}$, again necessarily incorrect, for the
+  distribution of some random quantity $W$, possibly vector-valued.  (We
+  may be interested in just one aspect of the distribution, say the
+  regression function, but for simplicity will refer just to the dstr.)
+  
+* Say $\cal{M}$ is parametric with some parameter $\theta$, again
+  possibly vector-valued.
+
+* Denote the true distribution of $W$ by $F_{pop}$.
+
+* We estimate $\theta$ by some method, say MLE. We want to find a
+  standard error that *does not assume $\cal{M}$ is correct.*
+
+* Optionally, we may want to also estimate the population "distance"
+  between  $F_W$ model and $F_{pop}$, including a standard error for
+  that estimate.
+
+### Example
+
+Say we have a random variable $X$ whose distribution we wish to model as
+exponential,
+
+$$
+f_X(t) = \lambda e^{-t/\lambda}
+$$
+
+We recognize that this model, as with any, is inherently false, and wish
+to estimate $\lambda$ accordingly. We also want to assess the distance
+between our model and the true population state of affairs. Denote our
+data by $X_1,...,X_n$.
+
+The MLE of $\lambda$ is $\widehat{\lambda} = 1/\bar{X}$, the reciprocal
+of the sample mean.  As discussed, the classic formulas for the
+standard error of $\widehat{\lambda}$ are invalid here. But the solution
+is simple here: $\bar{X}$ is asymptotically normal from the Central
+Limit Theorem, with standard error computable from the data. Thus we can
+find a CI for E(X), then invert the endpoints to obtain an interval for
+$\lambda$.
+
+But what about the distance between the model and actual distributions
+of $X$? Under the model, the cumulative distribution function is
+
+$$
+F_{model}(t) = 1 - e^{-t/\lambda}
+$$
+
+estimated by
+
+$$
+1 - e^{-t \bar{X}}
+$$
+
+The estimate of the true cdf is the *empirical cdf*,
+
+$$
+F_{true}(t) = \frac{1}{n} N(t)
+$$
+
+where $N(t)$ is the number of $X_i$ that are $\leq t$.
+
+We might compare the two cdfs at various selected points. For
+simplicity, let's look at just one point, say $v$. We thus wish to find
+a standard error for
+
+$$
+\frac{1 - e^{-v \bar{X}}}{1 - N(v)/n}
+$$
+
+This is perfectly set up for the Delta Method. We need the covariance
+matrix, which we can obtain empirically by applying the R function **cov**
+to the vectors $(X_1,...,X_n$ and $(I_1,...,I_n)$, where $I_j$ is 1 or 0,
+according to whethe $X_j \leq v$.
+
+# Making a Decision, III
+
+As noted earlier, proper analysis is easier, and probably less
+psychologically satisfying than NHST. In this section, there is also the
+issue of whether a typical scientific researcher even has the backgrund
+to be able to perform the analysis. In the case of estimating the
+distance between two distributions, this may be out of reach for many.
+
+This then is a good example of the need for mathematical statisticians t
+develop non-NHST tools, say along the above lines.
+
+Of course, there is always the bootstrap as a widely accessible
+alternative. A question, though, is whether scientific journals will
+accept such analyses. As long as data, code and random number seed are
+made available, hopefully this could be worked out.
+
+
 
