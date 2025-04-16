@@ -13,6 +13,7 @@ toc: true
 1. All null hypotheses $H_0$ are false.
 
 2. Null Hypothesis Significance Testing (NHST) is thus an absurdity.
+   Why "test" something we know is false?
 
 3. Here we probe more deeply than typical criticisms of NHST in the
    literature, starting with this core theme that all $H_0$s are false.
@@ -110,7 +111,7 @@ In practice, $H_0$ **is never true**.
   a trait that we know *a priori* is false.
 
 * The American Statistical Association (ASA) rightly takes pride in statistics
-  as a *science*, [saying](www.amstat.org/about-asa) they promotes"the
+  as a *science*, [saying](www.amstat.org/about-asa) they promote "the
   development, application, and dissemination of statistical science,"
   and that its members "[promote] sound statistical practice to inform 
   public policy and improve human welfare." 
@@ -147,16 +148,16 @@ In practice, $H_0$ **is never true**.
   names(lsa)
   ```
 
-* The two
-decile scores are class standing in the first and third years of law
-school, and 'cluster' refers to the reputed quality of the law school.
-[ ]{.column-margin}
+* The two decile scores are class standing in the first and third years
+  of law school, and 'cluster' refers to the reputed quality of the law
+  school.
 
-* Two variables of particular interest might be the student's score on the
-Law School Admission Test (LSAT) and a logical variable indicating
-whether the person passed the bar examination.
 [The 'age' variable is apparently birth year, with e.g. 67 meaning
 1967.]{.column-margin}
+
+* Two variables of particular interest might be the student's score on
+  the Law School Admission Test (LSAT) and a logical variable indicating
+  whether the person passed the bar examination.
 
 ## Wealth bias in the LSAT?
 
@@ -165,7 +166,7 @@ whether the person passed the bar examination.
 
 ::: {.column-margin}
 
-There are important causal issues here, but this aspect is beyond the
+There are important causal issues here and beloew, but this aspect is beyond the
 scope of this document. 
 
 :::
@@ -213,15 +214,20 @@ scope of this document.
   using the test statistic based on the standard error,
   
   $$
-  T = \frac{\widehat{\beta}_{\textrm{faminc}}}
+  W = \frac{\widehat{\beta}_{\textrm{faminc}}}
   {\textrm{s.e.}(\widehat{\beta}_{\textrm{faminc}})}
   $$
 
-* As the sample size increases the denominator of $T$ goes to 0.  The
+* As the sample size increases the denominator of $W$ goes to 0.  The
   numerator goes to the population parameter $\beta_{\textrm{faminc}}$
   -- **which is nonzero since all $H_0$s are false**.
 
-* $T$ then goes to $\pm \infty$, and thus the p-value goes to 0. In other
+[In some contexts, the term *data-generating process*, popular in
+machine learning circles, may work better than *population*. I use the
+latter for simplicity and for its propriety in many
+contexts.]{.column-margin}
+
+* $W$ then goes to $\pm \infty$, and thus the p-value goes to 0. In other
   words:
 
 ::: {.callout-important title="The Term 'Significant' Has No Meaning"}
@@ -273,7 +279,7 @@ and will be rejected. **The term "significant" means nothing.**
 We should focus on "practical significance," and abandon assessing
 "[statistical] significance." 
 
-Accordingly we need to idenitfy existing formal tools for assessing
+Accordingly we need to identify existing formal tools for assessing
 *practical* importance, and develop new such tools.
 
 ::: 
@@ -281,10 +287,10 @@ Accordingly we need to idenitfy existing formal tools for assessing
 * As noted, today's statistically-trained analysts know to watch for
   the phenomenon of statistical significance without practical
   significance -- **in the context of measuring a treatment effect**.
-  In the above case, the "treatment effect" was of family income. 
+  In the above case, the "treatment effect" was family income. 
 
-* But many analysts do not realize that this same notion may be
-  extended to non-treatment contexts.
+* But many analysts do not realize that this same notion may -- and
+  should -- be extended to non-treatment contexts.
 
 * E.g. an analyst who says, "I just want to use NHST to check whether my
   model fits the data" is not only missing the principle of "all $H_0$s
@@ -337,7 +343,7 @@ Accordingly we need to idenitfy existing formal tools for assessing
   being Black by an estimated -2.876555, resulting in a net effect
   of 4.121631-2.876555 = 1.245076. On an exam having top score of 48,
   this is not a strong effect, and we may decide that the effect of
-  being Black is minor.
+  being Black is minor in this particular context.
 
 # Making a Decision, II
 
@@ -351,7 +357,7 @@ Accordingly we need to idenitfy existing formal tools for assessing
 
 * In the case of scientific research, the full explanation of the
   authors' decision must be made available -- especially data 
-  (anonymised if need be) and code.
+  (anonymized if need be) and code.
 
 # Regarding Confidence Intervals
 
@@ -373,7 +379,7 @@ Accordingly we need to idenitfy existing formal tools for assessing
   (b), not just (a)? You should view statistical analysis in the same
   way.
 
-* CIs should play a key role in non-NHST analyses.
+* CIs should play a key role in lieu of NHST analyses.
 
 * Of course this includes multiple-comparisons CIs.
 
@@ -388,8 +394,7 @@ Accordingly we need to idenitfy existing formal tools for assessing
   LSAT model above.
 
 Below we discuss two broad classes of NHST tools.
-(See the Appendix for mathematical details of material in 
-this section.)
+(See the Appendix for mathematical details.)
 
 # Procedures Assessing Treatment Effects {#sec-treats}
 
@@ -402,7 +407,7 @@ this section.)
   plus or minux 1.96 times the standard error, 
 
   $$
-  -2.876555 \pm  1.96*0.460281 = (-3.336836, -2.416274)
+  -2.876555 \pm  1.96 \times 0.460281 = (-3.336836, -2.416274)
   $$
 
 * However, the more relevant quantity might be the net effect of being
@@ -415,7 +420,7 @@ this section.)
   *proportional* contribution to $\widehat{E}(Y|X=t)$ of some estimated
   regression coefficient, for some analyst-chosen "typical" value of
   $t$. In the code above, we arbitrarily chose the first row in the
-  dataset at our $t$, but the analyst might choose it, say, as the
+  dataset as our $t$, but the analyst might choose it, say, as the
   vector of means of all the predictor variables.
 
   We then would like to form a CI for the quantity
@@ -450,7 +455,16 @@ As usual, proper analysis depends on one's goals.
   population regression function $E(Y|X=t)$. 
 
 * But if the goal is measurement of treatment effects, we may be
-  acquiring distorted results if the model discrepancy is large.
+  producing distorted results if the model discrepancy is large.
+  Addressing this problem involves two components:
+
+  * Clarifying the issue of what is actually being estimated, in light
+    of the inevitable falsity of our model.
+
+  * Optionally, formally assessing the degree of discrepancy between
+    our model and reality.
+
+We now elaborate on these last two points.
 
 ### We are always estimating *something* {#sec-something}
 
@@ -462,8 +476,12 @@ As usual, proper analysis depends on one's goals.
   *something*. If we fit a linear regression model $E(Y|X=t) = \beta'X$
   (using ' for matrix transpose, in this case of a column vector), we
   are in essence estimating the linear function closest to the true
-  population regression function $\mu(t) = E(Y|X=t)$. $\beta$ is then
+  population regression function $\mu(t) = E(Y|X=t)$. What we are
+  estimating with our $\widehat{\beta}$ is then
   the vector of coefficients for that linear function. 
+
+[The term "closest" will be used in a broad sense. It could be defined
+mathematically in various ways.]{.column-margin}
 
 * Statistical theory asks what the long-run behavior of an estimator is,
   as the sample size $n$ grows. When we say that our least-squares
@@ -482,12 +500,15 @@ As usual, proper analysis depends on one's goals.
   assume the model is correct, especially in computing standard errors.
   For instance:
 
-     * Normally, in the linear miodel, we estimate the conditional
+     * Normally, in the linear model, we estimate the conditional
        variance $Var(Y|X=t) = \sigma^2$ using the squared residuals,
 
        $$
        \frac{1}{n-p-1} \sum_{i=1}^n (Y_i - \widehat{\beta}' X_i)^2
        $$
+
+       which is then used to produce standard errors for the
+       $\widehat{\beta}_i$.
 
        But that only works if the model is correct. If not, then each
        residual includes the model bias. That in turn invalidates the
@@ -495,8 +516,8 @@ As usual, proper analysis depends on one's goals.
 
      * In the case of MLEs, the standard errors come from the
        *information matrix*, based on a derivation that assumes the
-       model is correct. Thus standard errors based on the classic
-       formmula are incorrect.
+       model is correct. So standard errors based on the classic
+       formula are incorrect.
 
 * Thus alternative ways of computing standard errors must be found.
   At the very least, one has the bootstrap, but analytical methods would
@@ -504,7 +525,7 @@ As usual, proper analysis depends on one's goals.
 
 ## Goodness-of-fit of the fundamental model
 
-* But once again, "all models are wrong," so in addition to calculating
+* Once again, "all models are wrong," so in addition to calculating
   a point estimate and a standard error for $\theta$, the analyst may
   optionally wish to assess how close his/her model is to the true
   population entity. 
@@ -525,12 +546,12 @@ As usual, proper analysis depends on one's goals.
   with the above point that with a false model we are estimating the
   closest instance of our model to the true population entity.
 
-* However, most have limitations from our point of view here. For
-  instance, the procedure should produce standard errors not only for
-  $\theta$, the population quantity of interest, but also for the
-  distance from the asymptotic model fit and the true population
-  process. Most important, the procedure must not assume correctness of
-  the model.
+* However, many have limitations from our point of view here.  Most
+  important, the procedure must not assume correctness of the model.  In
+  addition, we would require that the procedure should produce standard
+  errors not only for $\widehat{\theta}$, but also for the estimated
+  distance between the asymptotic model fit and the true population
+  process. 
 
 * Fortunately what we need can be easily developed for large classes of
   estimators. See the Appendix.
@@ -563,7 +584,7 @@ barriers to usage:
 
 * Calculation of derivatives.
 
-That first barrier again illustrates the aboe point regarding
+That first barrier again illustrates the above point regarding
 the need for the inclusion of rudimentary properties of covariance
 matrices in Statistics curricula.
 
@@ -654,7 +675,7 @@ them, NHST is not just something tbey "grew up with," but a notion that
 has been absolutely core to their careers. Their work and their
 professional stature have stemmed from research that is typically
 NHST-centered. They thus had a powerful incentive to counter the 2019
-editorial  Though their bias was undoubtely not conscious, it was
+editorial. Though their bias was undoubtely not conscious, it was
 nevertheless very profound. 
 
 I hope that these highly talented researchers will instead turn to
@@ -687,13 +708,13 @@ on its 2016 ASA Statement and becoming more activist on the issue.
 
 # Acknowledgements
 
-I was first introduced to this vital issue long ago in graduate
-[Prof. Dunn is often credited as the first to use the Bonferroni
-Inequality for multiple comparisons]{.column-margin}
-school by the late Professor Olive Jean Dunn of the UCLA Biostatistics
-Department. I was doing my dissertation in the Mathematics Department.
-but took classes in Biostat. Jean brought up the topic casually one day
-in lecture, changing my views forever.
+I was first introduced to this vital issue long ago in graduate [Prof.
+Dunn is often credited as the first to use the Bonferroni Inequality for
+multiple comparisons]{.column-margin} school by the late Professor Olive
+Jean Dunn of the UCLA Biostatistics Department. I was doing my (very
+theoretical) dissertation in the Mathematics Department.  but took
+classes in Biostat. Jean brought up the topic casually one day in
+lecture, changing my views forever.
 
 # Appendix
 
@@ -720,7 +741,7 @@ comparison.)
 load('data/svcensus.RData')
 # for simplicity, limit scope
 svc <- svcensus[,c('age','wageinc','gender')]
-# replace gender by dummy variable for female
+# need numeric quantities; replace gender by dummy variable for female
 svc$fem <- as.numeric(svc$gender=='female')
 svc$gender <- NULL
 lmOut <- lm(wageinc ~ .,data=svc)
@@ -761,7 +782,8 @@ characteristics:
 * We have a model $\cal{M}$, again necessarily incorrect, for the
   distribution of some random quantity $W$, possibly vector-valued.  (We
   may be interested in just one aspect of the distribution, say the
-  regression function, but for simplicity will refer just to the dstr.)
+  regression function, but for simplicity will refer just to the
+  distribution.)
   
 * Say $\cal{M}$ is parametric with some parameter $\theta$, again
   possibly vector-valued.
@@ -772,7 +794,7 @@ characteristics:
   standard error that *does not assume $\cal{M}$ is correct.*
 
 * Optionally, we may want to also estimate the population "distance"
-  between  $F_W$ model and $F_{pop}$, including a standard error for
+  between our model and $F_{pop}$, including a standard error for
   that estimate.
 
 ### Example
@@ -785,17 +807,35 @@ f_X(t) = \lambda e^{-t/\lambda}
 $$
 
 We recognize that this model, as with any, is inherently false, and wish
-to estimate $\lambda$ accordingly. We also want to assess the distance
-between our model and the true population state of affairs. Denote our
-data by $X_1,...,X_n$.
+to estimate $\lambda$ accordingly, meaning that we estimate the
+$\lambda$ of the exponential distribution closest to the the $f_X$.  Say
+we also want to assess the distance between our model and the true
+population state of affairs.  Denote our data by $X_1,...,X_n$. 
 
 The MLE of $\lambda$ is $\widehat{\lambda} = 1/\bar{X}$, the reciprocal
-of the sample mean.  As discussed, the classic formulas for the
+of the sample mean. 
+
+::: {.callout-note title='Again, what are we actually estimating?'}
+
+Following the discussion in @sec-something, note that by choosing
+$1/\bar{X}$ as our estimator, the quantity it is estimating is the
+reciprocal of the population mean $1/\mu = 1/E(X)$, and our "closest
+model" to reality is
+
+$$
+f_X(t) = \frac{1}{\mu} e^{-t/\mu}
+$$
+
+Hopefully that is close to the true $f_X(t)$.
+
+:::
+
+As discussed, the classic formulas for the
 standard error of $\widehat{\lambda}$ are invalid here. But the solution
 is simple here: $\bar{X}$ is asymptotically normal from the Central
 Limit Theorem, with standard error computable from the data. Thus we can
 find a CI for E(X), then invert the endpoints to obtain an interval for
-$\lambda$.
+$\lambda$. 
 
 But what about the distance between the model and actual distributions
 of $X$? Under the model, the cumulative distribution function is
@@ -819,7 +859,8 @@ $$
 where $N(t)$ is the number of $X_i$ that are $\leq t$.
 
 We might compare the two cdfs at various selected points. For
-simplicity, let's look at just one point, say $v$. We thus wish to find
+simplicity, let's look at just one point, say $v$, and take as our
+"distance" the ratio of model cdf and true cdf. We thus wish to find
 a standard error for
 
 $$
@@ -833,18 +874,18 @@ according to whethe $X_j \leq v$.
 
 # Making a Decision, III
 
-As noted earlier, proper analysis is easier, and probably less
+As noted earlier, proper analysis is harder, and probably less
 psychologically satisfying than NHST. In this section, there is also the
-issue of whether a typical scientific researcher even has the backgrund
+issue of whether a typical scientific researcher even has the background
 to be able to perform the analysis. In the case of estimating the
 distance between two distributions, this may be out of reach for many.
 
-This then is a good example of the need for mathematical statisticians t
-develop non-NHST tools, say along the above lines.
+This then is a good example of the need for mathematical statisticians
+to develop non-NHST tools, say along the above lines.
 
 Of course, there is always the bootstrap as a widely accessible
 alternative. A question, though, is whether scientific journals will
-accept such analyses. As long as data, code and random number seed are
+accept such analyses. As long as (possibly anonymized) data, code and random number seed are
 made available, hopefully this could be worked out.
 
 
