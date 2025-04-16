@@ -146,29 +146,51 @@ window.Quarto = {
    
   <ul>
   <li><a href="#nhst-is-too-comfortable" id="toc-nhst-is-too-comfortable" class="nav-link active" data-scroll-target="#nhst-is-too-comfortable">NHST Is (Too) Comfortable</a></li>
-  <li><a href="#the-core-problem" id="toc-the-core-problem" class="nav-link" data-scroll-target="#the-core-problem">The Core Problem</a></li>
-  <li><a href="#effect-of-measurement-error-especially-bias" id="toc-effect-of-measurement-error-especially-bias" class="nav-link" data-scroll-target="#effect-of-measurement-error-especially-bias">Effect of Measurement Error, Especially Bias</a></li>
-  <li><a href="#both-an-epistemological-and-practical-problem" id="toc-both-an-epistemological-and-practical-problem" class="nav-link" data-scroll-target="#both-an-epistemological-and-practical-problem">Both an Epistemological and Practical Problem</a></li>
-  <li><a href="#the-easy-part-statistical-vs.-practical-significance" id="toc-the-easy-part-statistical-vs.-practical-significance" class="nav-link" data-scroll-target="#the-easy-part-statistical-vs.-practical-significance">The Easy Part: Statistical vs.&nbsp;Practical Significance</a></li>
-  <li><a href="#running-example-lsat-data" id="toc-running-example-lsat-data" class="nav-link" data-scroll-target="#running-example-lsat-data">Running Example: LSAT Data</a>
+  <li><a href="#the-central-issue" id="toc-the-central-issue" class="nav-link" data-scroll-target="#the-central-issue">The Central Issue</a>
   <ul class="collapse">
+  <li><a href="#effect-of-measurement-error-especially-bias" id="toc-effect-of-measurement-error-especially-bias" class="nav-link" data-scroll-target="#effect-of-measurement-error-especially-bias">Effect of measurement error, especially bias</a></li>
+  <li><a href="#both-an-epistemological-and-practical-problem" id="toc-both-an-epistemological-and-practical-problem" class="nav-link" data-scroll-target="#both-an-epistemological-and-practical-problem">Both an epistemological and practical problem</a></li>
+  </ul></li>
+  <li><a href="#the-easy-part-statistical-vs.-practical-significance" id="toc-the-easy-part-statistical-vs.-practical-significance" class="nav-link" data-scroll-target="#the-easy-part-statistical-vs.-practical-significance">The Easy Part: Statistical vs.&nbsp;Practical Significance</a>
+  <ul class="collapse">
+  <li><a href="#running-example-lsat-data" id="toc-running-example-lsat-data" class="nav-link" data-scroll-target="#running-example-lsat-data">Running example: LSAT data</a></li>
   <li><a href="#wealth-bias-in-the-lsat" id="toc-wealth-bias-in-the-lsat" class="nav-link" data-scroll-target="#wealth-bias-in-the-lsat">Wealth bias in the LSAT?</a></li>
+  <li><a href="#source-of-the-problem" id="toc-source-of-the-problem" class="nav-link" data-scroll-target="#source-of-the-problem">Source of the problem</a></li>
   </ul></li>
   <li><a href="#making-a-decision-i" id="toc-making-a-decision-i" class="nav-link" data-scroll-target="#making-a-decision-i">Making a Decision, I</a></li>
-  <li><a href="#not-so-easy-parts" id="toc-not-so-easy-parts" class="nav-link" data-scroll-target="#not-so-easy-parts">Not-So-Easy Parts</a>
+  <li><a href="#the-not-so-easy-part-abandon-the-term-significant-altogether" id="toc-the-not-so-easy-part-abandon-the-term-significant-altogether" class="nav-link" data-scroll-target="#the-not-so-easy-part-abandon-the-term-significant-altogether">The Not-So-Easy Part: Abandon the Term <em>Significant</em> Altogether</a>
   <ul class="collapse">
   <li><a href="#example-interaction-effects-in-lsat-data" id="toc-example-interaction-effects-in-lsat-data" class="nav-link" data-scroll-target="#example-interaction-effects-in-lsat-data">Example: interaction effects in LSAT data</a></li>
   </ul></li>
   <li><a href="#making-a-decision-ii" id="toc-making-a-decision-ii" class="nav-link" data-scroll-target="#making-a-decision-ii">Making a Decision, II</a></li>
   <li><a href="#regarding-confidence-intervals" id="toc-regarding-confidence-intervals" class="nav-link" data-scroll-target="#regarding-confidence-intervals">Regarding Confidence Intervals</a></li>
-  <li><a href="#formal-non-nhst-tools" id="toc-formal-non-nhst-tools" class="nav-link" data-scroll-target="#formal-non-nhst-tools">Formal Non-NHST Tools</a>
+  <li><a href="#formal-non-nhst-tools" id="toc-formal-non-nhst-tools" class="nav-link" data-scroll-target="#formal-non-nhst-tools">Formal Non-NHST Tools</a></li>
+  <li><a href="#sec-treats" id="toc-sec-treats" class="nav-link" data-scroll-target="#sec-treats">Procedures Assessing Treatment Effects</a></li>
+  <li><a href="#accounting-for-imperfections-in-our-model" id="toc-accounting-for-imperfections-in-our-model" class="nav-link" data-scroll-target="#accounting-for-imperfections-in-our-model">Accounting for Imperfections in Our Model</a>
   <ul class="collapse">
-  <li><a href="#hierarchical-models" id="toc-hierarchical-models" class="nav-link" data-scroll-target="#hierarchical-models">Hierarchical models</a></li>
-  <li><a href="#goodness-of-fit-procedures" id="toc-goodness-of-fit-procedures" class="nav-link" data-scroll-target="#goodness-of-fit-procedures">Goodness-of-fit procedures</a></li>
+  <li><a href="#dependence-on-ones-goals" id="toc-dependence-on-ones-goals" class="nav-link" data-scroll-target="#dependence-on-ones-goals">Dependence on one’s goals</a>
+  <ul class="collapse">
+  <li><a href="#sec-something" id="toc-sec-something" class="nav-link" data-scroll-target="#sec-something">We are always estimating <em>something</em></a></li>
+  </ul></li>
+  <li><a href="#goodness-of-fit-of-the-fundamental-model" id="toc-goodness-of-fit-of-the-fundamental-model" class="nav-link" data-scroll-target="#goodness-of-fit-of-the-fundamental-model">Goodness-of-fit of the fundamental model</a></li>
+  <li><a href="#how-can-this-idea-be-implemented" id="toc-how-can-this-idea-be-implemented" class="nav-link" data-scroll-target="#how-can-this-idea-be-implemented">How can this idea be implemented?</a></li>
+  <li><a href="#sec-curric" id="toc-sec-curric" class="nav-link" data-scroll-target="#sec-curric">Curricular improvement</a></li>
   </ul></li>
   <li><a href="#where-is-the-asa-on-this-issue" id="toc-where-is-the-asa-on-this-issue" class="nav-link" data-scroll-target="#where-is-the-asa-on-this-issue">Where Is the ASA on This Issue?</a></li>
   <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions</a></li>
   <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements">Acknowledgements</a></li>
+  <li><a href="#appendix" id="toc-appendix" class="nav-link" data-scroll-target="#appendix">Appendix</a>
+  <ul class="collapse">
+  <li><a href="#simple-applications-of-the-delta-method" id="toc-simple-applications-of-the-delta-method" class="nav-link" data-scroll-target="#simple-applications-of-the-delta-method">Simple Applications of the Delta Method</a>
+  <ul class="collapse">
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  </ul></li>
+  <li><a href="#taking-model-inaccuracy-into-account" id="toc-taking-model-inaccuracy-into-account" class="nav-link" data-scroll-target="#taking-model-inaccuracy-into-account">Taking model inaccuracy into account</a>
+  <ul class="collapse">
+  <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1">Example</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#making-a-decision-iii" id="toc-making-a-decision-iii" class="nav-link" data-scroll-target="#making-a-decision-iii">Making a Decision, III</a></li>
   </ul>
 </nav>
     </div>
@@ -202,9 +224,16 @@ window.Quarto = {
 
 
 <p><a href="https://heather.cs.ucdavis.edu/matloff.html">Author bio</a></p>
-<blockquote class="blockquote">
-<p><em>Abstract:</em> From the beginning of statistics, in the early 20th century, Null Hypothesis Significance Testing (NHST) was an ill-conceived idea. Unfortunately, its usage has become entrenched, producing misleading analysis and wasted opportunities. What are the problems with NHST, and what should one do instead? <strong>Here we probe more deeply than have previous treatments.</strong></p>
-</blockquote>
+<p><strong>Synopsis:</strong></p>
+<ol type="1">
+<li><p>All null hypotheses <span class="math inline">\(H_0\)</span> are false.</p></li>
+<li><p>Null Hypothesis Significance Testing (NHST) is thus an absurdity.</p></li>
+<li><p>Here we probe more deeply than typical criticisms of NHST in the literature, starting with this core theme that all <span class="math inline">\(H_0\)</span>s are false. NHST should be abandoned, not modified.</p></li>
+<li><p>Decisions must be made, but based on relevant analysis, not NHST.</p></li>
+<li><p>The concept of “practical significance vs.&nbsp;statistical significance” should be reduced to simply assessing practical significance.</p></li>
+<li><p>Non-NHST tools should be developed in that direction, some presented here.</p></li>
+<li><p>Such tools must be used to inform the analyst but not automatically make the decision, usurping the analyst.</p></li>
+</ol>
 <section id="nhst-is-too-comfortable" class="level1">
 <h1>NHST Is (Too) Comfortable</h1>
 <ul>
@@ -213,13 +242,13 @@ window.Quarto = {
 <li><p>Highly developed mathematical foundation – a feeling of “safety in math.”</p></li>
 </ul>
 </section>
-<section id="the-core-problem" class="level1">
-<h1>The Core Problem</h1>
+<section id="the-central-issue" class="level1">
+<h1>The Central Issue</h1>
 <ul>
 <li><p>We wish to determine whether <span class="math inline">\(H_0\)</span> is true or false.</p></li>
 <li><p>But:</p></li>
 </ul>
-<div class="callout callout-style-default callout-caution callout-titled" title="Core Problem with NHST">
+<div class="callout callout-style-default callout-important callout-titled" title="Core Problem with NHST">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -249,9 +278,8 @@ Core Problem with NHST
 </ul></li>
 </ul></li>
 </ul>
-</section>
-<section id="effect-of-measurement-error-especially-bias" class="level1">
-<h1>Effect of Measurement Error, Especially Bias</h1>
+<section id="effect-of-measurement-error-especially-bias" class="level2">
+<h2 class="anchored" data-anchor-id="effect-of-measurement-error-especially-bias">Effect of measurement error, especially bias</h2>
 <ul>
 <li><p>Biased sampling designs.</p></li>
 <li><p>Transcription errors.</p></li>
@@ -266,8 +294,8 @@ Core Problem with NHST
 </ul></li>
 </ul>
 </section>
-<section id="both-an-epistemological-and-practical-problem" class="level1">
-<h1>Both an Epistemological and Practical Problem</h1>
+<section id="both-an-epistemological-and-practical-problem" class="level2">
+<h2 class="anchored" data-anchor-id="both-an-epistemological-and-practical-problem">Both an epistemological and practical problem</h2>
 <ul>
 <li><p>OK, <span class="math inline">\(H_0\)</span> is never true. But why is that a problem?</p></li>
 <li><p>Philosophical: Unscientific – and just plain silly – to test for a trait that we know <em>a priori</em> is false.</p></li>
@@ -276,23 +304,22 @@ Core Problem with NHST
 <li><p>Practical: NHST can be extremely misleading, a grave concern in light of the pivotal role statistics plays in crucial human events, such as in medical cases or legal proceedings.</p></li>
 </ul>
 </section>
-<section id="the-easy-part-statistical-vs.-practical-significance" class="level1">
+</section>
+<section id="the-easy-part-statistical-vs.-practical-significance" class="level1 page-columns page-full">
 <h1>The Easy Part: Statistical vs.&nbsp;Practical Significance</h1>
 <ul>
 <li><p>This is the “easy” part, in the sense that most readers here will have learned about this issue in their statistics coursework. In other words, it would seem that they don’t need convincing.</p></li>
-<li><p>Yet they do need to be convinced. While they may distinguish between statistical vs.&nbsp;practical significance when analyzing treatment effects, many do not understand the importance of this distinction in general statistical contexts.</p></li>
+<li><p>Yet they do need to be convinced. While they may distinguish between statistical vs.&nbsp;practical significance when analyzing treatment effects, many do not understand the importance of this distinction in general statistical contexts</p></li>
 <li><p>So, let’s look in detail at this “easy” part before delving into deeper issues later in this document.</p></li>
 </ul>
-</section>
-<section id="running-example-lsat-data" class="level1 page-columns page-full">
-<h1>Running Example: LSAT Data</h1>
+<section id="running-example-lsat-data" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="running-example-lsat-data">Running example: LSAT data</h2>
 <ul>
 <li><p>See <a href="https://www.kaggle.com/datasets/danofer/law-school-admissions-bar-passage">the Kaggle entry</a>.</p></li>
 <li><p>Here is an overview of the variables:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">'data/lsa.RData'</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(lsa)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(lsa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(lsa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "age"      "decile1"  "decile3"  "fam_inc"  "lsat"     "ugpa"    
  [7] "gender"   "race1"    "cluster"  "fulltime" "bar"     </code></pre>
@@ -301,10 +328,16 @@ Core Problem with NHST
 <li><p>The two decile scores are class standing in the first and third years of law school, and ‘cluster’ refers to the reputed quality of the law school. </p></li>
 <li><p>Two variables of particular interest might be the student’s score on the Law School Admission Test (LSAT) and a logical variable indicating whether the person passed the bar examination. </p></li>
 </ul>
-<div class="no-row-height column-margin column-container"><span class=""></span><span class="">The ‘age’ variable is apparently birth year, with e.g.&nbsp;67 meaning 1967.</span></div><section id="wealth-bias-in-the-lsat" class="level2">
+<div class="no-row-height column-margin column-container"><span class=""></span><span class="">The ‘age’ variable is apparently birth year, with e.g.&nbsp;67 meaning 1967.</span></div></section>
+<section id="wealth-bias-in-the-lsat" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="wealth-bias-in-the-lsat">Wealth bias in the LSAT?</h2>
 <ul>
-<li><p>There is concern that the LSAT and other similar tests may be heavily influenced by family income, thus unfair.</p></li>
+<li>There is concern that the LSAT and other similar tests may be heavily influenced by family income, thus unfair.</li>
+</ul>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>There are important causal issues here, but this aspect is beyond the scope of this document.</p>
+</div></div><ul>
 <li><p>Let’s consider the estimated coefficients in a linear model for the LSAT:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="fu">lm</span>(lsat <span class="sc">~</span> .,lsa)  <span class="co"># predict lsat from all other variables</span></span>
@@ -349,8 +382,13 @@ F-statistic: 792.9 on 17 and 20782 DF,  p-value: &lt; 2.2e-16</code></pre>
 <li><p>There are definitely some salient racial aspects here, but, staying with the income issue, look at the coefficient for family income, 0.3009.</p></li>
 <li><p>The p-value is essentially 0, which in an academic research journal would be heralded with much fanfare, termed “very highly significant,” with a 3-star insignia.</p></li>
 <li><p>But actually, the impact of family income is not significant in practical terms. Here’s why:</p></li>
-<li><p>Family income in this dataset is measured in quintiles. So, this estimated coefficient says that, for example, if we compare people who grew up in the bottom 20% of income with those who were raised in the next 20%, the mean LSAT score rises by only about 1/3 of 1 point – on a test where scores are typically in the 20s, 30s and 40s. The 95% confidence interval (CI), (0.2304,0.3714), again indicates that the effect size here is very small.</p></li>
+<li><p>Family income in this dataset is measured in quintiles. So, this estimated coefficient says that, for example, if we compare people who grew up in the bottom 20% of income with those who were raised in the next 20%, the mean LSAT score rises by only about 1/3 of 1 point – on a test where scores are typically in the 20s, 30s and 40s (top score was 48). The 95% confidence interval (CI), (0.2304,0.3714), again indicates that the effect size here is very small.</p></li>
 <li><p>So family income is not an important factor after all, and the significance test was highly misleading. The result was statistically significant but not practically significant. How did this discrepancy arise?</p></li>
+</ul>
+</section>
+<section id="source-of-the-problem" class="level2">
+<h2 class="anchored" data-anchor-id="source-of-the-problem">Source of the problem</h2>
+<ul>
 <li><p>The above analysis tests the hypothesis</p>
 <p><span class="math display">\[
 H_0: \beta_{\textrm{faminc}} = 0
@@ -361,29 +399,55 @@ T = \frac{\widehat{\beta}_{\textrm{faminc}}}
 {\textrm{s.e.}(\widehat{\beta}_{\textrm{faminc}})}
 \]</span></p></li>
 <li><p>As the sample size increases the denominator of <span class="math inline">\(T\)</span> goes to 0. The numerator goes to the population parameter <span class="math inline">\(\beta_{\textrm{faminc}}\)</span> – <strong>which is nonzero since all <span class="math inline">\(H_0\)</span>s are false</strong>.</p></li>
-<li><p><span class="math inline">\(T\)</span> goes to <span class="math inline">\(\pm \infty\)</span>, and thus the p-value goes to 0. In other words:</p>
-<blockquote class="blockquote">
+<li><p><span class="math inline">\(T\)</span> then goes to <span class="math inline">\(\pm \infty\)</span>, and thus the p-value goes to 0. In other words:</p></li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled" title="The Term 'Significant' Has No Meaning">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+The Term ‘Significant’ Has No Meaning
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Given a large enough dataset, <em>any</em> <span class="math inline">\(H_0\)</span> will have a small p-value and will be rejected. <strong>The term “significant” means nothing.</strong></p>
-</blockquote></li>
-<li><p>The level of “large enough” depends on other factors, e.g.&nbsp;variability in the dataset, complexity of the model and so on, but the same principle holds.</p></li>
+</div>
+</div>
+<ul>
+<li>The level of “large enough” depends on other factors, e.g.&nbsp;variability in the dataset, complexity of the model and so on, but the same principle holds.</li>
 </ul>
 </section>
 </section>
 <section id="making-a-decision-i" class="level1">
 <h1>Making a Decision, I</h1>
 <ul>
-<li><p>One of the biggest myths about us critics of NHST is that we fail to recognize that the analyst must make a decision. Of course one must make a decision – but a decision based on relevant information, not on an NHST.</p></li>
+<li><p>One of the biggest myths about us critics of NHST is that we fail to recognize that the analyst must make a decision. Of course one must make a decision – but a decision based on relevant information, not on an NHST. “Making a decision” as to whether <span class="math inline">\(H_0\)</span> is true, when we know it to be false, makes no sense.</p></li>
 <li><p>For instance:</p>
 <blockquote class="blockquote">
-<p>In the above analysis, the proper decision is to conclude that family income has negligible effect on LSAT scores.</p>
+<p>In the above analysis, the proper decision is to conclude that family income has negligible effect on LSAT scores, after accounting for other possible factors..</p>
 </blockquote></li>
 <li><p>As noted at the outset of this document, making decisions in this manner is much less psychologically satisfying than doing an NHST. Rather than the decision being determined automatically in an NHST, the analyst must supply his/her own power, devising an <em>ad hoc</em> criterion for making a decision.</p></li>
 <li><p>But it is the scientifically valid approach, rather than relying on “superstition” with NHST.</p></li>
-<li><p>It is very telling that in a special 2019 issue of the <em>American Statistician</em> devoted to NHST problems, some authors proposed elaborate replacements for NHST. The psychological urge for an automatic decision-making procedure is clearly very strong. But I would argue that it is counterproductive, not really addressing the problem at hand.</p></li>
+<li><p>It is very telling that in a special 2019 issue of the <em>American Statistician</em> (Volume 73, Issue sup1) devoted to NHST problems, some authors proposed elaborate replacements for NHST. See for instance the proposed SGPV method in by Blume <em>et al</em>. Clearly the psychological urge for an automatic decision-making procedure is clearly very strong. But I would argue that it is counterproductive, not really addressing the problem at hand.</p></li>
 </ul>
 </section>
-<section id="not-so-easy-parts" class="level1">
-<h1>Not-So-Easy Parts</h1>
+<section id="the-not-so-easy-part-abandon-the-term-significant-altogether" class="level1">
+<h1>The Not-So-Easy Part: Abandon the Term <em>Significant</em> Altogether</h1>
+<div class="callout callout-style-default callout-important callout-titled" title="Abandon the Term 'Significant'">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Abandon the Term ‘Significant’
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We should focus on “practical significance,” and abandon assessing “[statistical] significance.”</p>
+<p>Accordingly we need to idenitfy existing formal tools for assessing <em>practical</em> importance, and develop new such tools.</p>
+</div>
+</div>
 <ul>
 <li><p>As noted, today’s statistically-trained analysts know to watch for the phenomenon of statistical significance without practical significance – <strong>in the context of measuring a treatment effect</strong>. In the above case, the “treatment effect” was of family income.</p></li>
 <li><p>But many analysts do not realize that this same notion may be extended to non-treatment contexts.</p></li>
@@ -437,8 +501,8 @@ Multiple R-squared:  0.3948,  Adjusted R-squared:  0.3942
 F-statistic: 645.4 on 21 and 20778 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div></li>
-<li><p>The Black and white interaction terms with undergraduate GPA are “very highly significant.” But that does mean we should use the more complex model?</p></li>
-<li><p>Let’s check the actual impact of including the interaction terms on the value of <span class="math inline">\(\widehat{E}(Y|X=t)\)</span>, the estimated value of the true regression function at some point <span class="math inline">\(t\)</span> chosen to be “typical.”</p></li>
+<li><p>The Black and white interaction terms with undergraduate GPA are “very highly significant.” But does that mean we should include them in our model?</p></li>
+<li><p>Let’s check the actual impact of including the interaction terms on the value of <span class="math inline">\(\widehat{E}(Y|X=t)\)</span>, the estimated value of the true regression function <span class="math inline">\(E(Y|X=t)\)</span>, at some point <span class="math inline">\(t\)</span> chosen to be “typical.”</p></li>
 <li><p>We will find <span class="math inline">\(\widehat{E}(Y|X=t)\)</span> under both models and compare:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>typx <span class="ot">&lt;-</span> lsa[<span class="dv">1</span>,<span class="sc">-</span><span class="dv">5</span>]  <span class="co"># set up an example case</span></span>
@@ -453,8 +517,11 @@ F-statistic: 645.4 on 21 and 20778 DF,  p-value: &lt; 2.2e-16</code></pre>
 40.2056 </code></pre>
 </div>
 </div></li>
-<li><p>Adding the interaction term changed the estimated value of the regession function by only about 0.02 out of a 40.23 baseline.</p></li>
-<li><p>So, while the test has strongly indicated a with-interaction model, we may well prefer the simpler, no-interaction version.</p></li>
+<li><p>Adding the interaction term changed the estimated value of the regression function by only about 0.02 out of a 40.23 baseline.</p>
+<p>(The interaction terms themselves are larger than 0.02, but they absorbed some of the values in the original noninteraction variables.)</p></li>
+<li><p>So, if our goal is prediction, we should not include the interaction terms.</p></li>
+<li><p>On the other hand, in this type of application, our goal is more likely to be assessing treatment effects, the “treatment” here being Black or Hispanic. Then things are more complicated.</p>
+<p>We see for instance that a 1.0 increase in GPA reduces the effect of being Black by an estimated -2.876555, resulting in a net effect of 4.121631-2.876555 = 1.245076. On an exam having top score of 48, this is not a strong effect, and we may decide that the effect of being Black is minor.</p></li>
 </ul>
 </section>
 </section>
@@ -463,6 +530,7 @@ F-statistic: 645.4 on 21 and 20778 DF,  p-value: &lt; 2.2e-16</code></pre>
 <ul>
 <li><p>Again, the above decision on whether to include interaction terms is not as psychologically satisfying as the NHST approach. We had to supply our own power, devising an <em>ad hoc</em> way to help us make a decision.</p></li>
 <li><p>But this is the rational, scientific approach, rather than relying on a test of a hypothesis that we know <em>a priori</em> is false, which is absurdly unscientific.</p></li>
+<li><p>In the case of scientific research, the full explanation of the authors’ decision must be made available – especially data (anonymised if need be) and code.</p></li>
 </ul>
 </section>
 <section id="regarding-confidence-intervals" class="level1">
@@ -480,45 +548,94 @@ F-statistic: 645.4 on 21 and 20778 DF,  p-value: &lt; 2.2e-16</code></pre>
 <li><p>Of course this includes multiple-comparisons CIs.</p></li>
 </ul>
 </section>
-<section id="formal-non-nhst-tools" class="level1 page-columns page-full">
+<section id="formal-non-nhst-tools" class="level1">
 <h1>Formal Non-NHST Tools</h1>
 <ul>
-<li><p>Defenders of NHST emphasize that NHST formally addresses uncertainty.</p></li>
+<li><p>Defenders of NHST emphasize that NHST formally addresses uncertainty. NHST does this badly, but it is definitely true that any analysis must address the random nature of the data. Non-NHST tools must do so.</p></li>
 <li><p>So for instance it would be desirable to formalize our assessment of adding interaction terms in the LSAT model above.</p></li>
-<li><p>Following are a few examples.</p></li>
 </ul>
-<section id="hierarchical-models" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="hierarchical-models">Hierarchical models</h2>
+<p>Below we discuss two broad classes of NHST tools. (See the Appendix for mathematical details of material in this section.)</p>
+</section>
+<section id="sec-treats" class="level1">
+<h1>Procedures Assessing Treatment Effects</h1>
 <ul>
 <li><p>In the interaction terms example, we informally compared the change in <span class="math inline">\(\widehat{E}(Y|X=t)\)</span> that occurred when we added interaction terms. How can we formalize this into a CI?</p></li>
-<li><p>A CI for the contribution of an interaction term to an overall estimate of <span class="math inline">\(E(Y|X=t)\)</span> is straightforward. The interaction term for GPA and being Black is given in the output, and we can add and subtract 1.96 times the standard error to obtain a CI for a 1-point increase in GPA for Black students, for example.</p></li>
-<li><p>A CI for the <em>proportional</em> contribution to <span class="math inline">\(E(Y|X=t)\)</span> can be obtained via the Delta Method, or by the bootstrap.</p></li>
+<li><p>A CI for the contribution of an interaction term to an overall estimate of <span class="math inline">\(E(Y|X=t)\)</span> is straightforward, just the point estimate plus or minux 1.96 times the standard error,</p>
+<p><span class="math display">\[
+-2.876555 \pm  1.96*0.460281 = (-3.336836, -2.416274)
+\]</span></p></li>
+<li><p>However, the more relevant quantity might be the net effect of being Black and having a 1.0 point increase in GPA, i.e.&nbsp;the computation 4.121631-2.876555 = 1.245076 shown above. Computation is still straightforward, if the analyst knows covariance matrices (see <a href="#sec-curric" class="quarto-xref">Section&nbsp;10.4</a> below.)</p></li>
+<li><p>A more sophisticated approach would be to form a CI for the <em>proportional</em> contribution to <span class="math inline">\(\widehat{E}(Y|X=t)\)</span> of some estimated regression coefficient, for some analyst-chosen “typical” value of <span class="math inline">\(t\)</span>. In the code above, we arbitrarily chose the first row in the dataset at our <span class="math inline">\(t\)</span>, but the analyst might choose it, say, as the vector of means of all the predictor variables.</p>
+<p>We then would like to form a CI for the quantity</p>
+<p><span class="math display">\[
+\frac{\beta_i}{E(Y|X=t)}
+\]</span></p>
+<p>This can be obtained via the Delta Method, or by the bootstrap.</p></li>
 <li><p>The <em>log-linear model</em> can be used to explore relationships among categorical variables. For instance, this might be used in the LSAT data to analyze relationships between race, gender, family income and so on.</p>
-<p>Again there is a hierarchy of interaction terms, as in our linear model example, so again either the Delta Method or the bootstrap can be used. The necessary standard errors for DM can be obtained via <a href="https://github.com/matloff/LogLinFit">the “Poisson trick”</a>.</p>
-
-</li>
+<p>Again there is a hierarchy of interaction terms, as in our linear model example, so again either the Delta Method or the bootstrap can be used. The necessary standard errors for DM can be obtained via <a href="https://github.com/matloff/LogLinFit">the “Poisson trick”</a>.</p></li>
 </ul>
-<div class="no-row-height column-margin column-container"><div class="">
-<p>For the Delta Method, see <em>All of Statistics</em>, by Larry Wasserman. Various R implementations exist, including those not requiring user-specified derivatives.</p>
-</div><div class="">
-<p><span class="">For log-linear models, see <em>An Introduction to Categorical Data Analysis</em>, by Alan Agresti. Many R implementations.</span></p>
-</div></div></section>
-<section id="goodness-of-fit-procedures" class="level2">
-<h2 class="anchored" data-anchor-id="goodness-of-fit-procedures">Goodness-of-fit procedures</h2>
+</section>
+<section id="accounting-for-imperfections-in-our-model" class="level1">
+<h1>Accounting for Imperfections in Our Model</h1>
+<p><em>All models are wrong, but some are useful</em> – prominant statistician George Box</p>
+<section id="dependence-on-ones-goals" class="level2">
+<h2 class="anchored" data-anchor-id="dependence-on-ones-goals">Dependence on one’s goals</h2>
+<p>As usual, proper analysis depends on one’s goals.</p>
 <ul>
-<li><p>As noted earlier, goodness-of-fit tests can be especially problematic in terms of the inappropriate nature of NHST. What can be done instead?</p></li>
-<li><p>First, ask if assessment of the model is needed in the first place. For instance, many statistical methods, such as the linear model, are robust to normality assumptions, and thus assessing normality is superfluous.</p></li>
-<li><p>Explicitly recognize that one’s model is an approximation, by estimating some measure of distance from the population version of one’s model to the true population probabilities, density or whatever.</p>
+<li><p>If the goal is prediction, a linear model may be quite effective even though there is a substantial discrepancy between it and the true population regression function <span class="math inline">\(E(Y|X=t)\)</span>.</p></li>
+<li><p>But if the goal is measurement of treatment effects, we may be acquiring distorted results if the model discrepancy is large.</p></li>
+</ul>
+<section id="sec-something" class="level3">
+<h3 class="anchored" data-anchor-id="sec-something">We are always estimating <em>something</em></h3>
 <ul>
-<li><p>As the sample size grows, a fitted linear regression model will converge to the linear function that best approximates the true population regression function.</p></li>
-<li><p>A genetic model may be technically false but still serve as a good approximation. As the sample size grows, the fitted probabilities will converge to the set of model probabilities closest to the true population values.</p></li>
-<li><p>In a Markov chain analysis, we might model the holding times as exponentially distributed as an approximation. The resulting estimated exponential distributions will converge to the closest exponential distributions to the true population distributions.</p></li>
+<li><p>Say we are estimating a parameter <span class="math inline">\(\theta\)</span> in some model. Does the inevitable incorrectness of the model mean our estimate is meaningless? No, not at all.</p></li>
+<li><p>Even though our model is (always) wrong, we are still estimating <em>something</em>. If we fit a linear regression model <span class="math inline">\(E(Y|X=t) = \beta'X\)</span> (using ’ for matrix transpose, in this case of a column vector), we are in essence estimating the linear function closest to the true population regression function <span class="math inline">\(\mu(t) = E(Y|X=t)\)</span>. <span class="math inline">\(\beta\)</span> is then the vector of coefficients for that linear function.</p></li>
+<li><p>Statistical theory asks what the long-run behavior of an estimator is, as the sample size <span class="math inline">\(n\)</span> grows. When we say that our least-squares estimator <span class="math inline">\(\widehat{\beta}\)</span> estimates that “closest” <span class="math inline">\(\beta\)</span>, we mean that <span class="math inline">\(\lim_{n \rightarrow \infty} \widehat{\beta} =\beta\)</span>.</p></li>
+<li><p>The mathematical details are in the Appendix, but the point is this: If that “closest linear function” is not too far from <span class="math inline">\(\mu(t)\)</span>, we can feel comfortable with analyzing the resulting <span class="math inline">\(\widehat{\beta}\)</span> as an approximation.</p></li>
+<li><p>The same principle holds for, say, Maximum Likelihood Estimators (MLE). We are estimating the closest model to reality.</p></li>
+<li><p>However, our estimation procedure for that closest model should not assume the model is correct, especially in computing standard errors. For instance:</p>
+<ul>
+<li><p>Normally, in the linear miodel, we estimate the conditional variance <span class="math inline">\(Var(Y|X=t) = \sigma^2\)</span> using the squared residuals,</p>
+<p><span class="math display">\[
+\frac{1}{n-p-1} \sum_{i=1}^n (Y_i - \widehat{\beta}' X_i)^2
+\]</span></p>
+<p>But that only works if the model is correct. If not, then each residual includes the model bias. That in turn invalidates the standard errors of the estimated coefficients.</p></li>
+<li><p>In the case of MLEs, the standard errors come from the <em>information matrix</em>, based on a derivation that assumes the model is correct. Thus standard errors based on the classic formmula are incorrect.</p></li>
 </ul></li>
-<li><p>In all these situations, estimating a distance can help us determine if our (imperfect) model is good enough.</p></li>
-<li><p>How can this idea be implemented?</p></li>
-<li><p>The familiar Kolmogorov-Smirnov procedure is a simple example, allowing use to form a CI for the distance between a model population CDF and the true population CDF.</p></li>
-<li><p>There is an extensive literature on, and R implementations of, <em>minimum distance estimators</em>. However, their computation of standard errors may assume that the given model holds, an assumption that is unacceptable in our context here. Instead, use the methods but compute standard errors using the bootstrap. (The theory on these methods needs to be reworked.)</p></li>
+<li><p>Thus alternative ways of computing standard errors must be found. At the very least, one has the bootstrap, but analytical methods would be preferred. This discussed in the Appendix.</p></li>
 </ul>
+</section>
+</section>
+<section id="goodness-of-fit-of-the-fundamental-model" class="level2">
+<h2 class="anchored" data-anchor-id="goodness-of-fit-of-the-fundamental-model">Goodness-of-fit of the fundamental model</h2>
+<ul>
+<li><p>But once again, “all models are wrong,” so in addition to calculating a point estimate and a standard error for <span class="math inline">\(\theta\)</span>, the analyst may optionally wish to assess how close his/her model is to the true population entity.</p></li>
+<li><p>Classically, that would be done via NHST, in some sort of goodness-of-fit test, but of course NHST should not be done. One should both calculate a point estimate for the distance and also a standard error for the estimated distance.</p></li>
+<li><p>(In many cases, this is done informally through a graphical procedure, e.g.&nbsp;plotting residuals. This is fine, but here we address the issue of formal methods.)</p></li>
+</ul>
+</section>
+<section id="how-can-this-idea-be-implemented" class="level2">
+<h2 class="anchored" data-anchor-id="how-can-this-idea-be-implemented">How can this idea be implemented?</h2>
+<ul>
+<li><p>There is an extensive literature on, and R implementations of, <em>minimum distance estimators</em>, a concept which would seem to dovetail with the above point that with a false model we are estimating the closest instance of our model to the true population entity.</p></li>
+<li><p>However, most have limitations from our point of view here. For instance, the procedure should produce standard errors not only for <span class="math inline">\(\theta\)</span>, the population quantity of interest, but also for the distance from the asymptotic model fit and the true population process. Most important, the procedure must not assume correctness of the model.</p></li>
+<li><p>Fortunately what we need can be easily developed for large classes of estimators. See the Appendix.</p></li>
+</ul>
+</section>
+<section id="sec-curric" class="level2">
+<h2 class="anchored" data-anchor-id="sec-curric">Curricular improvement</h2>
+<p>Besides the obvious retooling of statistics curricula in terms of banishing NHST, statistics programs need to modernize in terms of including some material on multivariate random variables. By this I mean in particular the concept of covariance and covariance matrices.</p>
+<p>Students need to be taught how to find the standard error of a linear combination <span class="math inline">\(a' \widehat{\theta}\)</span> of the components of a vector <span class="math inline">\(\widehat{\theta}\)</span>, knowing its estimated covariance matrix <span class="math inline">\(\widehat{\Sigma}\)</span>. They should be familiar with quadratic forms <span class="math inline">\(a'\widehat{\Sigma}a\)</span>, and more generally, <span class="math inline">\(a'\widehat{\Sigma}b\)</span>.</p>
+<p>I would surmise that even most Master’s programs in Statistics do not cover this. Yet really the concept is not beyond the grasp of students in methodology courses that do not require linear algebra, say a course in regression for non-Statistics majors. If the course uses the R <strong>lm</strong> function, there is no reason students can’t be taught the associated <strong>vcov</strong> method.</p>
+<p>A related topic is the Delta Method. It’s very handy for constructing CIs for nonlinear functions of <span class="math inline">\(\widehat{\theta}\)</span>, but has two main barriers to usage:</p>
+<ul>
+<li><p>Calculation of covariance matrices.</p></li>
+<li><p>Calculation of derivatives.</p></li>
+</ul>
+<p>That first barrier again illustrates the aboe point regarding the need for the inclusion of rudimentary properties of covariance matrices in Statistics curricula.</p>
+<p>The second barrier is overcome by use of software that computes numerical derivatives internally, such as R’s <strong>msm::deltamethod</strong>.</p>
+<p>Some exposure to the bootstrap is also desirable.</p>
+<p>Many analysts who apply statistics are largely self-taught. Again, educational materials in that genre should account for these issues.</p>
 </section>
 </section>
 <section id="where-is-the-asa-on-this-issue" class="level1">
@@ -556,6 +673,97 @@ F-statistic: 645.4 on 21 and 20778 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="acknowledgements" class="level1 page-columns page-full">
 <h1>Acknowledgements</h1>
 <div class="page-columns page-full"><p>I was first introduced to this vital issue long ago in graduate  school by the late Professor Olive Jean Dunn of the UCLA Biostatistics Department. I was doing my dissertation in the Mathematics Department. but took classes in Biostat. Jean brought up the topic casually one day in lecture, changing my views forever.</p><div class="no-row-height column-margin column-container"><span class="">Prof.&nbsp;Dunn is often credited as the first to use the Bonferroni Inequality for multiple comparisons</span></div></div>
+</section>
+<section id="appendix" class="level1">
+<h1>Appendix</h1>
+<p>This Appendix is itended as a start toward developing non-NHST tools for analyst decision making.</p>
+<section id="simple-applications-of-the-delta-method" class="level2">
+<h2 class="anchored" data-anchor-id="simple-applications-of-the-delta-method">Simple Applications of the Delta Method</h2>
+<p>In <a href="#sec-treats" class="quarto-xref">Section&nbsp;9</a>, it was mentioned that one might wish to form a CI for the ratio between some <span class="math inline">\(\beta_i\)</span>, say, and the value <span class="math inline">\(E(Y|X=t)\)</span> of the regression function at some analyst-chosen point <span class="math inline">\(t\)</span>. But in <a href="#sec-curric" class="quarto-xref">Section&nbsp;10.4</a>, concern was raised as to the degree of statistical sophistication needed. Let’s take a look.</p>
+<section id="example" class="level3">
+<h3 class="anchored" data-anchor-id="example">Example</h3>
+<p>The data here is from the 2000 US Census, specifically engineers and programmers in Santa Clara County, California. We will use the first row in our dataset as a “typical” point of comparison. (Again, our emphasis here is on the Delta Method, not on the propriety of this comparison.)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">'data/svcensus.RData'</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># for simplicity, limit scope</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>svc <span class="ot">&lt;-</span> svcensus[,<span class="fu">c</span>(<span class="st">'age'</span>,<span class="st">'wageinc'</span>,<span class="st">'gender'</span>)]</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># replace gender by dummy variable for female</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>svc<span class="sc">$</span>fem <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(svc<span class="sc">$</span>gender<span class="sc">==</span><span class="st">'female'</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>svc<span class="sc">$</span>gender <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>lmOut <span class="ot">&lt;-</span> <span class="fu">lm</span>(wageinc <span class="sc">~</span> .,<span class="at">data=</span>svc)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> svc[<span class="dv">1</span>,<span class="sc">-</span><span class="dv">2</span>]  <span class="co"># our reference point</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>x1Pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(lmOut,x1) <span class="co"># est. reg. ftn. at x1</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co"># prepare to compute relevant linear combinations of betahat</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">0</span>)  <span class="co"># effect of 10 years of age</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(x1)</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,b)  <span class="co"># account for intercept term</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>betaHat <span class="ot">&lt;-</span> <span class="fu">coef</span>(lmOut)</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="co"># compute ratio</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>num <span class="ot">&lt;-</span> <span class="fu">t</span>(a) <span class="sc">%*%</span> betaHat</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>den <span class="ot">&lt;-</span> <span class="fu">t</span>(b) <span class="sc">%*%</span> betaHat</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>propor10Age <span class="ot">&lt;-</span> num<span class="sc">/</span>den</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="co"># compute covariance matrix of ratio</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>cvm <span class="ot">&lt;-</span> <span class="fu">vcov</span>(lmOut)</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>varn <span class="ot">&lt;-</span> <span class="fu">t</span>(a) <span class="sc">%*%</span> cvm <span class="sc">%*%</span> a  <span class="co"># est. var. of numerator</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>vard <span class="ot">&lt;-</span> <span class="fu">t</span>(b) <span class="sc">%*%</span> cvm <span class="sc">%*%</span> b  <span class="co"># est. var. of denominator</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>cvnd <span class="ot">&lt;-</span> <span class="fu">t</span>(a) <span class="sc">%*%</span> cvm <span class="sc">%*%</span> b  <span class="co"># est. covariance</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="co"># apply Delta Method</span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(msm)</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>cvProp <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(varn,cvnd,cvnd,vard),<span class="at">nrow=</span><span class="dv">2</span>)</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="fu">deltamethod</span>(<span class="sc">~</span> x1<span class="sc">/</span>x2,<span class="fu">c</span>(num,den),cvProp)</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(propor10Age <span class="sc">-</span> <span class="fl">1.96</span><span class="sc">*</span>se,propor10Age <span class="sc">+</span> <span class="fl">1.96</span><span class="sc">*</span>se)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.07801891 0.09775186</code></pre>
+</div>
+</div>
+<p>We estimate that the proportional impact of 10 additional years of age is between 7.8 and 9.8%.</p>
+<p>The code is somewhat involved, but as noted earlier, well within the capabilities of scientific researchers who use R.</p>
+</section>
+</section>
+<section id="taking-model-inaccuracy-into-account" class="level2">
+<h2 class="anchored" data-anchor-id="taking-model-inaccuracy-into-account">Taking model inaccuracy into account</h2>
+<p>Continuing <a href="#sec-something" class="quarto-xref">Section&nbsp;10.1.1</a>, we seek estimators with the following characteristics:</p>
+<ul>
+<li><p>We have a model <span class="math inline">\(\cal{M}\)</span>, again necessarily incorrect, for the distribution of some random quantity <span class="math inline">\(W\)</span>, possibly vector-valued. (We may be interested in just one aspect of the distribution, say the regression function, but for simplicity will refer just to the dstr.)</p></li>
+<li><p>Say <span class="math inline">\(\cal{M}\)</span> is parametric with some parameter <span class="math inline">\(\theta\)</span>, again possibly vector-valued.</p></li>
+<li><p>Denote the true distribution of <span class="math inline">\(W\)</span> by <span class="math inline">\(F_{pop}\)</span>.</p></li>
+<li><p>We estimate <span class="math inline">\(\theta\)</span> by some method, say MLE. We want to find a standard error that <em>does not assume <span class="math inline">\(\cal{M}\)</span> is correct.</em></p></li>
+<li><p>Optionally, we may want to also estimate the population “distance” between <span class="math inline">\(F_W\)</span> model and <span class="math inline">\(F_{pop}\)</span>, including a standard error for that estimate.</p></li>
+</ul>
+<section id="example-1" class="level3">
+<h3 class="anchored" data-anchor-id="example-1">Example</h3>
+<p>Say we have a random variable <span class="math inline">\(X\)</span> whose distribution we wish to model as exponential,</p>
+<p><span class="math display">\[
+f_X(t) = \lambda e^{-t/\lambda}
+\]</span></p>
+<p>We recognize that this model, as with any, is inherently false, and wish to estimate <span class="math inline">\(\lambda\)</span> accordingly. We also want to assess the distance between our model and the true population state of affairs. Denote our data by <span class="math inline">\(X_1,...,X_n\)</span>.</p>
+<p>The MLE of <span class="math inline">\(\lambda\)</span> is <span class="math inline">\(\widehat{\lambda} = 1/\bar{X}\)</span>, the reciprocal of the sample mean. As discussed, the classic formulas for the standard error of <span class="math inline">\(\widehat{\lambda}\)</span> are invalid here. But the solution is simple here: <span class="math inline">\(\bar{X}\)</span> is asymptotically normal from the Central Limit Theorem, with standard error computable from the data. Thus we can find a CI for E(X), then invert the endpoints to obtain an interval for <span class="math inline">\(\lambda\)</span>.</p>
+<p>But what about the distance between the model and actual distributions of <span class="math inline">\(X\)</span>? Under the model, the cumulative distribution function is</p>
+<p><span class="math display">\[
+F_{model}(t) = 1 - e^{-t/\lambda}
+\]</span></p>
+<p>estimated by</p>
+<p><span class="math display">\[
+1 - e^{-t \bar{X}}
+\]</span></p>
+<p>The estimate of the true cdf is the <em>empirical cdf</em>,</p>
+<p><span class="math display">\[
+F_{true}(t) = \frac{1}{n} N(t)
+\]</span></p>
+<p>where <span class="math inline">\(N(t)\)</span> is the number of <span class="math inline">\(X_i\)</span> that are <span class="math inline">\(\leq t\)</span>.</p>
+<p>We might compare the two cdfs at various selected points. For simplicity, let’s look at just one point, say <span class="math inline">\(v\)</span>. We thus wish to find a standard error for</p>
+<p><span class="math display">\[
+\frac{1 - e^{-v \bar{X}}}{1 - N(v)/n}
+\]</span></p>
+<p>This is perfectly set up for the Delta Method. We need the covariance matrix, which we can obtain empirically by applying the R function <strong>cov</strong> to the vectors <span class="math inline">\((X_1,...,X_n\)</span> and <span class="math inline">\((I_1,...,I_n)\)</span>, where <span class="math inline">\(I_j\)</span> is 1 or 0, according to whethe <span class="math inline">\(X_j \leq v\)</span>.</p>
+</section>
+</section>
+</section>
+<section id="making-a-decision-iii" class="level1">
+<h1>Making a Decision, III</h1>
+<p>As noted earlier, proper analysis is easier, and probably less psychologically satisfying than NHST. In this section, there is also the issue of whether a typical scientific researcher even has the backgrund to be able to perform the analysis. In the case of estimating the distance between two distributions, this may be out of reach for many.</p>
+<p>This then is a good example of the need for mathematical statisticians t develop non-NHST tools, say along the above lines.</p>
+<p>Of course, there is always the bootstrap as a widely accessible alternative. A question, though, is whether scientific journals will accept such analyses. As long as data, code and random number seed are made available, hopefully this could be worked out.</p>
 
 
 </section>
