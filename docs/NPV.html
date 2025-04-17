@@ -188,9 +188,10 @@ window.Quarto = {
   <li><a href="#taking-model-inaccuracy-into-account" id="toc-taking-model-inaccuracy-into-account" class="nav-link" data-scroll-target="#taking-model-inaccuracy-into-account">Taking model inaccuracy into account</a>
   <ul class="collapse">
   <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1">Example</a></li>
-  </ul></li>
+  <li><a href="#example-2" id="toc-example-2" class="nav-link" data-scroll-target="#example-2">Example</a></li>
   </ul></li>
   <li><a href="#making-a-decision-iii" id="toc-making-a-decision-iii" class="nav-link" data-scroll-target="#making-a-decision-iii">Making a Decision, III</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -228,7 +229,6 @@ window.Quarto = {
 <ol type="1">
 <li><p>All null hypotheses <span class="math inline">\(H_0\)</span> are false.</p></li>
 <li><p>Null Hypothesis Significance Testing (NHST) is thus an absurdity. Why “test” something we know is false?</p></li>
-<li><p>Here we probe more deeply than typical criticisms of NHST in the literature, starting with this core theme that all <span class="math inline">\(H_0\)</span>s are false. NHST should be abandoned, not modified.</p></li>
 <li><p>Decisions must be made, but based on relevant analysis, not NHST.</p></li>
 <li><p>The concept of “practical significance vs.&nbsp;statistical significance” should be reduced to simply assessing practical significance.</p></li>
 <li><p>Non-NHST tools should be developed in that direction, some presented here.</p></li>
@@ -244,6 +244,7 @@ window.Quarto = {
 </section>
 <section id="the-central-issue" class="level1">
 <h1>The Central Issue</h1>
+<p><em>It is foolish to ask “Are the effects of A and B different. They are always different – for some decimal place</em> – John Tukey</p>
 <ul>
 <li><p>We wish to determine whether <span class="math inline">\(H_0\)</span> is true or false.</p></li>
 <li><p>But:</p></li>
@@ -278,8 +279,10 @@ Core Problem with NHST
 </ul></li>
 </ul></li>
 </ul>
+<p>Actually, this notion has arisen throughout the long history of the NHST debate.</p>
 <section id="effect-of-measurement-error-especially-bias" class="level2">
 <h2 class="anchored" data-anchor-id="effect-of-measurement-error-especially-bias">Effect of measurement error, especially bias</h2>
+<p>Problems with our data mean that in many cases, <span class="math inline">\(H_0\)</span> is not only false but also simply unanswerable.</p>
 <ul>
 <li><p>Biased sampling designs.</p></li>
 <li><p>Transcription errors.</p></li>
@@ -288,7 +291,7 @@ Core Problem with NHST
 <li><p>Bias in physical measurements. No physical measurement is infinitely precise, nor absolutely exactly centered.</p></li>
 <li><p>E.g. physics, <span class="math inline">\(H_0:\)</span> gravity waves do not exist.</p>
 <ul>
-<li><p>Yes, the existence is either true or false, but our imperfect measurements make <span class="math inline">\(H_0\)</span> false.</p></li>
+<li><p>Yes, the existence is either true or false, but our imperfect measurements make <span class="math inline">\(H_0\)</span> false; we large enough <span class="math inline">\(n\)</span>, we will reject.</p></li>
 <li><p>Research on gravity waves relies on a complex array of detection machinery and on other unproven theories. See <a href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.116.061102#fulltext">the main paper</a> and <a href="https://arxiv.org/pdf/1602.03840">the methods details</a>.</p></li>
 <li><p>(The situation is also complicated by the fact that they use a Bayesian analysis, courting further criticism.)</p></li>
 </ul></li>
@@ -583,7 +586,7 @@ F-statistic: 645.4 on 21 and 20778 DF,  p-value: &lt; 2.2e-16</code></pre>
 </section>
 <section id="accounting-for-imperfections-in-our-model" class="level1 page-columns page-full">
 <h1>Accounting for Imperfections in Our Model</h1>
-<p><em>All models are wrong, but some are useful</em> – prominant statistician George Box</p>
+<p><em>All models are wrong, but some are useful</em> – George Box</p>
 <section id="dependence-on-ones-goals" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="dependence-on-ones-goals">Dependence on one’s goals</h2>
 <p>As usual, proper analysis depends on one’s goals.</p>
@@ -688,6 +691,7 @@ F-statistic: 645.4 on 21 and 20778 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="acknowledgements" class="level1 page-columns page-full">
 <h1>Acknowledgements</h1>
 <div class="page-columns page-full"><p>I was first introduced to this vital issue long ago in graduate  school by the late Professor Olive Jean Dunn of the UCLA Biostatistics Department. I was doing my (very theoretical) dissertation in the Mathematics Department. but took classes in Biostat. Jean brought up the topic casually one day in lecture, changing my views forever.</p><div class="no-row-height column-margin column-container"><span class="">Prof. Dunn is often credited as the first to use the Bonferroni Inequality for multiple comparisons</span></div></div>
+<p>I am grateful for helpful feedback (agreement with my positions not impllied) from Dylan Atmbruster and Boyu Wang</p>
 </section>
 <section id="appendix" class="level1">
 <h1>Appendix</h1>
@@ -788,17 +792,104 @@ F_{true}(t) = \frac{1}{n} N(t)
 <p><span class="math display">\[
 \frac{1 - e^{-v \bar{X}}}{1 - N(v)/n}
 \]</span></p>
-<p>This is perfectly set up for the Delta Method. We need the covariance matrix, which we can obtain empirically by applying the R function <strong>cov</strong> to the vectors <span class="math inline">\((X_1,...,X_n\)</span> and <span class="math inline">\((I_1,...,I_n)\)</span>, where <span class="math inline">\(I_j\)</span> is 1 or 0, according to whethe <span class="math inline">\(X_j \leq v\)</span>.</p>
+<p>This is perfectly set up for the Delta Method. We need the covariance matrix, which we can obtain empirically by applying the R function <strong>cov</strong> to the vectors <span class="math inline">\((X_1,...,X_n\)</span> and <span class="math inline">\((I_1,...,I_n)\)</span>, where <span class="math inline">\(I_j\)</span> is 1 or 0, according to whether <span class="math inline">\(X_j \leq v\)</span>.</p>
+</section>
+<section id="example-2" class="level3">
+<h3 class="anchored" data-anchor-id="example-2">Example</h3>
+<p>Let’s look at a linear model example, again using the <strong>svcensus</strong> data. Actually, it is originally from my <strong>qeML</strong> package, and it will be convenient to use some functions from that package.</p>
+<p>Applying the Delta Method here is less straightforward. Computation of the least-squares estimate <span class="math inline">\(\widehat{\beta}\)</span> of the coefficients vector <span class="math inline">\(\beta\)</span> involves a matrix inverse, making analytical derivatives difficult. Meanwhile, the <strong>deltamethod</strong> function doesn’t allow matrix inverse in its operation. Other implementations of the Delta Method might be used, or a <em>fixed-X regression</em> view might be taken, but the bootstrap seems to be especially attractive in this setting. Let’s give it a try.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qeML)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: regtools</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: FNN</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: gtools</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+
+
+
+
+*********************
+
+
+
+Latest version of regtools at GitHub.com/matloff
+
+
+Type ?regtools to see function list by category</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: rmarkdown</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: tufte</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+
+
+
+
+*********************
+
+
+
+  Navigating qeML:
+
+      Type vignette("Quick_Start") for a quick overview!
+
+      Type vignette("Function_List") for a categorized function list
+
+      Type vignette("ML_Overview") for an introduction to machine learning</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'qeML'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked _by_ '.GlobalEnv':
+
+    evalr</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">9999</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>nreps <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>repOut <span class="ot">&lt;-</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">replicate</span>(nreps,</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">coef</span>(<span class="fu">qeLin</span>(svcensus,<span class="st">'wageinc'</span>,<span class="at">holdout=</span><span class="dv">100</span>))[<span class="st">'gendermale'</span>])</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(repOut)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8593.841</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(repOut) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 40.84038</code></pre>
+</div>
+</div>
+<p>So generating a CI for the gender coefficient using the bootstrap is straightforward. But estimating the distance between model and reality here raises an issue regarding what we mean by “distance.”</p>
+<p>Certainly we can estimate the distance between the model regression function and the real one. It would not be too different from our previous example of finding the distance between the model cdf and real cdf. One could use, say, k-Nearest Neighbors or kernel regression to estimate the real function.</p>
+<p>But in the above code, we found a CI for <span class="math inline">\(\beta_{\textrm{gender}}\)</span> – a quantity that has no counterpart in general regression functions. What might be done?</p>
+<p>One possibility would be to consider <span class="math inline">\(\beta_{\textrm{gender}}\)</span> to represent an <em>average treatment effect</em>, essentially</p>
+<p><span class="math display">\[
+E(\textrm{wage income} | \tilde{X},\textrm{gender = male}) -
+E(\textrm{wage income} | \tilde{X},\textrm{gender = female})
+\]</span></p>
+<p>where <span class="math inline">\(\tilde{X}\)</span> denotes the predictors other than gender. One could use k-Nearest Neighbors or kernel regression to estimate the two gender-specific real functions, then compare to our estimate of <span class="math inline">\(\beta_{\textrm{gender}}\)</span> to obtain our distance value.</p>
 </section>
 </section>
-</section>
-<section id="making-a-decision-iii" class="level1">
-<h1>Making a Decision, III</h1>
+<section id="making-a-decision-iii" class="level2">
+<h2 class="anchored" data-anchor-id="making-a-decision-iii">Making a Decision, III</h2>
 <p>As noted earlier, proper analysis is harder, and probably less psychologically satisfying than NHST. In this section, there is also the issue of whether a typical scientific researcher even has the background to be able to perform the analysis. In the case of estimating the distance between two distributions, this may be out of reach for many.</p>
 <p>This then is a good example of the need for mathematical statisticians to develop non-NHST tools, say along the above lines.</p>
 <p>Of course, there is always the bootstrap as a widely accessible alternative. A question, though, is whether scientific journals will accept such analyses. As long as (possibly anonymized) data, code and random number seed are made available, hopefully this could be worked out.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
