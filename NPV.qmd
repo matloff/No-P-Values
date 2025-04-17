@@ -15,19 +15,15 @@ toc: true
 2. Null Hypothesis Significance Testing (NHST) is thus an absurdity.
    Why "test" something we know is false?
 
-3. Here we probe more deeply than typical criticisms of NHST in the
-   literature, starting with this core theme that all $H_0$s are false.
-   NHST should be abandoned, not modified.
+3. Decisions must be made, but based on relevant analysis, not NHST.
 
-4. Decisions must be made, but based on relevant analysis, not NHST.
-
-5. The concept of "practical significance vs. statistical significance"
+4. The concept of "practical significance vs. statistical significance"
    should be reduced to simply assessing practical significance.
 
-6. Non-NHST tools should be developed in that direction, some presented
+5. Non-NHST tools should be developed in that direction, some presented
    here.
 
-7. Such tools must be used to inform the analyst but not 
+6. Such tools must be used to inform the analyst but not 
    automatically make the decision, usurping the analyst.
 
 # NHST Is (Too) Comfortable
@@ -40,6 +36,9 @@ toc: true
   math."
 
 # The Central Issue
+
+*It is foolish to ask "Are the effects of A and B different. They are
+always different -- for some decimal place* -- John Tukey
 
 * We wish to determine whether $H_0$ is true or false.
 
@@ -76,7 +75,13 @@ In practice, $H_0$ **is never true**.
      * The EMH is intended only as a rough description, so of course it
        is false in the exact sense.
 
+Actually, this notion has arisen throughout the long history of the NHST
+debate. 
+
 ## Effect of measurement error, especially bias
+
+Problems with our data mean that in many cases, $H_0$ is not only false
+but also simply unanswerable.
 
    * Biased sampling designs.
 
@@ -93,7 +98,8 @@ In practice, $H_0$ **is never true**.
    * E.g. physics, $H_0:$ gravity waves do not exist.
 
       * Yes, the existence is either true or false, but our imperfect
-        measurements make $H_0$ false.
+        measurements make $H_0$ false; we large enough $n$, we will
+        reject.
 
       * Research on gravity waves relies on a complex array of
         detection machinery and on other unproven
@@ -443,8 +449,7 @@ Below we discuss two broad classes of NHST tools.
 
 # Accounting for Imperfections in Our Model
 
-*All models are wrong, but some are useful* -- prominant 
-statistician George Box
+*All models are wrong, but some are useful* -- George Box
 
 ## Dependence on one's goals
 
@@ -716,6 +721,9 @@ theoretical) dissertation in the Mathematics Department.  but took
 classes in Biostat. Jean brought up the topic casually one day in
 lecture, changing my views forever.
 
+I am grateful for helpful feedback (agreement with my positions not
+impllied) from Dylan Atmbruster and Boyu Wang
+
 # Appendix
 
 This Appendix is itended as a start toward developing non-NHST tools for
@@ -870,9 +878,62 @@ $$
 This is perfectly set up for the Delta Method. We need the covariance
 matrix, which we can obtain empirically by applying the R function **cov**
 to the vectors $(X_1,...,X_n$ and $(I_1,...,I_n)$, where $I_j$ is 1 or 0,
-according to whethe $X_j \leq v$.
+according to whether $X_j \leq v$.
 
-# Making a Decision, III
+### Example
+
+Let's look at a linear model example, again using the **svcensus** data.
+Actually, it is originally from my **qeML** package, and it will be
+convenient to use some functions from that package.
+
+Applying the Delta Method here is less straightforward. Computation of
+the least-squares estimate $\widehat{\beta}$ of the coefficients vector
+$\beta$ involves a matrix inverse, making analytical derivatives
+difficult. Meanwhile, the **deltamethod** function doesn't allow matrix
+inverse in its operation. Other implementations of the Delta Method
+might be used, or a *fixed-X regression* view might be taken, but the
+bootstrap seems to be especially attractive in this setting. Let's give
+it a try.
+
+```{r}
+library(qeML)
+set.seed(9999)
+nreps <- 1000
+repOut <-
+   replicate(nreps,
+      coef(qeLin(svcensus,'wageinc',holdout=100))['gendermale'])
+mean(repOut)
+sd(repOut) 
+```
+
+So generating a CI for the gender coefficient using the bootstrap is
+straightforward. But estimating the distance between model and reality
+here raises an issue regarding what we mean by "distance."
+
+Certainly we can estimate the distance between the model regression
+function and the real one. It would not be too different from our
+previous example of finding the distance between the model cdf and real
+cdf. One could use, say, k-Nearest Neighbors or kernel regression to
+estimate the real function.
+
+But in the above code, we found a CI for $\beta_{\textrm{gender}}$ -- a
+quantity that has no counterpart in general regression functions. What
+might be done?
+
+One possibility would be to consider $\beta_{\textrm{gender}}$ to
+represent an *average treatment effect*, essentially
+
+$$
+E(\textrm{wage income} | \tilde{X},\textrm{gender = male}) -
+E(\textrm{wage income} | \tilde{X},\textrm{gender = female})
+$$
+
+where $\tilde{X}$ denotes the predictors other than gender.
+One could use k-Nearest Neighbors or kernel regression to
+estimate the two gender-specific real functions, then compare to
+our estimate of $\beta_{\textrm{gender}}$ to obtain our distance value.
+
+## Making a Decision, III
 
 As noted earlier, proper analysis is harder, and probably less
 psychologically satisfying than NHST. In this section, there is also the
