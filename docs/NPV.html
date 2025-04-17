@@ -799,74 +799,17 @@ F_{true}(t) = \frac{1}{n} N(t)
 <p>Let’s look at a linear model example, again using the <strong>svcensus</strong> data. Actually, it is originally from my <strong>qeML</strong> package, and it will be convenient to use some functions from that package.</p>
 <p>Applying the Delta Method here is less straightforward. Computation of the least-squares estimate <span class="math inline">\(\widehat{\beta}\)</span> of the coefficients vector <span class="math inline">\(\beta\)</span> involves a matrix inverse, making analytical derivatives difficult. Meanwhile, the <strong>deltamethod</strong> function doesn’t allow matrix inverse in its operation. Other implementations of the Delta Method might be used, or a <em>fixed-X regression</em> view might be taken, but the bootstrap seems to be especially attractive in this setting. Let’s give it a try.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qeML)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: regtools</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: FNN</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: gtools</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-
-
-
-
-*********************
-
-
-
-Latest version of regtools at GitHub.com/matloff
-
-
-Type ?regtools to see function list by category</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: rmarkdown</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: tufte</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-
-
-
-
-*********************
-
-
-
-  Navigating qeML:
-
-      Type vignette("Quick_Start") for a quick overview!
-
-      Type vignette("Function_List") for a categorized function list
-
-      Type vignette("ML_Overview") for an introduction to machine learning</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'qeML'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked _by_ '.GlobalEnv':
-
-    evalr</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">9999</span>)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>nreps <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>repOut <span class="ot">&lt;-</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">replicate</span>(nreps,</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">coef</span>(<span class="fu">qeLin</span>(svcensus,<span class="st">'wageinc'</span>,<span class="at">holdout=</span><span class="dv">100</span>))[<span class="st">'gendermale'</span>])</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(repOut)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(qeML))</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">9999</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>nreps <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>repOut <span class="ot">&lt;-</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">replicate</span>(nreps,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">coef</span>(<span class="fu">qeLin</span>(svcensus,<span class="st">'wageinc'</span>,<span class="at">holdout=</span><span class="dv">100</span>))[<span class="st">'gendermale'</span>])</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(repOut)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 8593.841</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(repOut) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(repOut) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 40.84038</code></pre>
 </div>
