@@ -87,6 +87,8 @@ debate.
 Problems with our data mean that in many cases, $H_0$ is not only false
 but also simply unanswerable.
 
+   * Model imperfections.
+
    * Biased sampling designs.
 
    * Transcription errors.
@@ -285,6 +287,8 @@ and will be rejected. **The term "significant" means nothing.**
   strong. But I would argue that it is counterproductive, not really
   addressing the problem at hand.
 
+  [See also, for example, Blume *et al* *PLoS One*, 2018 13(30]{.column-margin}
+
 # The Not-So-Easy Part: Abandon the Term *Significant* Altogether
 
 ::: {.callout-important title="Abandon the Term 'Significant'"}
@@ -406,8 +410,8 @@ Accordingly we need to identify existing formal tools for assessing
   our assessment of adding interaction terms in the
   LSAT model above.
 
-Below we discuss two broad classes of NHST tools.
-(See the Appendix for mathematical details.)
+Below we discuss two broad classes of NHST tools.  (See the Appendix for
+mathematical details.) 
 
 # Procedures Assessing Treatment Effects {#sec-treats}
 
@@ -462,6 +466,12 @@ Below we discuss two broad classes of NHST tools.
 
 As usual, proper analysis depends on one's goals. 
 
+* When an analyst who says, “I just want to use NHST to check whether my
+  model fits the data," what is the analyst's goal? For instance, will he/she 
+  then apply the model on the strength of $H_0$ being accepted? The test
+  is not designed for that use, and, given enough data, this approach
+  will lead to discarding what may be a very useful model.
+
 * If the goal is prediction, a linear model may be quite effective even
   though there is a substantial discrepancy between it and the true
   population regression function $E(Y|X=t)$. 
@@ -476,7 +486,27 @@ As usual, proper analysis depends on one's goals.
   * Optionally, formally assessing the degree of discrepancy between
     our model and reality.
 
-We now elaborate on these last two points.
+  * In the next section, we will elaborate on these last two points.
+
+* D. Lakens, a highly outspoken defender of p-values, objects to what he
+  believes is statisticians telling others what their goals ought to be.
+  Again, the chosen analysis must be tailored to the analyst's own
+  goals.  This is of course true, but the problem is that p-values, even
+  in modified form, do not address any practical goals.
+
+  He mentions for instance that "...the null hypothesis should be
+  plausible enough so that rejecting it is surprising..." Again, 
+  the fact that, given a large enough $n$, a "surprise" will result even
+  in settings in which the analyst would wish not to be surprised.
+
+[Lakens, *Perspect. Psych.  Scie, 2021, 16(3)*]{.column-margin} 
+
+::: {.callout-important title="The Bottom Line"}
+
+P-values don't address the analyst's goals. The availability of
+estimating procedures appropriate to those goals is crucial.
+
+:::
 
 ### We are always estimating *something* {#sec-something}
 
