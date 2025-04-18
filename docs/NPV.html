@@ -285,6 +285,7 @@ Core Problem with NHST
 <h2 class="anchored" data-anchor-id="effect-of-measurement-error-especially-bias">Effect of measurement error, especially bias</h2>
 <p>Problems with our data mean that in many cases, <span class="math inline">\(H_0\)</span> is not only false but also simply unanswerable.</p>
 <ul>
+<li><p>Model imperfections.</p></li>
 <li><p>Biased sampling designs.</p></li>
 <li><p>Transcription errors.</p></li>
 <li><p>“I just want know which medical treatment is better.” <span class="math inline">\(H_0: \mu_1
@@ -296,6 +297,7 @@ Core Problem with NHST
 <li><p>Research on gravity waves relies on a complex array of detection machinery and on other unproven theories. See <a href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.116.061102#fulltext">the main paper</a> and <a href="https://arxiv.org/pdf/1602.03840">the methods details</a>.</p></li>
 <li><p>(The situation is also complicated by the fact that they use a Bayesian analysis, courting further criticism.)</p></li>
 </ul></li>
+<li><p>Accordingly, replacing classical NHST by <em>mimimal effects tests</em> does not solve the problem.</p></li>
 </ul>
 </section>
 <section id="both-an-epistemological-and-practical-problem" class="level2">
@@ -429,7 +431,7 @@ The Term ‘Significant’ Has No Meaning
 </ul>
 </section>
 </section>
-<section id="making-a-decision-i" class="level1">
+<section id="making-a-decision-i" class="level1 page-columns page-full">
 <h1>Making a Decision, I</h1>
 <ul>
 <li><p>One of the biggest myths about us critics of NHST is that we fail to recognize that the analyst must make a decision. Of course one must make a decision – but a decision based on relevant information, not on an NHST. “Making a decision” as to whether <span class="math inline">\(H_0\)</span> is true, when we know it to be false, makes no sense.</p></li>
@@ -439,9 +441,10 @@ The Term ‘Significant’ Has No Meaning
 </blockquote></li>
 <li><p>As noted at the outset of this document, making decisions in this manner is much less psychologically satisfying than doing an NHST. Rather than the decision being determined automatically in an NHST, the analyst must supply his/her own power, devising an <em>ad hoc</em> criterion for making a decision.</p></li>
 <li><p>But it is the scientifically valid approach, rather than relying on “superstition” with NHST.</p></li>
-<li><p>It is very telling that in a special 2019 issue of the <em>American Statistician</em> (Volume 73, Issue sup1) devoted to NHST problems, some authors proposed elaborate replacements for NHST. See for instance the proposed SGPV method in by Blume <em>et al</em>. Clearly the psychological urge for an automatic decision-making procedure is clearly very strong. But I would argue that it is counterproductive, not really addressing the problem at hand.</p></li>
+<li><p>It is very telling that in a special 2019 issue of the <em>American Statistician</em> (Volume 73, Issue sup1) devoted to NHST problems, some authors proposed elaborate replacements for NHST. See for instance the proposed SGPV method in by Blume <em>et al</em>. Clearly the psychological urge for an automatic decision-making procedure is clearly very strong. But I would argue that it is counterproductive, not really addressing the problem at hand.</p>
+<p></p></li>
 </ul>
-</section>
+<div class="no-row-height column-margin column-container"><span class="">See also, for example, Blume <em>et al</em> <em>PLoS One</em>, 2018 13(30</span></div></section>
 <section id="the-not-so-easy-part-abandon-the-term-significant-altogether" class="level1">
 <h1>The Not-So-Easy Part: Abandon the Term <em>Significant</em> Altogether</h1>
 <div class="callout callout-style-default callout-important callout-titled" title="Abandon the Term 'Significant'">
@@ -592,14 +595,31 @@ F-statistic: 645.4 on 21 and 20778 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h2 class="anchored" data-anchor-id="dependence-on-ones-goals">Dependence on one’s goals</h2>
 <p>As usual, proper analysis depends on one’s goals.</p>
 <ul>
+<li><p>When an analyst who says, “I just want to use NHST to check whether my model fits the data,” what is the analyst’s goal? For instance, will he/she then apply the model on the strength of <span class="math inline">\(H_0\)</span> being accepted? The test is not designed for that use, and, given enough data, this approach will lead to discarding what may be a very useful model.</p></li>
 <li><p>If the goal is prediction, a linear model may be quite effective even though there is a substantial discrepancy between it and the true population regression function <span class="math inline">\(E(Y|X=t)\)</span>.</p></li>
 <li><p>But if the goal is measurement of treatment effects, we may be producing distorted results if the model discrepancy is large. Addressing this problem involves two components:</p>
 <ul>
 <li><p>Clarifying the issue of what is actually being estimated, in light of the inevitable falsity of our model.</p></li>
 <li><p>Optionally, formally assessing the degree of discrepancy between our model and reality.</p></li>
+<li><p>In the next section, we will elaborate on these last two points.</p></li>
 </ul></li>
+<li><p>D. Lakens, a highly outspoken defender of p-values, objects to what he believes is statisticians telling others what their goals ought to be. Again, the chosen analysis must be tailored to the analyst’s own goals. This is of course true, but the problem is that p-values, even in modified form, do not address any practical goals.</p>
+<p>He mentions for instance that “…the null hypothesis should be plausible enough so that rejecting it is surprising…” Again, the fact that, given a large enough <span class="math inline">\(n\)</span>, a “surprise” will result even in settings in which the analyst would wish not to be surprised.</p></li>
 </ul>
-<p>We now elaborate on these last two points.</p>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">Lakens, <em>Perspect. Psych. Scie, 2021, 16(3)</em></span></div></div>
+<div class="callout callout-style-default callout-important callout-titled" title="The Bottom Line">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+The Bottom Line
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>P-values don’t address the analyst’s goals. The availability of estimating procedures appropriate to those goals is crucial.</p>
+</div>
+</div>
 <section id="sec-something" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="sec-something">We are always estimating <em>something</em></h3>
 <ul>
@@ -692,7 +712,7 @@ F-statistic: 645.4 on 21 and 20778 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="acknowledgements" class="level1 page-columns page-full">
 <h1>Acknowledgements</h1>
 <div class="page-columns page-full"><p>I was first introduced to this vital issue long ago in graduate  school by the late Professor Olive Jean Dunn of the UCLA Biostatistics Department. I was doing my (very theoretical) dissertation in the Mathematics Department. but took classes in Biostat. Jean brought up the topic casually one day in lecture, changing my views forever.</p><div class="no-row-height column-margin column-container"><span class="">Prof. Dunn is often credited as the first to use the Bonferroni Inequality for multiple comparisons</span></div></div>
-<p>I am grateful for helpful feedback (agreement with my positions not impllied) from Dylan Atmbruster and Boyu Wang</p>
+<p>I am grateful for helpful feedback (agreement with my positions not implied) from Dylan Atmbruster and Boyu Wang</p>
 </section>
 <section id="appendix" class="level1">
 <h1>Appendix</h1>
@@ -807,11 +827,11 @@ F_{true}(t) = \frac{1}{n} N(t)
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">coef</span>(<span class="fu">qeLin</span>(svcensus,<span class="st">'wageinc'</span>,<span class="at">holdout=</span><span class="dv">100</span>))[<span class="st">'age'</span>])</span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span><span class="sc">*</span><span class="fu">mean</span>(repOut)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4698.979</code></pre>
+<pre><code>[1] 4698.574</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span><span class="sc">*</span><span class="fu">sd</span>(repOut) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 16.92412</code></pre>
+<pre><code>[1] 17.36161</code></pre>
 </div>
 </div>
 <p>So generating a CI for the gender coefficient using the bootstrap is straightforward. But estimating the distance between model and reality here raises an issue regarding what we mean by “distance.”</p>
@@ -867,7 +887,7 @@ E[E(\textrm{wage income} | \tilde{X},\textrm{age = 40}])
 </div>
 </div>
 <p>Ah, a nonmonotonic relation! (Plus apparent outliers etc.) We might add a quadratic term in age to our linear model.</p>
-<p>So computing a distance between model and reality led to a model check and revision. An NHST might have done the same thing, but as discussed, would too dependent on <span class="math inline">\(n\)</span>.</p>
+<p>So computing a distance between model and reality led to a model check and revision. An NHST might have done the same thing, but as discussed, would be too dependent on <span class="math inline">\(n\)</span>; a test is not telling us whether the two distributions are close.</p>
 </section>
 </section>
 <section id="making-a-decision-iii" class="level2">
