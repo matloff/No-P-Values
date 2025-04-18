@@ -113,6 +113,9 @@ but also simply unanswerable.
       * (The situation is also complicated by the fact that they use a
         Bayesian analysis, courting further criticism.)
 
+* Accordingly, replacing classical NHST by *mimimal effects tests* does
+  not solve the problem.
+
 ## Both an epistemological and practical problem
 
 * OK, $H_0$ is never true. But why is that a problem?
@@ -726,7 +729,7 @@ classes in Biostat. Jean brought up the topic casually one day in
 lecture, changing my views forever.
 
 I am grateful for helpful feedback (agreement with my positions not
-impllied) from Dylan Atmbruster and Boyu Wang
+implied) from Dylan Atmbruster and Boyu Wang
 
 # Appendix
 
@@ -975,7 +978,8 @@ a quadratic term in age to our linear model.
 
 So computing a distance between model and reality led to a model check
 and revision. An NHST might have done the same thing, but as discussed,
-would too dependent on $n$.
+would be too dependent on $n$; a test is not telling us whether the two
+distributions are close.
 
 ## Making a Decision, III
 
