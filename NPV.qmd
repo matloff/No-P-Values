@@ -8,6 +8,10 @@ toc: true
 
 [Author bio](https://heather.cs.ucdavis.edu/matloff.html) 
 
+**Intended audience:** STEM professions and researchers ("S" means both
+natural and social science); statistics educators; mathematical
+statisticians who wish to modernize the field
+
 **Synopsis:**
 
 1. All null hypotheses $H_0$ are false.
@@ -38,7 +42,7 @@ toc: true
 # The Central Issue
 
 *It is foolish to ask "Are the effects of A and B different. They are
-always different -- for some decimal place* -- John Tukey
+always different -- for some decimal place"* -- John Tukey
 
 * We wish to determine whether $H_0$ is true or false.
 
@@ -838,12 +842,11 @@ Hopefully that is close to the true $f_X(t)$.
 
 :::
 
-As discussed, the classic formulas for the
-standard error of $\widehat{\lambda}$ are invalid here. But the solution
-is simple here: $\bar{X}$ is asymptotically normal from the Central
-Limit Theorem, with standard error computable from the data. Thus we can
-find a CI for E(X), then invert the endpoints to obtain an interval for
-$\lambda$. 
+As discussed, the classic formulas for the standard error of
+$\widehat{\lambda}$ are invalid here. But the solution is simple:
+$\bar{X}$ is asymptotically normal from the Central Limit Theorem, with
+standard error computable from the data. Thus we can find a CI for E(X),
+then invert the endpoints to obtain an interval for $\lambda$. 
 
 But what about the distance between the model and actual distributions
 of $X$? Under the model, the cumulative distribution function is
@@ -882,7 +885,7 @@ according to whether $X_j \leq v$.
 
 ### Example
 
-Let's look at a linear model example, again using the **svcensus** data.
+Let's now look at a linear model example, again using the **svcensus** data.
 Actually, it is originally from my **qeML** package, and it will be
 convenient to use some functions from that package.
 
@@ -893,17 +896,16 @@ difficult. Meanwhile, the **deltamethod** function doesn't allow matrix
 inverse in its operation. Other implementations of the Delta Method
 might be used, or a *fixed-X regression* view might be taken, but the
 bootstrap seems to be especially attractive in this setting. Let's give
-it a try.
+it a try. First, a single-replicate version for clarity:
 
 ```{r}
-library(qeML)
-set.seed(9999)
+suppressMessages(library(qeML))
 nreps <- 1000
 repOut <-
    replicate(nreps,
-      coef(qeLin(svcensus,'wageinc',holdout=100))['gendermale'])
-mean(repOut)
-sd(repOut) 
+      coef(qeLin(svcensus,'wageinc',holdout=100))['age'])
+10*mean(repOut)
+10*sd(repOut) 
 ```
 
 So generating a CI for the gender coefficient using the bootstrap is
@@ -916,22 +918,64 @@ previous example of finding the distance between the model cdf and real
 cdf. One could use, say, k-Nearest Neighbors or kernel regression to
 estimate the real function.
 
-But in the above code, we found a CI for $\beta_{\textrm{gender}}$ -- a
+Say we define distance (in function space) to be $L_1$, mean absolute
+difference. We could estimate it this way:
+
+```{r}
+linOut <- qeLin(svc,'wageinc',holdout=NULL)
+# no holdout, to be consistent with linear model
+knnOut <- qeKNN(svc,'wageinc',holdout=NULL) # k-Nearest Nhbr., defaults
+mean(abs(linOut$fitted.values - knnOut$regests))
+```
+
+That difference would seem to be rather large, but before addressing
+that, let's consider another distance measure, one more directly related
+to our analysis above:
+
+In the above code, we found a CI for $\beta_{\textrm{age}}$ -- a
 quantity that has no counterpart in general regression functions. What
 might be done?
 
-One possibility would be to consider $\beta_{\textrm{gender}}$ to
+One possibility would be to consider $\beta_{\textrm{age}}$ to
 represent an *average treatment effect*, essentially
 
 $$
-E(\textrm{wage income} | \tilde{X},\textrm{gender = male}) -
-E(\textrm{wage income} | \tilde{X},\textrm{gender = female})
+E[E(\textrm{wage income} | \tilde{X},\textrm{age = 50})] -
+E[E(\textrm{wage income} | \tilde{X},\textrm{age = 40}])
 $$
 
-where $\tilde{X}$ denotes the predictors other than gender.
-One could use k-Nearest Neighbors or kernel regression to
-estimate the two gender-specific real functions, then compare to
-our estimate of $\beta_{\textrm{gender}}$ to obtain our distance value.
+where $\tilde{X}$ denotes the predictors other than age The outer
+expectation averages the age difference over the distribution of $X$.
+We could use k-NN to get the estimates:
+
+```{r}
+data(svcensus)  # 2000 Census dataset
+names(svcensus)
+# keep things simple
+svc <- svcensus[,c('age','occ','wageinc','gender')]
+knnOut <- qeKNN(svc,'wageinc',holdout=NULL) # k-Nearest Nhbr., defaults
+# prepare to compare estimated E(Y|X) for age 40 and 50
+svc40 <- svc
+svc40$age <- 40
+svc50 <- svc
+svc50$age <- 50
+meanY40 <- mean(predict(knnOut,svc40[,-3]))
+meanY50 <- mean(predict(knnOut,svc50[,-3]))
+meanY50 - meanY40
+```
+
+Quite a difference! Let's look at the data:
+
+```{r}
+plot(svc[,c('age','wageinc')],cex=0.1)
+```
+
+Ah, a nonmonotonic relation! (Plus apparent outliers etc.) We might add
+a quadratic term in age to our linear model.
+
+So computing a distance between model and reality led to a model check
+and revision. An NHST might have done the same thing, but as discussed,
+would too dependent on $n$.
 
 ## Making a Decision, III
 
@@ -946,8 +990,9 @@ to develop non-NHST tools, say along the above lines.
 
 Of course, there is always the bootstrap as a widely accessible
 alternative. A question, though, is whether scientific journals will
-accept such analyses. As long as (possibly anonymized) data, code and random number seed are
-made available, hopefully this could be worked out.
+accept such analyses. As long as (possibly anonymized) data, code and
+random number seed are made available, hopefully this could be worked
+out.
 
 
 
