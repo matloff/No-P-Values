@@ -225,6 +225,7 @@ window.Quarto = {
 
 
 <p><a href="https://heather.cs.ucdavis.edu/matloff.html">Author bio</a></p>
+<p><strong>Intended audience:</strong> STEM professions and researchers (“S” means both natural and social science); statistics educators; mathematical statisticians who wish to modernize the field</p>
 <p><strong>Synopsis:</strong></p>
 <ol type="1">
 <li><p>All null hypotheses <span class="math inline">\(H_0\)</span> are false.</p></li>
@@ -244,7 +245,7 @@ window.Quarto = {
 </section>
 <section id="the-central-issue" class="level1">
 <h1>The Central Issue</h1>
-<p><em>It is foolish to ask “Are the effects of A and B different. They are always different – for some decimal place</em> – John Tukey</p>
+<p><em>It is foolish to ask “Are the effects of A and B different. They are always different – for some decimal place”</em> – John Tukey</p>
 <ul>
 <li><p>We wish to determine whether <span class="math inline">\(H_0\)</span> is true or false.</p></li>
 <li><p>But:</p></li>
@@ -774,7 +775,7 @@ f_X(t) = \frac{1}{\mu} e^{-t/\mu}
 <p>Hopefully that is close to the true <span class="math inline">\(f_X(t)\)</span>.</p>
 </div>
 </div>
-<p>As discussed, the classic formulas for the standard error of <span class="math inline">\(\widehat{\lambda}\)</span> are invalid here. But the solution is simple here: <span class="math inline">\(\bar{X}\)</span> is asymptotically normal from the Central Limit Theorem, with standard error computable from the data. Thus we can find a CI for E(X), then invert the endpoints to obtain an interval for <span class="math inline">\(\lambda\)</span>.</p>
+<p>As discussed, the classic formulas for the standard error of <span class="math inline">\(\widehat{\lambda}\)</span> are invalid here. But the solution is simple: <span class="math inline">\(\bar{X}\)</span> is asymptotically normal from the Central Limit Theorem, with standard error computable from the data. Thus we can find a CI for E(X), then invert the endpoints to obtain an interval for <span class="math inline">\(\lambda\)</span>.</p>
 <p>But what about the distance between the model and actual distributions of <span class="math inline">\(X\)</span>? Under the model, the cumulative distribution function is</p>
 <p><span class="math display">\[
 F_{model}(t) = 1 - e^{-t/\lambda}
@@ -796,33 +797,77 @@ F_{true}(t) = \frac{1}{n} N(t)
 </section>
 <section id="example-2" class="level3">
 <h3 class="anchored" data-anchor-id="example-2">Example</h3>
-<p>Let’s look at a linear model example, again using the <strong>svcensus</strong> data. Actually, it is originally from my <strong>qeML</strong> package, and it will be convenient to use some functions from that package.</p>
-<p>Applying the Delta Method here is less straightforward. Computation of the least-squares estimate <span class="math inline">\(\widehat{\beta}\)</span> of the coefficients vector <span class="math inline">\(\beta\)</span> involves a matrix inverse, making analytical derivatives difficult. Meanwhile, the <strong>deltamethod</strong> function doesn’t allow matrix inverse in its operation. Other implementations of the Delta Method might be used, or a <em>fixed-X regression</em> view might be taken, but the bootstrap seems to be especially attractive in this setting. Let’s give it a try.</p>
+<p>Let’s now look at a linear model example, again using the <strong>svcensus</strong> data. Actually, it is originally from my <strong>qeML</strong> package, and it will be convenient to use some functions from that package.</p>
+<p>Applying the Delta Method here is less straightforward. Computation of the least-squares estimate <span class="math inline">\(\widehat{\beta}\)</span> of the coefficients vector <span class="math inline">\(\beta\)</span> involves a matrix inverse, making analytical derivatives difficult. Meanwhile, the <strong>deltamethod</strong> function doesn’t allow matrix inverse in its operation. Other implementations of the Delta Method might be used, or a <em>fixed-X regression</em> view might be taken, but the bootstrap seems to be especially attractive in this setting. Let’s give it a try. First, a single-replicate version for clarity:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(qeML))</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">9999</span>)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>nreps <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>repOut <span class="ot">&lt;-</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">replicate</span>(nreps,</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">coef</span>(<span class="fu">qeLin</span>(svcensus,<span class="st">'wageinc'</span>,<span class="at">holdout=</span><span class="dv">100</span>))[<span class="st">'gendermale'</span>])</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(repOut)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>nreps <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>repOut <span class="ot">&lt;-</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">replicate</span>(nreps,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">coef</span>(<span class="fu">qeLin</span>(svcensus,<span class="st">'wageinc'</span>,<span class="at">holdout=</span><span class="dv">100</span>))[<span class="st">'age'</span>])</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span><span class="sc">*</span><span class="fu">mean</span>(repOut)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 8593.841</code></pre>
+<pre><code>[1] 4698.979</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(repOut) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span><span class="sc">*</span><span class="fu">sd</span>(repOut) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 40.84038</code></pre>
+<pre><code>[1] 16.92412</code></pre>
 </div>
 </div>
 <p>So generating a CI for the gender coefficient using the bootstrap is straightforward. But estimating the distance between model and reality here raises an issue regarding what we mean by “distance.”</p>
 <p>Certainly we can estimate the distance between the model regression function and the real one. It would not be too different from our previous example of finding the distance between the model cdf and real cdf. One could use, say, k-Nearest Neighbors or kernel regression to estimate the real function.</p>
-<p>But in the above code, we found a CI for <span class="math inline">\(\beta_{\textrm{gender}}\)</span> – a quantity that has no counterpart in general regression functions. What might be done?</p>
-<p>One possibility would be to consider <span class="math inline">\(\beta_{\textrm{gender}}\)</span> to represent an <em>average treatment effect</em>, essentially</p>
+<p>Say we define distance (in function space) to be <span class="math inline">\(L_1\)</span>, mean absolute difference. We could estimate it this way:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>linOut <span class="ot">&lt;-</span> <span class="fu">qeLin</span>(svc,<span class="st">'wageinc'</span>,<span class="at">holdout=</span><span class="cn">NULL</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># no holdout, to be consistent with linear model</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>knnOut <span class="ot">&lt;-</span> <span class="fu">qeKNN</span>(svc,<span class="st">'wageinc'</span>,<span class="at">holdout=</span><span class="cn">NULL</span>) <span class="co"># k-Nearest Nhbr., defaults</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">abs</span>(linOut<span class="sc">$</span>fitted.values <span class="sc">-</span> knnOut<span class="sc">$</span>regests))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 12107.06</code></pre>
+</div>
+</div>
+<p>That difference would seem to be rather large, but before addressing that, let’s consider another distance measure, one more directly related to our analysis above:</p>
+<p>In the above code, we found a CI for <span class="math inline">\(\beta_{\textrm{age}}\)</span> – a quantity that has no counterpart in general regression functions. What might be done?</p>
+<p>One possibility would be to consider <span class="math inline">\(\beta_{\textrm{age}}\)</span> to represent an <em>average treatment effect</em>, essentially</p>
 <p><span class="math display">\[
-E(\textrm{wage income} | \tilde{X},\textrm{gender = male}) -
-E(\textrm{wage income} | \tilde{X},\textrm{gender = female})
+E[E(\textrm{wage income} | \tilde{X},\textrm{age = 50})] -
+E[E(\textrm{wage income} | \tilde{X},\textrm{age = 40}])
 \]</span></p>
-<p>where <span class="math inline">\(\tilde{X}\)</span> denotes the predictors other than gender. One could use k-Nearest Neighbors or kernel regression to estimate the two gender-specific real functions, then compare to our estimate of <span class="math inline">\(\beta_{\textrm{gender}}\)</span> to obtain our distance value.</p>
+<p>where <span class="math inline">\(\tilde{X}\)</span> denotes the predictors other than age The outer expectation averages the age difference over the distribution of <span class="math inline">\(X\)</span>. We could use k-NN to get the estimates:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(svcensus)  <span class="co"># 2000 Census dataset</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(svcensus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "age"     "educ"    "occ"     "wageinc" "wkswrkd" "gender" </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># keep things simple</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>svc <span class="ot">&lt;-</span> svcensus[,<span class="fu">c</span>(<span class="st">'age'</span>,<span class="st">'occ'</span>,<span class="st">'wageinc'</span>,<span class="st">'gender'</span>)]</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>knnOut <span class="ot">&lt;-</span> <span class="fu">qeKNN</span>(svc,<span class="st">'wageinc'</span>,<span class="at">holdout=</span><span class="cn">NULL</span>) <span class="co"># k-Nearest Nhbr., defaults</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># prepare to compare estimated E(Y|X) for age 40 and 50</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>svc40 <span class="ot">&lt;-</span> svc</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>svc40<span class="sc">$</span>age <span class="ot">&lt;-</span> <span class="dv">40</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>svc50 <span class="ot">&lt;-</span> svc</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>svc50<span class="sc">$</span>age <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>meanY40 <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">predict</span>(knnOut,svc40[,<span class="sc">-</span><span class="dv">3</span>]))</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>meanY50 <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">predict</span>(knnOut,svc50[,<span class="sc">-</span><span class="dv">3</span>]))</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>meanY50 <span class="sc">-</span> meanY40</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -5519.589</code></pre>
+</div>
+</div>
+<p>Quite a difference! Let’s look at the data:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(svc[,<span class="fu">c</span>(<span class="st">'age'</span>,<span class="st">'wageinc'</span>)],<span class="at">cex=</span><span class="fl">0.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="NPV_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Ah, a nonmonotonic relation! (Plus apparent outliers etc.) We might add a quadratic term in age to our linear model.</p>
+<p>So computing a distance between model and reality led to a model check and revision. An NHST might have done the same thing, but as discussed, would too dependent on <span class="math inline">\(n\)</span>.</p>
 </section>
 </section>
 <section id="making-a-decision-iii" class="level2">
