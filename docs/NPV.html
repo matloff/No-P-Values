@@ -187,10 +187,13 @@ window.Quarto = {
   </ul></li>
   <li><a href="#taking-model-inaccuracy-into-account" id="toc-taking-model-inaccuracy-into-account" class="nav-link" data-scroll-target="#taking-model-inaccuracy-into-account">Taking model inaccuracy into account</a>
   <ul class="collapse">
-  <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1">Example</a></li>
-  <li><a href="#example-2" id="toc-example-2" class="nav-link" data-scroll-target="#example-2">Example</a></li>
+  <li><a href="#example-delta-method" id="toc-example-delta-method" class="nav-link" data-scroll-target="#example-delta-method">Example: Delta Method</a></li>
+  <li><a href="#example-modelreality-distance" id="toc-example-modelreality-distance" class="nav-link" data-scroll-target="#example-modelreality-distance">Example: Model/Reality Distance</a></li>
   </ul></li>
-  <li><a href="#making-a-decision-iii" id="toc-making-a-decision-iii" class="nav-link" data-scroll-target="#making-a-decision-iii">Making a Decision, III</a></li>
+  <li><a href="#making-a-decision-iii" id="toc-making-a-decision-iii" class="nav-link" data-scroll-target="#making-a-decision-iii">Making a Decision, III</a>
+  <ul class="collapse">
+  <li><a href="#ah-this-distance-thing-is-very-useful" id="toc-ah-this-distance-thing-is-very-useful" class="nav-link" data-scroll-target="#ah-this-distance-thing-is-very-useful">Ah, this distance thing is very useful!</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -770,8 +773,8 @@ The Bottom Line
 <li><p>We estimate <span class="math inline">\(\theta\)</span> by some method, say MLE. We want to find a standard error that <em>does not assume <span class="math inline">\(\cal{M}\)</span> is correct.</em></p></li>
 <li><p>Optionally, we may want to also estimate the population “distance” between our model and <span class="math inline">\(F_{pop}\)</span>, including a standard error for that estimate.</p></li>
 </ul>
-<section id="example-1" class="level3">
-<h3 class="anchored" data-anchor-id="example-1">Example</h3>
+<section id="example-delta-method" class="level3">
+<h3 class="anchored" data-anchor-id="example-delta-method">Example: Delta Method</h3>
 <p>Say we have a random variable <span class="math inline">\(X\)</span> whose distribution we wish to model as exponential,</p>
 <p><span class="math display">\[
 f_X(t) = \lambda e^{-t/\lambda}
@@ -815,8 +818,8 @@ F_{true}(t) = \frac{1}{n} N(t)
 \]</span></p>
 <p>This is perfectly set up for the Delta Method. We need the covariance matrix, which we can obtain empirically by applying the R function <strong>cov</strong> to the vectors <span class="math inline">\((X_1,...,X_n\)</span> and <span class="math inline">\((I_1,...,I_n)\)</span>, where <span class="math inline">\(I_j\)</span> is 1 or 0, according to whether <span class="math inline">\(X_j \leq v\)</span>.</p>
 </section>
-<section id="example-2" class="level3">
-<h3 class="anchored" data-anchor-id="example-2">Example</h3>
+<section id="example-modelreality-distance" class="level3">
+<h3 class="anchored" data-anchor-id="example-modelreality-distance">Example: Model/Reality Distance</h3>
 <p>Let’s now look at a linear model example, again using the <strong>svcensus</strong> data. Actually, it is originally from my <strong>qeML</strong> package, and it will be convenient to use some functions from that package.</p>
 <p>Applying the Delta Method here is less straightforward. Computation of the least-squares estimate <span class="math inline">\(\widehat{\beta}\)</span> of the coefficients vector <span class="math inline">\(\beta\)</span> involves a matrix inverse, making analytical derivatives difficult. Meanwhile, the <strong>deltamethod</strong> function doesn’t allow matrix inverse in its operation. Other implementations of the Delta Method might be used, or a <em>fixed-X regression</em> view might be taken, but the bootstrap seems to be especially attractive in this setting. Let’s give it a try. First, a single-replicate version for clarity:</p>
 <div class="cell">
@@ -827,11 +830,11 @@ F_{true}(t) = \frac{1}{n} N(t)
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">coef</span>(<span class="fu">qeLin</span>(svcensus,<span class="st">'wageinc'</span>,<span class="at">holdout=</span><span class="dv">100</span>))[<span class="st">'age'</span>])</span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span><span class="sc">*</span><span class="fu">mean</span>(repOut)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4698.574</code></pre>
+<pre><code>[1] 4697.81</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span><span class="sc">*</span><span class="fu">sd</span>(repOut) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 17.36161</code></pre>
+<pre><code>[1] 17.77708</code></pre>
 </div>
 </div>
 <p>So generating a CI for the gender coefficient using the bootstrap is straightforward. But estimating the distance between model and reality here raises an issue regarding what we mean by “distance.”</p>
@@ -887,7 +890,6 @@ E[E(\textrm{wage income} | \tilde{X},\textrm{age = 40}])
 </div>
 </div>
 <p>Ah, a nonmonotonic relation! (Plus apparent outliers etc.) We might add a quadratic term in age to our linear model.</p>
-<p>So computing a distance between model and reality led to a model check and revision. An NHST might have done the same thing, but as discussed, would be too dependent on <span class="math inline">\(n\)</span>; a test is not telling us whether the two distributions are close.</p>
 </section>
 </section>
 <section id="making-a-decision-iii" class="level2">
@@ -895,8 +897,14 @@ E[E(\textrm{wage income} | \tilde{X},\textrm{age = 40}])
 <p>As noted earlier, proper analysis is harder, and probably less psychologically satisfying than NHST. In this section, there is also the issue of whether a typical scientific researcher even has the background to be able to perform the analysis. In the case of estimating the distance between two distributions, this may be out of reach for many.</p>
 <p>This then is a good example of the need for mathematical statisticians to develop non-NHST tools, say along the above lines.</p>
 <p>Of course, there is always the bootstrap as a widely accessible alternative. A question, though, is whether scientific journals will accept such analyses. As long as (possibly anonymized) data, code and random number seed are made available, hopefully this could be worked out.</p>
+<section id="ah-this-distance-thing-is-very-useful" class="level3">
+<h3 class="anchored" data-anchor-id="ah-this-distance-thing-is-very-useful">Ah, this distance thing is very useful!</h3>
+<p>So in the last example, computing a distance between model and reality led to a model check and revision. An NHST might have done the same thing, but as discussed, would be too dependent on <span class="math inline">\(n\)</span>; a test is not telling us whether the two distributions are close or far apart.</p>
+<p>By contrast, the estimated <span class="math inline">\(L_1\)</span> distance in the case of the LSAT data (first eight columns, predicting LSAT) is about 0.91, very good considered the mean LSAT score was about 36. By contrast, in the Census data about, the estimated distance was 12017, for a mean wage income of 60312. (It was still large after adding a quadratic term, though smaller than before.)</p>
+<p>Putting questions of confounders aside, it would appear that a linear model analysis of the Census data is not very safe, while the LSAT example looks very good.</p>
 
 
+</section>
 </section>
 </section>
 
