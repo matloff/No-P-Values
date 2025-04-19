@@ -842,7 +842,7 @@ characteristics:
   between our model and $F_{pop}$, including a standard error for
   that estimate.
 
-### Example
+### Example: Delta Method
 
 Say we have a random variable $X$ whose distribution we wish to model as
 exponential,
@@ -916,7 +916,7 @@ matrix, which we can obtain empirically by applying the R function **cov**
 to the vectors $(X_1,...,X_n$ and $(I_1,...,I_n)$, where $I_j$ is 1 or 0,
 according to whether $X_j \leq v$.
 
-### Example
+### Example: Model/Reality Distance
 
 Let's now look at a linear model example, again using the **svcensus** data.
 Actually, it is originally from my **qeML** package, and it will be
@@ -1006,11 +1006,6 @@ plot(svc[,c('age','wageinc')],cex=0.1)
 Ah, a nonmonotonic relation! (Plus apparent outliers etc.) We might add
 a quadratic term in age to our linear model.
 
-So computing a distance between model and reality led to a model check
-and revision. An NHST might have done the same thing, but as discussed,
-would be too dependent on $n$; a test is not telling us whether the two
-distributions are close.
-
 ## Making a Decision, III
 
 As noted earlier, proper analysis is harder, and probably less
@@ -1028,5 +1023,21 @@ accept such analyses. As long as (possibly anonymized) data, code and
 random number seed are made available, hopefully this could be worked
 out.
 
+### Ah, this distance thing is very useful!
 
+So in the last example, computing a distance between model and reality
+led to a model check and revision. An NHST might have done the same
+thing, but as discussed, would be too dependent on $n$; a test is not
+telling us whether the two distributions are close or far apart.
+
+By contrast, the estimated $L_1$ distance in the case of the LSAT data
+(first eight columns, predicting LSAT) is about 0.91, very good
+considered the mean LSAT score was about 36. By contrast, in the Census
+data about, the estimated distance was 12017, for a mean wage income of
+60312. (It was still large after adding a quadratic term, though smaller
+than before.)
+
+Putting questions of confounders aside, it would appear that a linear
+model analysis of the Census data is not very safe, while the LSAT
+example looks very good.
 
