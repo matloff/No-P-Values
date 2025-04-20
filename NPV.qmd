@@ -104,7 +104,7 @@ but also simply unanswerable.
    * E.g. physics, $H_0:$ gravity waves do not exist.
 
       * Yes, the existence is either true or false, but our imperfect
-        measurements make $H_0$ false; we large enough $n$, we will
+        measurements make $H_0$ false; with large enough $n$, we will
         reject.
 
       * Research on gravity waves relies on a complex array of
