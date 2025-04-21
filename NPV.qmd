@@ -8,11 +8,7 @@ toc: true
 
 [Author bio](https://heather.cs.ucdavis.edu/matloff.html) 
 
-**Intended audience:** STEM professions and researchers ("S" means both
-natural and social science); statistics educators; mathematical
-statisticians who wish to modernize the field
-
-**Synopsis:**
+::: {.callout-important title='Main Points'}
 
 1. All null hypotheses $H_0$ are false.
 
@@ -22,13 +18,28 @@ statisticians who wish to modernize the field
 3. Decisions must be made, but based on relevant analysis, not NHST.
 
 4. The concept of "practical significance vs. statistical significance"
-   should be reduced to simply assessing practical significance.
+   should be reduced to simply assessing practical significance, in 
+   all statistical contexts, not just in analyzing treatment effects.
 
-5. Non-NHST tools should be developed in that direction, some presented
-   here.
+5. Usable and interpretable non-NHST tools should be developed,
+   with some being presented here.
 
-6. Such tools must be used to inform the analyst but not 
-   automatically make the decision, usurping the analyst.
+6. Such tools should not have binary yes/no output, which usurps the
+   analyst's role and discards valuable information.  Instead, should be
+   used to inform the analyst but not automatically make the decision,
+   usurping the analyst.
+
+7. This issue has been debated for years, notably among members of the
+   American Statistical Association (@sec-whereasa). It's time to
+   finally repair its serious damage to the field, with the ASA taking a
+   firm lead.
+
+:::
+
+**Intended audience:** STEM professionals and researchers ("S" means both
+natural and social science); statistics educators; mathematical
+statisticians who wish to modernize the field. A reading knowledge of R
+is assumed.
 
 # NHST Is (Too) Comfortable
 
@@ -138,16 +149,18 @@ but also simply unanswerable.
   of the pivotal role statistics plays in crucial human events, such as
   in medical cases or legal proceedings.
 
-# The Easy Part: Statistical vs. Practical Significance
+# The Easy Part: Statistical vs. Practical Significance of Treatment Effects
 
 * This is the "easy" part, in the sense that most readers here will
   have learned about this issue in their statistics coursework. In other
-  words, it would seem that they don't need convincing.
+  words, it would seem that they don't need to be convinced that
+  NHST can be problematic at least in the context of assessing treatment
+  effects.
 
-* Yet they do need to be convinced. While they may distinguish
-  between statistical vs. practical significance when analyzing
-  treatment effects, many do not understand the importance of this
-  distinction in general statistical contexts
+* Yet they do need to be convinced in general. While they may
+  distinguish between statistical vs. practical significance when
+  analyzing treatment effects, many do not understand the importance of
+  this distinction in general statistical contexts.
 
 * So, let's look in detail at this "easy" part before delving into 
   deeper issues later in this document.
@@ -181,7 +194,7 @@ but also simply unanswerable.
 
 ::: {.column-margin}
 
-There are important causal issues here and beloew, but this aspect is beyond the
+There are important causal issues here and below, but this aspect is beyond the
 scope of this document. 
 
 :::
@@ -638,7 +651,7 @@ Some exposure to the bootstrap is also desirable.
 Many analysts who apply statistics are largely self-taught. Again,
 educational materials in that genre should account for these issues.
 
-# Where Is the ASA on This Issue?
+# Where Is the ASA on This Issue? {#sec-whereasa}
 
 The American Statistical Association clearly should play a leading role
 in rectifying this grave error in statistical science. And in fact, in
