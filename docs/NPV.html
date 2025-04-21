@@ -151,7 +151,7 @@ window.Quarto = {
   <li><a href="#effect-of-measurement-error-especially-bias" id="toc-effect-of-measurement-error-especially-bias" class="nav-link" data-scroll-target="#effect-of-measurement-error-especially-bias">Effect of measurement error, especially bias</a></li>
   <li><a href="#both-an-epistemological-and-practical-problem" id="toc-both-an-epistemological-and-practical-problem" class="nav-link" data-scroll-target="#both-an-epistemological-and-practical-problem">Both an epistemological and practical problem</a></li>
   </ul></li>
-  <li><a href="#the-easy-part-statistical-vs.-practical-significance" id="toc-the-easy-part-statistical-vs.-practical-significance" class="nav-link" data-scroll-target="#the-easy-part-statistical-vs.-practical-significance">The Easy Part: Statistical vs.&nbsp;Practical Significance</a>
+  <li><a href="#the-easy-part-statistical-vs.-practical-significance-of-treatment-effects" id="toc-the-easy-part-statistical-vs.-practical-significance-of-treatment-effects" class="nav-link" data-scroll-target="#the-easy-part-statistical-vs.-practical-significance-of-treatment-effects">The Easy Part: Statistical vs.&nbsp;Practical Significance of Treatment Effects</a>
   <ul class="collapse">
   <li><a href="#running-example-lsat-data" id="toc-running-example-lsat-data" class="nav-link" data-scroll-target="#running-example-lsat-data">Running example: LSAT data</a></li>
   <li><a href="#wealth-bias-in-the-lsat" id="toc-wealth-bias-in-the-lsat" class="nav-link" data-scroll-target="#wealth-bias-in-the-lsat">Wealth bias in the LSAT?</a></li>
@@ -176,7 +176,7 @@ window.Quarto = {
   <li><a href="#how-can-this-idea-be-implemented" id="toc-how-can-this-idea-be-implemented" class="nav-link" data-scroll-target="#how-can-this-idea-be-implemented">How can this idea be implemented?</a></li>
   <li><a href="#sec-curric" id="toc-sec-curric" class="nav-link" data-scroll-target="#sec-curric">Curricular improvement</a></li>
   </ul></li>
-  <li><a href="#where-is-the-asa-on-this-issue" id="toc-where-is-the-asa-on-this-issue" class="nav-link" data-scroll-target="#where-is-the-asa-on-this-issue">Where Is the ASA on This Issue?</a></li>
+  <li><a href="#sec-whereasa" id="toc-sec-whereasa" class="nav-link" data-scroll-target="#sec-whereasa">Where Is the ASA on This Issue?</a></li>
   <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions</a></li>
   <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements">Acknowledgements</a></li>
   <li><a href="#appendix" id="toc-appendix" class="nav-link" data-scroll-target="#appendix">Appendix</a>
@@ -228,16 +228,28 @@ window.Quarto = {
 
 
 <p><a href="https://heather.cs.ucdavis.edu/matloff.html">Author bio</a></p>
-<p><strong>Intended audience:</strong> STEM professions and researchers (“S” means both natural and social science); statistics educators; mathematical statisticians who wish to modernize the field</p>
-<p><strong>Synopsis:</strong></p>
+<div class="callout callout-style-default callout-important callout-titled" title="Main Points">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Main Points
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ol type="1">
 <li><p>All null hypotheses <span class="math inline">\(H_0\)</span> are false.</p></li>
 <li><p>Null Hypothesis Significance Testing (NHST) is thus an absurdity. Why “test” something we know is false?</p></li>
 <li><p>Decisions must be made, but based on relevant analysis, not NHST.</p></li>
-<li><p>The concept of “practical significance vs.&nbsp;statistical significance” should be reduced to simply assessing practical significance.</p></li>
-<li><p>Non-NHST tools should be developed in that direction, some presented here.</p></li>
-<li><p>Such tools must be used to inform the analyst but not automatically make the decision, usurping the analyst.</p></li>
+<li><p>The concept of “practical significance vs.&nbsp;statistical significance” should be reduced to simply assessing practical significance, in all statistical contexts, not just in analyzing treatment effects.</p></li>
+<li><p>Usable and interpretable non-NHST tools should be developed, with some being presented here.</p></li>
+<li><p>Such tools should not have binary yes/no output, which usurps the analyst’s role and discards valuable information. Instead, should be used to inform the analyst but not automatically make the decision, usurping the analyst.</p></li>
+<li><p>This issue has been debated for years, notably among members of the American Statistical Association (<a href="#sec-whereasa" class="quarto-xref">Section&nbsp;11</a>). It’s time to finally repair its serious damage to the field, with the ASA taking a firm lead.</p></li>
 </ol>
+</div>
+</div>
+<p><strong>Intended audience:</strong> STEM professionals and researchers (“S” means both natural and social science); statistics educators; mathematical statisticians who wish to modernize the field. A reading knowledge of R is assumed.</p>
 <section id="nhst-is-too-comfortable" class="level1">
 <h1>NHST Is (Too) Comfortable</h1>
 <ul>
@@ -296,7 +308,7 @@ Core Problem with NHST
 <li><p>Bias in physical measurements. No physical measurement is infinitely precise, nor absolutely exactly centered.</p></li>
 <li><p>E.g. physics, <span class="math inline">\(H_0:\)</span> gravity waves do not exist.</p>
 <ul>
-<li><p>Yes, the existence is either true or false, but our imperfect measurements make <span class="math inline">\(H_0\)</span> false; we large enough <span class="math inline">\(n\)</span>, we will reject.</p></li>
+<li><p>Yes, the existence is either true or false, but our imperfect measurements make <span class="math inline">\(H_0\)</span> false; with large enough <span class="math inline">\(n\)</span>, we will reject.</p></li>
 <li><p>Research on gravity waves relies on a complex array of detection machinery and on other unproven theories. See <a href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.116.061102#fulltext">the main paper</a> and <a href="https://arxiv.org/pdf/1602.03840">the methods details</a>.</p></li>
 <li><p>(The situation is also complicated by the fact that they use a Bayesian analysis, courting further criticism.)</p></li>
 </ul></li>
@@ -314,11 +326,11 @@ Core Problem with NHST
 </ul>
 </section>
 </section>
-<section id="the-easy-part-statistical-vs.-practical-significance" class="level1 page-columns page-full">
-<h1>The Easy Part: Statistical vs.&nbsp;Practical Significance</h1>
+<section id="the-easy-part-statistical-vs.-practical-significance-of-treatment-effects" class="level1 page-columns page-full">
+<h1>The Easy Part: Statistical vs.&nbsp;Practical Significance of Treatment Effects</h1>
 <ul>
-<li><p>This is the “easy” part, in the sense that most readers here will have learned about this issue in their statistics coursework. In other words, it would seem that they don’t need convincing.</p></li>
-<li><p>Yet they do need to be convinced. While they may distinguish between statistical vs.&nbsp;practical significance when analyzing treatment effects, many do not understand the importance of this distinction in general statistical contexts</p></li>
+<li><p>This is the “easy” part, in the sense that most readers here will have learned about this issue in their statistics coursework. In other words, it would seem that they don’t need to be convinced that NHST can be problematic at least in the context of assessing treatment effects.</p></li>
+<li><p>Yet they do need to be convinced in general. While they may distinguish between statistical vs.&nbsp;practical significance when analyzing treatment effects, many do not understand the importance of this distinction in general statistical contexts.</p></li>
 <li><p>So, let’s look in detail at this “easy” part before delving into deeper issues later in this document.</p></li>
 </ul>
 <section id="running-example-lsat-data" class="level2 page-columns page-full">
@@ -348,7 +360,7 @@ Core Problem with NHST
 </ul>
 
 <div class="no-row-height column-margin column-container"><div class="">
-<p>There are important causal issues here and beloew, but this aspect is beyond the scope of this document.</p>
+<p>There are important causal issues here and below, but this aspect is beyond the scope of this document.</p>
 </div></div><ul>
 <li><p>Let’s consider the estimated coefficients in a linear model for the LSAT:</p>
 <div class="cell">
@@ -680,7 +692,7 @@ The Bottom Line
 <p>Many analysts who apply statistics are largely self-taught. Again, educational materials in that genre should account for these issues.</p>
 </section>
 </section>
-<section id="where-is-the-asa-on-this-issue" class="level1">
+<section id="sec-whereasa" class="level1">
 <h1>Where Is the ASA on This Issue?</h1>
 <p>The American Statistical Association clearly should play a leading role in rectifying this grave error in statistical science. And in fact, in one sense, it has done so.</p>
 <p>In 2016, the ASA released <a href="https://www.burtthompson.net/uploads/9/6/8/4/9684389/wasserstein-2016__asa_p-value_statement.pdf">a position paper</a> on the issue, along with a <a href="https://www.amstat.org/asa/files/pdfs/p-valuestatement.pdf">cover letter.</a>. The latter says in part (emphasis added),</p>
@@ -830,11 +842,11 @@ F_{true}(t) = \frac{1}{n} N(t)
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">coef</span>(<span class="fu">qeLin</span>(svcensus,<span class="st">'wageinc'</span>,<span class="at">holdout=</span><span class="dv">100</span>))[<span class="st">'age'</span>])</span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span><span class="sc">*</span><span class="fu">mean</span>(repOut)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4697.81</code></pre>
+<pre><code>[1] 4698.449</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span><span class="sc">*</span><span class="fu">sd</span>(repOut) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 17.77708</code></pre>
+<pre><code>[1] 18.34334</code></pre>
 </div>
 </div>
 <p>So generating a CI for the gender coefficient using the bootstrap is straightforward. But estimating the distance between model and reality here raises an issue regarding what we mean by “distance.”</p>
