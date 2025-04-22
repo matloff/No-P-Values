@@ -24,17 +24,28 @@ toc: true
 5. Usable and interpretable non-NHST tools should be developed,
    with some being presented here.
 
-6. Such tools should not have binary yes/no output, which usurps the
-   analyst's role and discards valuable information.  Instead, should be
-   used to inform the analyst but not automatically make the decision,
-   usurping the analyst.
-
-7. This issue has been debated for years, notably among members of the
+6. This issue has been debated for years, notably among members of the
    American Statistical Association (@sec-whereasa). It's time to
    finally repair its serious damage to the field, with the ASA taking a
    firm lead.
 
 :::
+
+What is different about this essay?
+
+* Some ongoing issues with NHST are clarified.
+
+* Some "safe and sane" alternatives to NHST are proposed.
+
+  * Emphasis is on the point that non-NHST tools should not have binary
+    yes/no output, essentially still in the NHST realm. Binary output
+    discards valuable information and usurps the analyst's
+    decision-making role. Non-NHST tools should be used to inform the
+    analyst but not automatically make his/her decision, and should have
+    easy interpretability.
+
+  * The inevitable discrepancy between model and reality is 
+    accounted for, again in an easily interpretable manner.
 
 **Intended audience:** STEM professionals and researchers ("S" means both
 natural and social science); statistics educators; mathematical
