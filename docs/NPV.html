@@ -244,11 +244,19 @@ Main Points
 <li><p>Decisions must be made, but based on relevant analysis, not NHST.</p></li>
 <li><p>The concept of “practical significance vs.&nbsp;statistical significance” should be reduced to simply assessing practical significance, in all statistical contexts, not just in analyzing treatment effects.</p></li>
 <li><p>Usable and interpretable non-NHST tools should be developed, with some being presented here.</p></li>
-<li><p>Such tools should not have binary yes/no output, which usurps the analyst’s role and discards valuable information. Instead, should be used to inform the analyst but not automatically make the decision, usurping the analyst.</p></li>
 <li><p>This issue has been debated for years, notably among members of the American Statistical Association (<a href="#sec-whereasa" class="quarto-xref">Section&nbsp;11</a>). It’s time to finally repair its serious damage to the field, with the ASA taking a firm lead.</p></li>
 </ol>
 </div>
 </div>
+<p>What is different about this essay?</p>
+<ul>
+<li><p>Some ongoing issues with NHST are clarified.</p></li>
+<li><p>Some “safe and sane” alternatives to NHST are proposed.</p>
+<ul>
+<li><p>Emphasis is on the point that non-NHST tools should not have binary yes/no output, essentially still in the NHST realm. Binary output discards valuable information and usurps the analyst’s decision-making role. Non-NHST tools should be used to inform the analyst but not automatically make his/her decision, and should have easy interpretability.</p></li>
+<li><p>The inevitable discrepancy between model and reality is accounted for, again in an easily interpretable manner.</p></li>
+</ul></li>
+</ul>
 <p><strong>Intended audience:</strong> STEM professionals and researchers (“S” means both natural and social science); statistics educators; mathematical statisticians who wish to modernize the field. A reading knowledge of R is assumed.</p>
 <section id="nhst-is-too-comfortable" class="level1">
 <h1>NHST Is (Too) Comfortable</h1>
@@ -842,11 +850,11 @@ F_{true}(t) = \frac{1}{n} N(t)
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">coef</span>(<span class="fu">qeLin</span>(svcensus,<span class="st">'wageinc'</span>,<span class="at">holdout=</span><span class="dv">100</span>))[<span class="st">'age'</span>])</span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span><span class="sc">*</span><span class="fu">mean</span>(repOut)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4698.449</code></pre>
+<pre><code>[1] 4697.625</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span><span class="sc">*</span><span class="fu">sd</span>(repOut) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 18.34334</code></pre>
+<pre><code>[1] 17.57449</code></pre>
 </div>
 </div>
 <p>So generating a CI for the gender coefficient using the bootstrap is straightforward. But estimating the distance between model and reality here raises an issue regarding what we mean by “distance.”</p>
